@@ -1142,8 +1142,8 @@ def base():
     
     deal_prods = []
     
-    for i in range(4):
-        deal_prods.append(similar_products[(i)])
+    #for i in range(4):
+    #    deal_prods.append(similar_products[str(i)])
     cart = session["cart"]
     carty = []    
     total=0

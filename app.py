@@ -23,7 +23,7 @@ from fastapi.staticfiles import StaticFiles
 from square.client import Client
 from pydantic import BaseModel
 from faker import Faker
-from keys import DATABASEURI_ZENTRY, SECRET_KEY_ZENTRY, DATABASEURI_LOCAL 
+from keys import DATABASEURI_ZENTRY, SECRET_KEY_ZENTRY, DATABASEURI_LOCAL, BASE_URL 
 from api_views import api
 
 import random
@@ -55,7 +55,7 @@ PAYMENT_FORM_URL = (
 
 @app.before_request
 def add_user_to_g():
-    """If we're logged in, add curr user to Flask global."""
+    """If we're logged in, add current user to Flask global."""
     
     if "username" in session:
         #Here we address an edge case where if the User has been deleted, but the User data persists in the session, user will not be able to access the site and no pages will load.
@@ -1142,8 +1142,8 @@ def base():
     
     deal_prods = []
     
-    for i in range(4):
-        deal_prods.append(similar_products[str(i)])
+    #for i in range(4):
+        #deal_prods.append(similar_products[str(i)])
     cart = session["cart"]
     carty = []    
     total=0

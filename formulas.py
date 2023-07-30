@@ -8,6 +8,7 @@ import random
 from random import uniform
 import requests
 from faker import Faker
+from keys import BASE_URL
 
 fake = Faker()
 
@@ -20,7 +21,7 @@ def random_products(num_products):
     '''ZentryAPI request to /api/products/random/<int:num_products>, provide num_products to specify number of results'''
     products = []
     try:
-        resp = requests.get(f'http://localhost:5000/api/products/random/{num_products}',          
+        resp = requests.get(f'{BASE_URL}/api/products/random/{num_products}',          
        )
 
         resp = resp.json()
@@ -37,7 +38,7 @@ def get_sectors():
     '''ZentryAPI request to /api/sectors, returns list of sectors json format'''
     try:
         resp = requests.get(
-            "http://localhost:5000/api/sectors",
+            f"{BASE_URL}/api/sectors",
             #params={"term": "billy bragg", "limit": 3}
             
        )
@@ -56,7 +57,7 @@ def get_APIdata(id, model):
     product = []
     try:
         resp = requests.get(
-            f"http://localhost:5000/api/{model}/{id}",
+            f"{BASE_URL}/api/{model}/{id}",
             #params={"term": "billy bragg", "limit": 3}
             
        )
@@ -79,7 +80,7 @@ def get_APIdata_all(model):
     product = []
     try:
         resp = requests.get(
-            f"http://localhost:5000/api/{model}",
+            f"{BASE_URL}/api/{model}",
             #params={"term": "billy bragg", "limit": 3}
             
        )

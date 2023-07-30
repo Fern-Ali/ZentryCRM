@@ -134,21 +134,22 @@ def get_quote():
     ''' use quotable.io api to generate random quote with 50 char limit'''
     quote = ''
 
-    try:
-        resp = requests.get(
-            "https://api.quotable.io/quotes/random?maxLength=50",
-            #params={"term": "billy bragg", "limit": 3}
-       )
+    #try:
+    #    resp = requests.get(
+    #        "https://api.quotable.io/quotes/random?maxLength=50",
+    #        #params={"term": "billy bragg", "limit": 3}
+    #   )
 
-        resp = resp.json()
-        if resp[0]["author"]:
-            return resp
-        else:
-            return [{"_id":"f6PUk-AOBm","author":"H. G. Wells","content":"If you fell down yesterday, stand up today.","tags":["Motivational"],"authorSlug":"h-g-wells","length":43,"dateAdded":"2022-07-06","dateModified":"2023-04-14"}]
-    except requests.exceptions.RequestException as e:  # This is the correct syntax
-        return [{"_id":"f6PUk-AOBm","author":"H. G. Wells","content":"If you fell down yesterday, stand up today.","tags":["Motivational"],"authorSlug":"h-g-wells","length":43,"dateAdded":"2022-07-06","dateModified":"2023-04-14"}]
+    #    resp = resp.json()
+    #    if resp[0]["author"]:
+    #        return resp
+    #    else:
+    #        return [{"_id":"f6PUk-AOBm","author":"H. G. Wells","content":"If you fell down yesterday, stand up today.","tags":["Motivational"],"authorSlug":"h-g-wells","length":43,"dateAdded":"2022-07-06","dateModified":"2023-04-14"}]
+    #except requests.exceptions.RequestException as e:  # This is the correct syntax
+    #    return [{"_id":"f6PUk-AOBm","author":"H. G. Wells","content":"If you fell down yesterday, stand up today.","tags":["Motivational"],"authorSlug":"h-g-wells","length":43,"dateAdded":"2022-07-06","dateModified":"2023-04-14"}]
   
-
+    return [{"_id":"f6PUk-AOBm","author":"H. G. Wells","content":"If you fell down yesterday, stand up today.","tags":["Motivational"],"authorSlug":"h-g-wells","length":43,"dateAdded":"2022-07-06","dateModified":"2023-04-14"}]
+  
 
 
 

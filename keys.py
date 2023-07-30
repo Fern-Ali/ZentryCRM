@@ -9,4 +9,6 @@ SECRET_KEY_ZENTRY = "dc2bbf134adb448a72dcf54f5d5839e9"
 if 'ZENTRY_APP_BASE_URL' in os.environ:
     BASE_URL = os.environ['ZENTRY_APP_BASE_URL']
 else:
-    BASE_URL = "http://localhost:5000"
+    BASE_URL = "http://localhost:8000"
+
+#BASE_URL = "http://localhost:8000"

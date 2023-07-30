@@ -66,6 +66,7 @@ api = Blueprint("api", __name__)
 @api.route('/api')
 def get_home_page():
     '''Renders ZentryAPI docs'''
+    
     return render_template('api_docs.html')
 
 

@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template, redirect, flash, session, jsonify, json, g
+from flask import Flask, request, render_template, redirect, flash, session, jsonify, json, g, send_from_directory
 from sqlalchemy import func, select, column, text
 import requests
 from flask_debugtoolbar import DebugToolbarExtension
@@ -92,6 +92,10 @@ def page_not_found(e):
     
     return render_template('/front-end/404.html'), 404
 
+
+#@app.route('/favicon.ico') 
+#def favicon(): 
+#    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/', methods=["GET", "POST"])
 def redirect_list_users():
@@ -1159,6 +1163,7 @@ def base():
  
 
     sectors = get_sectors()
+    
     
     
 

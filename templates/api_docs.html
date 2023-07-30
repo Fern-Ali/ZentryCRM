@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Page title -->
+	<title>ZentryAPI - Documentation - v1.4</title>
+	<!-- Page description -->
+	<meta name="description" content="">
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Favicon  -->
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='zentryapi/img/favicons/favicon-16x16.png') }}" sizes="16x16">
+
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='zentryapi/img/favicons/favicon-32x32.png') }}" sizes="32x32">
+
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='zentryapi/img/favicons/favicon-96x96.png') }}" sizes="96x96">
+	<link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='zentryapi/img/favicons/apple-touch-icon-57x57.png') }}">
+	<link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='zentryapi/img/favicons/apple-touch-icon-60x60.png') }}">
+	<link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='zentryapi/img/favicons/apple-touch-icon-72x72.png') }}">
+	<link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='zentryapi/img/favicons/apple-touch-icon-76x76.png') }}">
+	<link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='zentryapi/img/favicons/apple-touch-icon-114x114.png') }}">
+	<link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='zentryapi/img/favicons/apple-touch-icon-120x120.png') }}">
+	<link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='zentryapi/img/favicons/apple-touch-icon-144x144.png') }}">
+	<link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='zentryapi/img/favicons/apple-touch-icon-152x152.png') }}">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='zentryapi/img/favicons/apple-touch-icon-180x180.png') }}">
+	<!-- Include StyleSheets -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='zentryapi/css/style.min.css') }}">
+	 <link rel="stylesheet" href="{{ url_for('static', filename='zentryapi/css/custom.css') }}"> 
+	<script src="{{ url_for('static', filename='zentryapi/js/modernizr.js') }}"></script>
+
+	<!--fontawesome-->
+	<script src="https://kit.fontawesome.com/8b28226415.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body class="js-preload-me "  style="">
+	<!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+	<!-- Preloader: uncomment this if you want to show a smooth preloader while the page is loading. Don't forget to add the 'js-preload-me' class on the <body> tag. -->
+	 <div class="preloader js-preloader"><div class="preloader-animation"></div></div>
+	
+	<!-- End of Preloader -->
+	<div class="page js-page ">
+
+		<!-- Header -->
+		<div class="header header-over large">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-6 col-xs-6">
+						<!-- Logo Image -->
+						<a href="index.html" class="logo-image logo-animated">
+							<img src="{{ url_for('static', filename='zentryapi/img/logos/logo-light.png') }}" alt="logo">
+						</a>
+						<!-- End of Logo Image -->
+						<!-- Languages -->
+						<div class="languages languages-light js-languages">
+							<span class="language-active js-language-active">
+								English
+								<i class="fa fa-angle-down"></i>
+							</span>
+							<ul class="languages-list js-languages-list">
+								<li>
+									<a href="#">English</a>
+								</li>
+								<li>
+									<a href="#">Español</a>
+								</li>
+								<li>
+									<a href="#">Deutsch</a>
+								</li>
+								<li>
+									<a href="#">Русский</a>
+								</li>
+								<li>
+									<a href="#">Français</a>
+								</li>
+							</ul>
+						</div>
+						<!-- End of Languages -->
+					</div>
+					<div class="col-md-9 col-sm-6 col-xs-6">
+						<!-- Menu -->
+						<nav class="right helper sticky-top">
+							<ul class="menu sf-menu js-menu menu-light">
+								<li>
+									<a href="index.html">
+										Home
+
+									</a>
+									<ul>
+										<li>
+											<a href="#">One Page Docs</a>
+											<ul>
+												<li>
+													<a href="home-one-page.html">Static Header</a>
+												</li>
+												<li>
+													<a href="home-one-page-header-fixed.html">Sticky Header</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="#">Menu</a>
+											<ul>
+												<li>
+													<a href="index-2.html">Left - Off Canvas</a>
+												</li>
+												<li>
+													<a href="index-3.html">Right - Off Canvas</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="#">Static</a>
+											<ul>
+												<li>
+													<a href="home-subscribe.html">Subscribe</a>
+												</li>
+												<li>
+													<a href="home-web.html">Web App</a>
+												</li>
+												<li>
+													<a href="home-mobile-app.html">Mobile App</a>
+												</li>
+												<li>
+													<a href="home-soft.html">Software</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="#">Video</a>
+											<ul>
+												<li>
+													<a href="index-5.html">Background</a>
+												</li>
+												<li>
+													<a href="home-video-trigger.html">Trigger Simple</a>
+												</li>
+												<li>
+													<a href="home-web-video-trigger.html">Trigger Web</a>
+												</li>
+												<li>
+													<a href="home-app-video-trigger.html">Trigger App</a>
+												</li>
+												<li>
+													<a href="home-soft-video-trigger.html">Trigger Soft</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="index-4.html">Text Rotator</a>
+										</li>
+										<li>
+											<a href="home-with-preloader.html">With Preloader</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="#">Pages</a>
+									<ul>
+										<li>
+											<a href="panels.html">Panels</a>
+										</li>
+										<li>
+											<a href="#">Blog</a>
+											<ul>
+												<li>
+													<a href="blog-grid.html">Blog Grid</a>
+												</li>
+												<li>
+													<a href="blog-list.html">Blog List</a>
+												</li>
+												<li>
+													<a href="article.html">Article</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="faq.html">Faq</a>
+										</li>
+										<li>
+											<a href="notification.html">Notification</a>
+										</li>
+										<li>
+											<a href="tutorial.html">Tutorial</a>
+										</li>
+										<li>
+											<a href="login.html">Login</a>
+										</li>
+										<li>
+											<a href="register.html">Register</a>
+										</li>
+										<li>
+											<a href="404.html">404 Error</a>
+										</li>
+									</ul>
+								</li>
+
+								<li>
+									<a href="#general">Navigation</a>
+									<span class="menu-label">START</span>
+									<ul>
+										<li>
+											<a href="#general">General</a>
+											<ul>
+
+												<li>
+													<a href="#schema">Database Schema</a>
+												</li>
+												<li>
+													<a href="#general">Zentry API Guide</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="#inventory">Inventory</a>
+											<ul>
+												<li>
+													<a href="#products">Products</a>
+												</li>
+												<li>
+													<a href="#sectors">Sectors</a>
+												</li>
+												<li>
+													<a href="#categories">Cateogories</a>
+												</li>
+												<li>
+													<a href="#seedlings">Seedlings</a>
+												</li>
+												<li>
+													<a href="#strains">Strains</a>
+												</li>
+												<li>
+													<a href="#facilities">Facilities</a>
+												</li>
+
+											</ul>
+										</li>
+
+										<li>
+											<a href="#ecommerce">Ecommerce</a>
+											<ul>
+
+												<li>
+													<a href="#sales">Sales</a>
+												</li>
+												<li>
+													<a href="#carts">Carts (Baskets)</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="#accounting">Financial</a>
+											<ul>
+												<li>
+													<a href="#accounts">Accounts</a>
+												</li>
+												<li>
+													<a href="#transactions">Transactions</a>
+												</li>
+												<li>
+													<a href="journal-entries">Journal Entries</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="#users">Users</a>
+											<ul>
+												<li>
+													<a href="#users">Users</a>
+												</li>
+												<li>
+													<a href="#customers">Customers</a>
+												</li>
+												<li>
+													<a href="posts">Posts</a>
+												</li>
+												<li>
+													<a href="reviews">Reviews</a>
+												</li>
+											</ul>
+										</li>
+
+									</ul>
+								</li>
+
+								<li>
+									<a href="changelog.html">Changelog</a>
+								</li>
+								<li>
+									<a href="contacts.html">Contacts</a>
+								</li>
+							</ul>
+						</nav>
+						<!-- End of Menu -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of Header -->
+		<!-- Header Back -->
+		<div class="header-back header-back-bg-3 header-back-large">
+			<div class="header-back-container">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- Rotator -->
+							<div class="rotator rotator-light ">
+								<div class="container">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="rotator-text">
+												Discover the
+												<span class="js-rotator">concise, scaleable, efficient</span> Zentry API <br />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End of Rotator -->
+							<div class="header-back-buttons helper center">
+								<a href="http://zentry.onrender.com" class="button stroke rounded large white">Front End</a>
+								<a href="#" class="button stroke rounded large white">GitHub</a>
+								<a href="#" class="button stroke rounded large white">Creator</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Next Section Button -->
+				<span class="next-section js-scroll-to next-section-light" data-target="#general">
+					<i class="fa-angle-down fa"></i>
+				</span>
+				<!-- End of Next Section Button -->
+			</div>
+		</div>
+		<!-- End of Header Back -->
+		<div class="panels  " style=" background-size: contain" id="content">
+			<div class="container background-4 "  >
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+
+						<div class="panel mt-5" id="general">
+
+							<section class="panel-content">
+								<div class="note js-note blue">
+									<h4 class="note-title">Zentry API Directory </h4>
+									Welcome to the ZentryAPI Docs!
+									<p class="note-description mt-2">
+										Here you will find detailed instructions on how to make requests and receive data from various ZentryAPI endpoints. 
+										<br />
+										<a href="#inventory"><span class="mark fill grey">inventory</span></a>
+										<a href="#accounting"><span class="mark fill grey">accounting</span></a>
+										<a href="#ecommerce"><span class="mark fill grey">ecommerce</span></a>
+										<a href="#users"><span class="mark fill grey">users</span></a>
+
+
+
+
+
+										<br />
+
+									</p>
+
+
+								</div>
+
+								<div class="helper center">
+									<img src="{{ url_for('static', filename='zentryapi/img/zentry/graphics/graphic4.svg') }}" class="helper mb30 panel-image" alt="Responsive devices">
+								</div>
+								<div class="note js-note green">
+									<h4 class="note-title">Getting Started </h4>
+									ZentryAPI Walkthrough
+									<p class="note-description mt-2">
+										
+										 The entire project is open-source, and this page is dedicated
+										entirely to the function of the ZentryAPI. For details regarding the application in production, please visit our <a href="https://github.com/Fern-Ali/ZentryCRMv1.4#readme"><span class="mark fill grey">repository</span></a><br />
+								
+									</p>
+
+
+								</div>
+							</section>
+
+						</div>
+
+						<div class="panel " id="schema">
+
+							<section class="panel-content">
+								<div class="note js-note blue">
+									<div class="row justify-content-center">
+										<div class="col-9">
+											<h4 class="note-title">Zentry Database Schema </h4>
+										</div>
+										<div class="col-3">
+											<a href="/api/schema" class="button small green">open in browser</a>
+										</div>
+
+									</div>
+
+									DB Schema snapshots
+									<p class="note-description">
+										Open in browser for full-size view
+										<br />
+										<span class="mark fill grey">accounts</span>
+										<span class="mark fill grey">users</span>
+										<span class="mark fill grey">customers</span>
+
+										<span class="mark fill grey">sales</span>
+										<span class="mark fill grey">invoices</span>
+										<span class="mark fill grey">products</span>
+										<span class="mark fill grey">messages</span>
+										<span class="mark fill grey">favorites</span>
+
+
+
+
+
+										<br />
+
+
+									</p>
+
+								</div>
+								<div class="">
+									<div class="card-body" style="">
+
+
+										<img src="{{ url_for('static', filename='zentryapi/img/zentry/AccountFlow.png') }}" />
+										<img src="{{ url_for('static', filename='zentryapi/img/zentry/SalesANDSocial.png') }}" />
+										<img src="{{ url_for('static', filename='zentryapi/img/zentry/InventoryFlow.png') }}" />
+										<img src="{{ url_for('static', filename='zentryapi/img/zentry/TransactionFlow.png') }}" />
+										<img src="{{ url_for('static', filename='zentryapi/img/zentry/SalesStickies.png') }}" />
+
+
+									</div>
+								</div>
+
+							</section>
+						</div>
+
+
+
+						<div class="panel" id="inventory">
+
+							<section class="panel-content">
+								<div class="note js-note purple">
+									<h4 class="note-title"> Inventory <i class="fa-solid fa-magnifying-glass-chart"></i></h4>
+									Database Models <br />
+									<p class="note-description">
+
+										<a href="#products"><span class="mark fill grey">products</span></a>
+										<a href="#categories"><span class="mark fill grey">categories</span></a>
+										<a href="#strains"><span class="mark fill grey">strains</span></a>
+										<a href="#sectors"><span class="mark fill grey">sectors</span></a>
+										<a href="#facilities"><span class="mark fill grey">facilities</span></a>
+										<a href="#seedlings"><span class="mark fill grey">seedlings</span></a>
+
+										<br />
+										<br />
+										<a href="#" class="button button-icon small blue-light">
+											<i class="fa fa-home"></i>API Home
+										</a>
+										<a href="#requests" class="button small blue-light">Making Requests</a>
+										<a href="/api/products" class="button small blue-light">JSON Response</a>
+										<a href="#" class="button small blue-light">Production Application</a>
+									</p>
+								</div>
+							</section>
+						</div>
+						<div class="panel" id="products">
+
+							<section class="panel-content">
+
+
+								<div class="note js-note blue-light">
+									<div class="row justify-content-center">
+										<div class="col-9">
+											<h4 class="note-title"> Products <i class="fa-solid fa-boxes-packing"></i> </h4>
+										</div>
+										<div class="col-3">
+											<!-- Next Section Button -->
+											<span class="js-scroll-to button button-icon small purple" data-target="#categories">
+												<i class="fa-solid fa-square-caret-down fa-lg"></i>Next Section
+											</span>
+											<!-- End of Next Section Button -->
+										</div>
+
+									</div>
+
+
+									<p class="note-description">
+										<span class="mark fill grey">GET</span> <span class="mark fill grey">POST</span> <span class="mark fill grey">PATCH</span> <span class="mark fill grey">DELETE</span>
+										<br />
+										<br />
+										<a href="#inventory" class="button button-icon small purple">
+											<i class="fa fa-book"></i>Inventory
+										</a>
+									</p>
+								</div>
+								<!-- Table -->
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Action</th>
+												<th>Endpoint</th>
+												<th>Method</th>
+												<th>Purpose</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Products</span></th>
+
+
+
+
+												<td><a href="/api/products"> /api/products </a></td>
+												<td>GET</td>
+												<td>
+													Product Index
+													<ul>
+														<li>
+															List all products at root
+														</li>
+
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Create Product</span></th>
+
+
+
+
+												<td></td>
+												<td>POST</td>
+												<td>
+													Create a new product
+													<ul>
+														<li>
+															[Required Parameters]
+															<ul>
+																<li>
+																	name
+																</li>
+																<li>
+																	description
+																</li>
+																<li>
+																	category_id
+																</li>
+																<li>
+																	sector_id
+																</li>
+																<li>
+																	seedling_id
+																</li>
+																<li>
+																	strain_id
+																</li>
+																<li>
+																	plant_facility_id
+																</li>
+																<li>
+																	image_url
+																</li>
+															</ul>
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Product</span></th>
+
+
+
+
+												<td><a>/api/products/:id</a></td>
+												<td>GET</td>
+												<td>
+													Show Product Data
+													<ul>
+														<li>
+															Specific product by ID
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Update Product</span></th>
+
+
+
+
+												<td></td>
+												<td>PATCH</td>
+												<td>
+													Update Product Data
+													<ul>
+														<li>
+															Specify parameters to update on product
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Delete Product</span></th>
+
+
+
+
+												<td></td>
+												<td>DELETE</td>
+												<td>
+													Delete Product from Database
+													<ul>
+														<li>
+															Returns json deleted: response
+														</li>
+													</ul>
+												</td>
+											</tr>
+
+
+										</tbody>
+									</table>
+
+								</div>
+								<!-- End of Table -->
+								<p class="helper mb40">
+									Find data regarding products easily using the RESTful api created by Fern-Ali. You can even see a
+									<span class="mark fill grey">collection of examples</span> in the Making Requests section.
+								</p>
+
+
+
+								<!-- Social -->
+								<ul class="social helper center">
+									<li>
+										<a href="#">
+											<i class="fa fa-facebook"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-twitter"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-behance"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-github"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-linkedin"></i>
+										</a>
+									</li>
+								</ul>
+								<!-- End of Social -->
+							</section>
+						</div>
+						<div class="panel" id="categories">
+
+							<section class="panel-content">
+
+								<div class="note js-note blue-light">
+									<h4 class="note-title"> Categories <i class="fa-solid fa-ranking-star"></i></h4>
+									<p class="note-description">
+										<span class="mark fill grey">GET</span> <span class="mark fill grey">POST</span> <span class="mark fill grey">PATCH</span> <span class="mark fill grey">DELETE</span>
+										<br />
+										<br />
+										<a href="#inventory" class="button button-icon small purple">
+											<i class="fa fa-book"></i>Inventory
+										</a>
+									</p>
+								</div>
+								<!-- Table -->
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Action</th>
+												<th>Endpoint</th>
+												<th>Method</th>
+												<th>Purpose</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Categories</span></th>
+
+
+
+
+												<td><a> /api/categories </a></td>
+												<td>GET</td>
+												<td>
+													Category Index
+													<ul>
+														<li>
+															List all product categories at root
+														</li>
+
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Create Category</span></th>
+
+
+
+
+												<td></td>
+												<td>POST</td>
+												<td>
+													Create a new category
+													<ul>
+														<li>
+															[Required Parameters]
+															<ul>
+																<li>
+																	name
+																</li>
+
+															</ul>
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Category</span></th>
+
+
+
+
+												<td><a>/api/categories/:id</a></td>
+												<td>GET</td>
+												<td>
+													View Category Data
+													<ul>
+														<li>
+															Specific category data by ID
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Update Category</span></th>
+
+
+
+
+												<td></td>
+												<td>PATCH</td>
+												<td>
+													Update Category Data
+													<ul>
+														<li>
+															Specify parameters to update on category
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Delete Category</span></th>
+
+
+
+
+												<td></td>
+												<td>DELETE</td>
+												<td>
+													Delete Category from Database
+													<ul>
+														<li>
+															Returns json deleted: response
+														</li>
+													</ul>
+												</td>
+											</tr>
+
+
+										</tbody>
+									</table>
+
+								</div>
+								<!-- End of Table -->
+								<p class="helper mb40">
+									Millions of amazing sites across the web are being built with Bootstrap. Get started on your own with our growing
+									<span class="mark fill grey">collection of examples</span> or by exploring some of our favorites. We showcase dozens of inspiring projects built with Bootstrap on the Bootstrap Expo.
+								</p>
+
+								<!-- Social -->
+								<ul class="social helper center">
+									<li>
+										<a href="#">
+											<i class="fa fa-facebook"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-twitter"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-behance"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-github"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-linkedin"></i>
+										</a>
+									</li>
+								</ul>
+								<!-- End of Social -->
+							</section>
+						</div>
+						<!-- Next Section Button -->
+						<span class="js-scroll-to button button-icon small purple" data-target="#sectors">
+							<i class="fa-angle-down fa"></i>
+						</span>
+						<!-- End of Next Section Button -->
+						<div class="panel" id="seedlings">
+
+							<section class="panel-content">
+
+								<div class="note js-note blue-light">
+									<h4 class="note-title"> Seedlings <i class="fa-solid fa-seedling"></i> </h4>
+									<p class="note-description">
+										<span class="mark fill grey">GET</span> <span class="mark fill grey">POST</span> <span class="mark fill grey">PATCH</span> <span class="mark fill grey">DELETE</span>
+										<br />
+										<br />
+										<a href="#inventory" class="button button-icon small purple">
+											<i class="fa fa-book"></i>Inventory
+										</a>
+									</p>
+								</div>
+								<!-- Table -->
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Action</th>
+												<th>Endpoint</th>
+												<th>Method</th>
+												<th>Purpose</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Seedlings</span></th>
+
+
+
+
+												<td><a> /api/seedlings </a></td>
+												<td>GET</td>
+												<td>
+													seedlings Index
+													<ul>
+														<li>
+															List all product seedlings at root
+														</li>
+
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Create Seedling</span></th>
+
+
+
+
+												<td></td>
+												<td>POST</td>
+												<td>
+													Create a new seedling
+													<ul>
+														<li>
+															[Required Parameters]
+															<ul>
+																<li>
+																	name
+																</li>
+
+															</ul>
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Seedling</span></th>
+
+
+
+
+												<td><a>/api/seedlings/:id</a></td>
+												<td>GET</td>
+												<td>
+													View Seedling Data
+													<ul>
+														<li>
+															Specific seedling data by ID
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Update Seedling</span></th>
+
+
+
+
+												<td></td>
+												<td>PATCH</td>
+												<td>
+													Update Seedling Data
+													<ul>
+														<li>
+															Specify parameters to update on seedling
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Delete Seedling</span></th>
+
+
+
+
+												<td></td>
+												<td>DELETE</td>
+												<td>
+													Delete Seedling from Database
+													<ul>
+														<li>
+															Returns json deleted: response
+														</li>
+													</ul>
+												</td>
+											</tr>
+
+
+										</tbody>
+									</table>
+
+								</div>
+								<!-- End of Table -->
+								<p class="helper mb40">
+									Millions of amazing sites across the web are being built with Bootstrap. Get started on your own with our growing
+									<span class="mark fill grey">collection of examples</span> or by exploring some of our favorites. We showcase dozens of inspiring projects built with Bootstrap on the Bootstrap Expo.
+								</p>
+
+								<!-- Social -->
+								<ul class="social helper center">
+									<li>
+										<a href="#">
+											<i class="fa fa-facebook"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-twitter"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-behance"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-github"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-linkedin"></i>
+										</a>
+									</li>
+								</ul>
+								<!-- End of Social -->
+							</section>
+						</div>
+
+						<div class="panel">
+
+							<section class="panel-content" id="sectors">
+
+
+								<div class="note js-note blue-light">
+									<h4 class="note-title"> Sectors <i class="fa-solid fa-chart-pie"></i></h4>
+									<p class="note-description">
+										<span class="mark fill grey">GET</span> <span class="mark fill grey">POST</span> <span class="mark fill grey">PATCH</span> <span class="mark fill grey">DELETE</span>
+										<br />
+										<br />
+										<a href="#inventory" class="button button-icon small purple">
+											<i class="fa fa-book"></i>Inventory
+										</a>
+									</p>
+								</div>
+								<!-- Table -->
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Action</th>
+												<th>Endpoint</th>
+												<th>Method</th>
+												<th>Purpose</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Sectors</span></th>
+
+
+
+
+												<td><a> /api/sectors </a></td>
+												<td>GET</td>
+												<td>
+													Sector Index
+													<ul>
+														<li>
+															List all product sectors at root
+														</li>
+
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Create Sector</span></th>
+
+
+
+
+												<td></td>
+												<td>POST</td>
+												<td>
+													Create a new sector
+													<ul>
+														<li>
+															[Required Parameters]
+															<ul>
+																<li>
+																	name
+																</li>
+
+															</ul>
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Sector</span></th>
+
+
+
+
+												<td><a>/api/sectors/:id</a></td>
+												<td>GET</td>
+												<td>
+													View Sector Data
+													<ul>
+														<li>
+															Specific sector data by ID
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Update Sector</span></th>
+
+
+
+
+												<td></td>
+												<td>PATCH</td>
+												<td>
+													Update Sector Data
+													<ul>
+														<li>
+															Specify parameters to update on sector
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Delete Product</span></th>
+
+
+
+
+												<td></td>
+												<td>DELETE</td>
+												<td>
+													Delete Product from Database
+													<ul>
+														<li>
+															Returns json deleted: response
+														</li>
+													</ul>
+												</td>
+											</tr>
+
+
+										</tbody>
+									</table>
+
+								</div>
+								<!-- End of Table -->
+								<p class="helper mb40">
+									Millions of amazing sites across the web are being built with Bootstrap. Get started on your own with our growing
+									<span class="mark fill grey">collection of examples</span> or by exploring some of our favorites. We showcase dozens of inspiring projects built with Bootstrap on the Bootstrap Expo.
+								</p>
+
+								<!-- Social -->
+								<ul class="social helper center">
+									<li>
+										<a href="#">
+											<i class="fa fa-facebook"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-twitter"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-behance"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-github"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-linkedin"></i>
+										</a>
+									</li>
+								</ul>
+								<!-- End of Social -->
+							</section>
+						</div>
+
+						<div class="panel" id="strains">
+							<!--<header class="panel-header"> API Documentation </header>-->
+							<section class="panel-content">
+
+								<!--<p>
+				Detailed below are instructions to request data from the Zentry API
+			</p>-->
+								<div class="note js-note blue-light">
+									<h4 class="note-title"> Strains <i class="fa-solid fa-dna"></i> </h4>
+									<p class="note-description">
+										<span class="mark fill grey">GET</span> <span class="mark fill grey">POST</span> <span class="mark fill grey">PATCH</span> <span class="mark fill grey">DELETE</span>
+										<br />
+										<br />
+										<a href="#inventory" class="button button-icon small purple">
+											<i class="fa fa-book"></i>Inventory
+										</a>
+									</p>
+								</div>
+								<!-- Table -->
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Action</th>
+												<th>Endpoint</th>
+												<th>Method</th>
+												<th>Purpose</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Strains</span></th>
+
+
+
+
+												<td><a> /api/strains </a></td>
+												<td>GET</td>
+												<td>
+													Strain Index
+													<ul>
+														<li>
+															List all product strains at root
+														</li>
+
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Create Strain</span></th>
+
+
+
+
+												<td></td>
+												<td>POST</td>
+												<td>
+													Create a new strain
+													<ul>
+														<li>
+															[Required Parameters]
+															<ul>
+																<li>
+																	name
+																</li>
+																<li>
+																	category_id
+																</li>
+
+															</ul>
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Strain</span></th>
+
+
+
+
+												<td><a>/api/strains/:id</a></td>
+												<td>GET</td>
+												<td>
+													View Strain Data
+													<ul>
+														<li>
+															Specific strain data by ID
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Update Strain</span></th>
+
+
+
+
+												<td></td>
+												<td>PATCH</td>
+												<td>
+													Update Strain Data
+													<ul>
+														<li>
+															Specify parameters to update on strain
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Delete Strain</span></th>
+
+
+
+
+												<td></td>
+												<td>DELETE</td>
+												<td>
+													Delete Strain from Database
+													<ul>
+														<li>
+															Returns json deleted: response
+														</li>
+													</ul>
+												</td>
+											</tr>
+
+
+										</tbody>
+									</table>
+
+								</div>
+								<!-- End of Table -->
+								<p class="helper mb40">
+									Millions of amazing sites across the web are being built with Bootstrap. Get started on your own with our growing
+									<span class="mark fill grey">collection of examples</span> or by exploring some of our favorites. We showcase dozens of inspiring projects built with Bootstrap on the Bootstrap Expo.
+								</p>
+
+								<!-- Social -->
+								<ul class="social helper center">
+									<li>
+										<a href="#">
+											<i class="fa fa-facebook"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-twitter"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-behance"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-github"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-linkedin"></i>
+										</a>
+									</li>
+								</ul>
+								<!-- End of Social -->
+							</section>
+						</div>
+
+						<div class="panel" id="facilities">
+							<!--<header class="panel-header"> API Documentation </header>-->
+							<section class="panel-content">
+
+								<!--<p>
+				Detailed below are instructions to request data from the Zentry API
+			</p>-->
+								<div class="note js-note blue-light">
+									<h4 class="note-title"> Facilities <i class="fa-solid fa-industry"></i> </h4>
+									<p class="note-description">
+										<span class="mark fill grey">GET</span> <span class="mark fill grey">POST</span> <span class="mark fill grey">PATCH</span> <span class="mark fill grey">DELETE</span>
+										<br />
+										<br />
+										<a href="#inventory" class="button button-icon small purple">
+											<i class="fa fa-book"></i>Inventory
+										</a>
+									</p>
+								</div>
+								<!-- Table -->
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Action</th>
+												<th>Endpoint</th>
+												<th>Method</th>
+												<th>Purpose</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Facilities</span></th>
+
+
+
+
+												<td><a> /api/facilities </a></td>
+												<td>GET</td>
+												<td>
+													Facility Index
+													<ul>
+														<li>
+															List all product facilities at root
+														</li>
+
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Create Facility</span></th>
+
+
+
+
+												<td></td>
+												<td>POST</td>
+												<td>
+													Create a new facility
+													<ul>
+														<li>
+															[Required Parameters]
+															<ul>
+																<li>
+																	name
+																</li>
+																<li>
+																	location
+																</li>
+
+
+															</ul>
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Facility</span></th>
+
+
+
+
+												<td><a>/api/facilities/:id</a></td>
+												<td>GET</td>
+												<td>
+													View Facility Data
+													<ul>
+														<li>
+															Specific facility data by ID
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Update Facility</span></th>
+
+
+
+
+												<td></td>
+												<td>PATCH</td>
+												<td>
+													Update Facility Data
+													<ul>
+														<li>
+															Specify parameters to update on facility
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Delete Facility</span></th>
+
+
+
+
+												<td></td>
+												<td>DELETE</td>
+												<td>
+													Delete Facility from Database
+													<ul>
+														<li>
+															Returns json deleted: response
+														</li>
+													</ul>
+												</td>
+											</tr>
+
+
+										</tbody>
+									</table>
+
+								</div>
+								<!-- End of Table -->
+								<p class="helper mb40">
+									Millions of amazing sites across the web are being built with Bootstrap. Get started on your own with our growing
+									<span class="mark fill grey">collection of examples</span> or by exploring some of our favorites. We showcase dozens of inspiring projects built with Bootstrap on the Bootstrap Expo.
+								</p>
+
+								<!-- Social -->
+								<ul class="social helper center">
+									<li>
+										<a href="#">
+											<i class="fa fa-facebook"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-twitter"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-behance"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-github"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-linkedin"></i>
+										</a>
+									</li>
+								</ul>
+								<!-- End of Social -->
+							</section>
+						</div>
+
+						<div class="panel" id="requests">
+							<header class="panel-header"> Making Requests </header>
+							<section class="panel-content">
+								<p class="helper mb30">Here is an example of an asynchronous request using axios generated by clicking a button:</p>
+								<!-- Mixed Code Highlight -->
+								<div class="code-highlight">
+									<span class="js-copy-to-clipboard copy-code">copy</span> <pre><code class="language-markup js-code">
+	&lt;script&gt;
+
+	//Request to server via button//
+
+	$('[id^=myButtonID]').click(async function () {
+
+	let id = $(this).attr('id')
+
+	await axios.post(`/products/${id}` , {
+	"name": `${myProductName}`,
+	"description": `${myDescription}`,
+	"category_id": `${myCategory_id}`,
+	"sector_id": `${mySector_id}`,
+	"image_url": `${myImage_url}`,
+	"seedling_id": `${mySeedling_id}`,
+	"strain_id": `${myStrain_id}`,
+	"plant_facility_id": `${myPlant_facility_id}`,
+	"price": `${myPrice}`
+	})
+	.then(function (response) {
+	console.log(response);
+	})
+	.catch(function (error) {
+	console.log(error);
+	});
+
+	});
+
+	&lt;/script&gt;
+</code></pre>
+								</div>
+								<!-- End of Mixed Code Highlight -->
+							</section>
+						</div>
+
+						<div class="panel" id="ecommerce">
+
+							<section class="panel-content">
+								<div class="note js-note purple">
+									<h4 class="note-title"> Ecommerce <i class="fa-solid fa-cart-shopping"></i></h4>
+									Database Models <br />
+									<p class="note-description">
+										Here you will find the routes to request Zentry storefront data regarding <br />
+										<a href="#sales"><span class="mark fill grey">sales</span></a>
+										<span class="mark fill grey">carts</span>
+										<br />
+										<br />
+										<a href="#" class="button button-icon small blue-light">
+											<i class="fa fa-home"></i>API Home
+										</a>
+										<a href="#requests" class="button small blue-light">Making Requests</a>
+										<a href="/api/products" class="button small blue-light">JSON Response</a>
+										<a href="#" class="button small blue-light">Production Application</a>
+									</p>
+								</div>
+							</section>
+						</div>
+						<div class="panel" id="sales">
+							<!--<header class="panel-header"> API Documentation </header>-->
+							<section class="panel-content">
+
+								<!--<p>
+				Detailed below are instructions to request data from the Zentry API
+			</p>-->
+								<div class="note js-note blue-light">
+									<h4 class="note-title"> Sales </h4>
+									<p class="note-description">
+										<span class="mark fill grey">GET</span> <span class="mark fill grey">POST</span> <span class="mark fill grey">PATCH</span> <span class="mark fill grey">DELETE</span>
+										<br />
+										<br />
+										<a href="#ecommerce" class="button button-icon small purple">
+											<i class="fa fa-book"></i>Ecommerce
+										</a>
+									</p>
+								</div>
+								<!-- Table -->
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Action</th>
+												<th>Endpoint</th>
+												<th>Method</th>
+												<th>Purpose</th>
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Sales</span></th>
+
+
+
+
+												<td><a> /api/sales </a></td>
+												<td>GET</td>
+												<td>
+													Sales Index
+													<ul>
+														<li>
+															List all product sales at root
+														</li>
+
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Record Sale</span></th>
+
+
+
+
+												<td></td>
+												<td>POST</td>
+												<td>
+													Create a new sale
+													<ul>
+														<li>
+															[Required Parameters]
+															<ul>
+																<li>
+																	product_id
+																</li>
+																<li>
+																	basket_id
+																</li>
+																<li>
+																	customer_id
+																</li>
+																<li>
+																	discount (optional)
+																</li>
+															</ul>
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">View Sale</span></th>
+
+
+
+
+												<td><a>/api/sales/:id</a></td>
+												<td>GET</td>
+												<td>
+													View Sale Data
+													<ul>
+														<li>
+															Specific sale data by ID
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Update Sale</span></th>
+
+
+
+
+												<td></td>
+												<td>PATCH</td>
+												<td>
+													Update Sale Data
+													<ul>
+														<li>
+															Specify parameters to update on sale
+														</li>
+													</ul>
+												</td>
+											</tr>
+											<tr class="">
+												<th scope="row"><span class="mark fill grey">Delete Sale</span></th>
+
+
+
+
+												<td></td>
+												<td>DELETE</td>
+												<td>
+													Delete Sale from Database
+													<ul>
+														<li>
+															Returns json deleted: response
+														</li>
+													</ul>
+												</td>
+											</tr>
+
+
+
+
+										</tbody>
+									</table>
+
+								</div>
+								<!-- End of Table -->
+								<p class="helper mb40">
+									Millions of amazing sites across the web are being built with Bootstrap. Get started on your own with our growing
+									<span class="mark fill grey">collection of examples</span> or by exploring some of our favorites. We showcase dozens of inspiring projects built with Bootstrap on the Bootstrap Expo.
+								</p>
+
+								<!-- Social -->
+								<ul class="social helper center">
+									<li>
+										<a href="#">
+											<i class="fa fa-facebook"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-twitter"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-behance"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-github"></i>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-linkedin"></i>
+										</a>
+									</li>
+								</ul>
+								<!-- End of Social -->
+							</section>
+						</div>
+						<div class="panel" id="accounting">
+
+							<section class="panel-content">
+								<div class="note js-note purple">
+									<h4 class="note-title"> Accounting <i class="fa-solid fa-circle-dollar-to-slot"></i> </h4>
+									Database Models <br />
+									<p class="note-description">
+										Here you will find the routes to request Zentry storefront data regarding <br /> <span class="mark fill grey">accounts</span> <span class="mark fill grey">transactions</span> <span class="mark fill grey">journal entries</span>
+										<br />
+										<br />
+										<a href="#" class="button button-icon small blue-light">
+											<i class="fa fa-home"></i>API Home
+										</a>
+										<a href="#requests" class="button small blue-light">Making Requests</a>
+										<a href="/api/products" class="button small blue-light">JSON Response</a>
+										<a href="#" class="button small blue-light">Production Application</a>
+									</p>
+								</div>
+							</section>
+						</div>
+
+						<div class="panel" id="users">
+
+							<section class="panel-content">
+								<div class="note js-note purple">
+									<h4 class="note-title"> Users </h4>
+									Database Models <br />
+									<p class="note-description">
+										Here you will find the routes to request Zentry storefront data regarding <br /> <span class="mark fill grey">accounts</span> <span class="mark fill grey">transactions</span> <span class="mark fill grey">journal entries</span>
+										<br />
+										<br />
+										<a href="#" class="button button-icon small blue-light">
+											<i class="fa fa-home"></i>API Home
+										</a>
+										<a href="#requests" class="button small blue-light">Making Requests</a>
+										<a href="/api/products" class="button small blue-light">JSON Response</a>
+										<a href="#" class="button small blue-light">Production Application</a>
+									</p>
+								</div>
+							</section>
+						</div>
+
+						<div class="panel" id="dynamic">
+							<header class="panel-header"> Dynamic Requests </header>
+							<section class="panel-content">
+								<div class="note js-note purple">
+									<h4 class="note-title"> Dashboard Data Generation </h4>
+									<p class="note-description">
+										Here you will find the routes to request Zentry storefront data regarding <br /> <span class="mark fill grey">products</span> <span class="mark fill grey">categories</span> <span class="mark fill grey">customers</span> <span class="mark fill grey">users</span> <span class="mark fill grey">posts</span>
+										<br />
+
+									</p>
+								</div>
+							</section>
+						</div>
+
+						<div class="panel">
+							<header class="panel-header"> More Options </header>
+							<section class="panel-content">
+								<p class="helper mb30">Here's the full list of all options which could be used. You could easily customize your item, just write the required option in custom.js</p>
+								<!-- Table -->
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Property</th>
+												<th>Default</th>
+												<th>Description</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="">
+												<th scope="row">duplicate</th>
+												<td>true</td>
+												<td>If true, a copy of the menu element is made for the mobile menu. This allows for separate functionality for both mobile and non-mobile versions.</td>
+											</tr>
+											<tr class="">
+												<th scope="row">duration</th>
+												<td>200</td>
+												<td>The duration of the sliding animation.</td>
+											</tr>
+											<tr class="">
+												<th scope="row">easingOpen</th>
+												<td>swing</td>
+												<td>Easing used for open animations. 'Swing' and 'Linear' are available with jQuery. More easing functions are available with the use of plug-ins, such as jQuery UI.</td>
+											</tr>
+											<tr class="">
+												<th scope="row">easingClose</th>
+												<td>swing</td>
+												<td>Easing used for close animations. 'Swing' and 'Linear' are available with jQuery. More easing functions are available with the use of plug-ins, such as jQuery UI.</td>
+											</tr>
+											<tr class="">
+												<th scope="row">prependTo</th>
+												<td>body</td>
+												<td>Element, jQuery object, or jQuery selector string for the element to prepend the mobile menu to.</td>
+											</tr>
+											<tr class="">
+												<th scope="row">parentTag</th>
+												<td>a</td>
+												<td>Element type for parent menu items. Anchor tag is recommended for accessibility.</td>
+											</tr>
+											<tr class="">
+												<th scope="row">closeOnClick</th>
+												<td>false</td>
+												<td>Close menu when a link is clicked. Useful when navigating within a single page.</td>
+											</tr>
+											<tr class="">
+												<th scope="row">allowParentClick</th>
+												<td>false</td>
+												<td>Allow clickable links as parent elements.</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<!-- End of Table -->
+							</section>
+						</div>
+						<div class="panel">
+							<header class="panel-header"> Demo Gif </header>
+							<section class="panel-content">
+								<p class="helper mb30">Bootstrap automatically adapts your pages for various screen sizes. Here's how to disable this feature so your page works like this non-responsive example.</p>
+								<div class="helper center">
+									<!-- Gif Player -->
+									<div class="gif-player">
+										<img src="http://placehold.it/670x340" class="js-gif-player" alt="gif animation">
+									</div>
+									<!-- End of Grid view -->
+								</div>
+							</section>
+						</div>
+						<div class="panel">
+							<header class="panel-header"> Browser Support </header>
+							<section class="panel-content">
+								<p class="helper mb30">Specifically, we support the latest versions of the following browsers and platforms. On Windows, we support Internet Explorer 9+. More specific support information is provided below.</p>
+								<!-- Browser Support -->
+								<ul class="browsers browsers-compact">
+									<li class="browser-recommended">
+										<div class="browser-icon">
+											<svg enable-background="new 0 0 515.91 728.5" height="64" id="Layer_2" viewBox="0 0 512.00003 512" width="64" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+											<defs id="defs7" />
+											<g id="g6625" transform="translate(-141.91412,-143.63566)">
+											<path d="m 397.91414,530.64366 c -26.00001,0 -49.66401,-7.008 -71.00801,-20.992 -21.344,-14 -37.344,-32 -48,-54 L 173.91412,271.63565 c -22,39.344 -32,83.344 -32,128.00001 0,64 20.832,119.84 62.496,167.50401 41.66401,47.664 93.50401,76.16 155.50401,85.504 l 74.25601,-128.49601 c -7.472,2.192 -19.936,6.496 -36.256,6.496 z"
+												  id="path5-5" style="fill:#4aae48" />
+											<path d="m 317.41813,296.13165 c 23.648,-18.32 50.496,-24.496 80.49601,-24.496 4,0 220.00001,0 220.00001,0 -22.672,-38.656 -53.504,-71.32801 -92.49601,-94.00001 -39.008,-22.656 -81.504,-34 -127.504,-34 -40.00001,0 -77.34401,8.496 -112.00001,25.504 -34.672,16.992 -66.75201,41.744 -90.25601,73.50401 l 74.25601,124.992 c 7.328,-28.656 23.824,-53.152 47.504,-71.504 z"
+												  id="path7-1" style="fill:#ea3939" />
+											<path d="M 634.66615,303.63565 H 485.91414 c 26,26 43.008,59.344 43.008,96.00001 0,27.344 -7.664,52.336 -23.008,75.008 l -104.992,180.99201 c 70,-0.672 129.664,-26 179.00801,-76 49.312,-50.00001 73.984,-110.00001 73.984,-180.00001 0,-32.65601 -5.504,-67.00801 -19.248,-96.00001 z"
+												  id="path9-7" style="fill:#fed14b" />
+											<circle cx="16" cy="16" id="circle11" r="6" style="fill:#188fd1" transform="matrix(16.000001,0,0,16.000001,141.91412,143.63564)" />
+												</g>
+											</svg>
+										</div>
+										<h4 class="browser-title"> Chrome </h4>
+									</li>
+									<li>
+										<div class="browser-icon">
+											<svg enable-background="new 0.907 -0.205 32 32" height="64" viewBox="0.907 -0.205 32 32" width="64" xmlns="http://www.w3.org/2000/svg">
+												<path clip-rule="evenodd" d="M16.907-.205c-8.836 0-16 7.164-16 16s7.164 16 16 16 16-7.164 16-16-7.164-16-16-16zm0 29c-7.18 0-13-5.82-13-13s5.82-13 13-13 13 5.82 13 13-5.82 13-13 13z" fill="#26A6D1" fill-rule="evenodd" />
+												<path clip-rule="evenodd" d="M25.221 7.48l-6.192 10.436-4.242-4.243 10.434-6.193z" fill="#E2574C" fill-rule="evenodd" />
+												<path clip-rule="evenodd" d="M8.594 24.11l10.435-6.193-4.242-4.243-6.193 10.436z" fill="#E4E7E7" fill-rule="evenodd" />
+											</svg>
+										</div>
+										<h4 class="browser-title"> Safari </h4>
+									</li>
+									<li>
+										<div class="browser-icon">
+											<svg enable-background="new 0 0 32 32" height="64" id="Layer_1" viewBox="0 0 32 32" width="64" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+											<g>
+											<path d="M26.737,4.375c2.842,2.917,4.264,6.75,4.264,11.5c0,4.334-1.422,8.104-4.264,11.312   C23.895,30.396,20.295,32,15.938,32c-4.316,0-7.885-1.604-10.706-4.812C2.41,23.979,1,20.209,1,15.875   c0-4.75,1.39-8.583,4.171-11.5C7.95,1.459,11.54,0,15.938,0C20.295,0,23.895,1.459,26.737,4.375z M21.291,11.062   c-0.124-1.291-0.373-2.552-0.747-3.781c-0.373-1.229-0.944-2.177-1.711-2.844c-0.769-0.666-1.733-1-2.895-1   c-1.162,0-2.116,0.323-2.863,0.969C12.328,5.053,11.778,6,11.426,7.25S10.835,9.75,10.71,11c-0.124,1.25-0.187,2.771-0.187,4.562   c0,1.125,0.021,2.073,0.062,2.844c0.04,0.771,0.113,1.709,0.218,2.812c0.103,1.104,0.27,2.031,0.498,2.781   c0.228,0.75,0.538,1.49,0.934,2.219c0.394,0.729,0.902,1.281,1.524,1.656s1.348,0.562,2.179,0.562c0.829,0,1.565-0.188,2.21-0.562   c0.643-0.375,1.161-0.927,1.556-1.656C20.098,25.49,20.42,24.75,20.669,24s0.436-1.677,0.56-2.781   c0.125-1.104,0.197-2.052,0.219-2.844c0.02-0.791,0.03-1.729,0.03-2.812C21.478,13.854,21.416,12.354,21.291,11.062z"
+												  fill="#EA3939" />
+												</g>
+											<g />
+											<g />
+											<g />
+											<g />
+											<g />
+											<g />
+											</svg>
+										</div>
+										<h4 class="browser-title"> Opera </h4>
+									</li>
+									<li>
+										<div class="browser-icon">
+											<svg enable-background="new -0.002 -0.501 32 31" height="64" viewBox="-0.002 -0.501 32 31" width="64" xmlns="http://www.w3.org/2000/svg">
+												<path d="M15.998-.501c8.284 0 15 6.715 15 15 0 8.283-6.716 15-15 15s-15-6.717-15-15c0-8.286 6.716-15 15-15z" fill="#2394BC" />
+												<path d="M18.562 30.274c7.614-1.229 13.437-7.814 13.437-15.775l-.146.181c.228-1.513.188-2.861-.125-4.037-.112.871-.234 1.397-.357 1.608-.001-.068-.018-.976-.307-2.243-.137-.924-.338-1.793-.616-2.596.068.368.108.675.128.953-1.162-3.118-4.023-6.957-11.072-6.867 0 0 2.479.262 3.646 2.029 0 0-1.193-.285-2.095.152 1.099.438 2.052.896 2.863 1.374l.07.043c.208.125.385.253.573.38 1.498 1.052 2.888 2.553 2.782 4.489-.323-.51-.753-.844-1.304-1.012.679 2.66.746 4.857.197 6.59-.377-1.154-.724-1.846-1.033-2.09.431 3.566-.15 6.203-1.739 7.922.302-1.049.422-1.908.354-2.586-1.867 2.822-3.991 4.281-6.372 4.371-.941-.008-1.83-.15-2.666-.426-1.228-.415-2.339-1.124-3.328-2.13 1.544.129 2.954-.139 4.195-.772l2.033-1.332-.008-.006c.264-.1.512-.092.754.021.496-.068.67-.334.504-.783-.24-.334-.603-.637-1.069-.904-1.017-.531-2.079-.447-3.187.26-1.055.6-2.07.576-3.058-.062-.647-.447-1.272-1.049-1.876-1.801l-.24-.355c-.113.852.015 1.945.398 3.291l.008.018-.008-.016c-.384-1.346-.511-2.442-.398-3.293v-.008c.029-.744.337-1.154.924-1.246l-.249-.021.251.021c.663.061 1.424.213 2.282.463.144-.828-.045-1.695-.564-2.584v-.016c.806-.752 1.521-1.299 2.132-1.648.271-.145.429-.365.481-.662l.022-.016.008-.008.03-.029c.158-.236.105-.426-.165-.594-.565.031-1.131-.008-1.695-.121l-.008.023c-.233-.068-.527-.275-.889-.625l-.927-.912-.278-.219v.029h-.008l.008-.037-.053-.055.075-.053c.128-.691.339-1.285.64-1.795l.068-.061c.302-.502.881-1.041 1.732-1.617-1.582.197-3.013.91-4.285 2.143-1.055-.387-2.305-.305-3.744.25l-.173.132-.013.007.188-.138.008-.008c-.905-.416-1.515-1.611-1.809-3.564-1.152 1.141-1.71 3.178-1.673 6.119l-.33.499-.085.058-.017.016-.007.007-.016.033c-.175.274-.416.688-.72 1.244-.437.786-.584 1.446-.627 2.021l-.004.007.002.019-.014.151.025-.04c.003.133.006.267.04.387l.934-.768c-.339.859-.564 1.77-.678 2.736l-.027.442-.293-.335c0 3.428 1.088 6.597 2.924 9.201l.055.086.088.105c1.32 1.813 3.006 3.338 4.958 4.464 1.403.831 2.911 1.413 4.519 1.759l.331.074c.333.064.674.112 1.016.155.253.033.506.065.762.087l.34.039.483.003.525.026.418-.021.689-.034c.409-.028.812-.073 1.212-.131l.243-.036zm-9.409-16.75h0zm19.527-2.741l-.007.131.005-.132.002.001z"
+													  fill="#EC8840" />
+											</svg>
+										</div>
+										<h4 class="browser-title"> FireFox </h4>
+									</li>
+									<li class="browser-partial">
+										<div class="browser-icon">
+											<svg enable-background="new 0.001 -0.001 31.996 29.997" height="64" viewBox="0.001 -0.001 31.996 29.997" width="64" xmlns="http://www.w3.org/2000/svg">
+												<path d="M23.841 17.972h8.032c.074-.576.147-1.162.116-1.758-.321-6.163-4.144-11.568-9.642-13.413l.423.084s10.027-4.359 6.644 5.447l.412.677s3.089-7.542-1.688-8.789c-3.909-1.02-9.686 1.814-9.686 1.814l.213.042c-.359-.025-.721-.042-1.088-.042-7.146 0-13.078 4.845-14.215 11.453.81-.907 3.712-4.255 6.979-6.352 0 0-5.566 4.76-7.177 8.671 0 0-2.064 3.502-2.742 6.122-.41 1.588-1.463 7.283 2.742 7.938 4.376.68 7.829-1.551 7.829-1.551l-.084-.047c1.994 1.018 4.261 1.598 6.667 1.598 6.375 0 11.779-4.26 13.68-9.855h-8.242c-1.123 2.213-3.112 3.449-5.467 3.449-3.123 0-5.413-1.84-6.008-5.488h12.302zm-13.819 9.807s-2.421 1.18-4.463 1.236c-6.243-.057-1.565-8.506-1.565-8.506l-.003-.009c1.107 3.051 3.264 5.619 6.048 7.291l-.017-.012zm7.556-19.226c3.617 0 5.309 2.446 5.718 5.45h-11.697c.635-2.98 2.702-5.45 5.979-5.45z"
+													  fill="#26A6D1" />
+											</svg>
+										</div>
+										<h4 class="browser-title"> IE 9+ </h4>
+									</li>
+								</ul>
+								<!-- End of Browser Support -->
+							</section>
+						</div>
+						<div class="panel">
+							<header class="panel-header"> Must read </header>
+							<section class="panel-content">
+								<!-- List View -->
+								<div class="list-view helper m0">
+									<div class="list-item">
+										<div class="list-item-header">
+											<h3 class="list-item-title">
+												<a href="#">How to use a plugin</a>
+											</h3>
+											<span class="list-item-meta">
+												<a href="#">article</a>
+											</span>
+										</div>
+										<div class="list-item-content"> A jQuery plugin is simply a new method that we use to extend jQuery&#39;s prototype object. By extending the prototype object you enable all objects to inherit any methods that you add. </div>
+									</div>
+									<div class="list-item">
+										<div class="list-item-header">
+											<h3 class="list-item-title">
+												<a href="#">Plugin for dummies</a>
+											</h3>
+											<span class="list-item-meta">
+												<a href="#">book</a>
+											</span>
+										</div>
+										<div class="list-item-content"> You know you need to learn jQuery. Everyone else has, and you’re falling behind! No worries; it’s a brand new year, and what better way to celebrate it than by learning a new skill? </div>
+									</div>
+									<div class="list-item">
+										<div class="list-item-header">
+											<h3 class="list-item-title">
+												<a href="#">How to create a plugin</a>
+											</h3>
+											<span class="list-item-meta">
+												<a href="#">article</a>
+											</span>
+										</div>
+										<div class="list-item-content"> Sometimes you want to make a piece of functionality available throughout your code. For example, perhaps you want a single method you can call on a jQuery. </div>
+									</div>
+								</div>
+								<!-- End of List View -->
+							</section>
+						</div>
+						<div class="panel">
+							<header class="panel-header"> Download links </header>
+							<section class="panel-content">
+								<p class="helper mb30">
+									You are allowed to make any changes and modifications in the themes or products to adapt them to your needs. It is not permitted to change or remove the copyright information in the source code. For commercial use, please buy an extended license.
+								</p>
+								<div class="helper center">
+									<div class="button-list">
+										<a href="#" class="button green">Download Now</a>
+										<a href="#" class="button blue">Commercial License</a>
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer -->
+		<footer class="js-footer-is-fixed">
+			<!-- Footer Default -->
+			<div class="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3 col-sm-3 col-xs-12">
+							<div class="footer-logo-wrapper">
+								<!-- Logo Image -->
+								<a href="index.html" class="logo-image ">
+									<img src="{{ url_for('static', filename='zentryapi/img/logos/logo.png') }}" alt="logo">
+								</a>
+								<!-- End of Logo Image -->
+								<!-- Slogan -->
+								<p class="slogan">
+									Learn.
+									<br>Create.
+									<br>Impress.
+								</p>
+								<!-- End of Slogan -->
+							</div>
+						</div>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+							<div class="footer-wrapper">
+								<!-- Scroll top -->
+								<span class="scroll-top js-scroll-top">
+									<i class="fa fa-angle-up"></i>
+								</span>
+								<!-- End of Scroll top -->
+								<!-- Version -->
+								<div class="docs-version js-docs-version">
+									<span class="docs-current-version js-docs-current-version">v3.5</span>
+									<ul class="js-docs-version-list">
+										<li>
+											<a href="#">1.0</a>
+										</li>
+										<li>
+											<a href="#">1.5</a>
+										</li>
+										<li>
+											<a href="#">2.5</a>
+										</li>
+										<li>
+											<a href="#">3.0</a>
+										</li>
+										<li>
+											<a href="#">3.1</a>
+										</li>
+									</ul>
+								</div>
+								<!-- End of Version -->
+								<!-- Footer Menu -->
+								<ul class="footer-menu helper right">
+									<li>
+										<a href="#"> About us </a>
+									</li>
+									<li>
+										<a href="#"> Privacy Policy </a>
+									</li>
+									<li>
+										<a href="#"> Terms & Condotions </a>
+									</li>
+									<li>
+										<a href="#"> My account </a>
+									</li>
+									<li>
+										<a href="#"> Support service </a>
+									</li>
+								</ul>
+								<!-- End of Footer Menu -->
+								<!-- Copyright -->
+								<p class="copyright helper right">
+									<a href="http://vsart.me">VSArt</a>, all rights reserved. 2016 &copy;
+								</p>
+								<!-- End of Copyright -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End of Footer Default -->
+		</footer>
+		<!-- End of Footer -->
+	</div>
+	<script src="{{ url_for('static', filename='zentryapi/js/all.js') }}"></script>
+	<script src="{{ url_for('static', filename='zentryapi/js/custom.js') }}"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+	<!--
+	<script>
+		(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+		function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+		e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+		e.src='//www.google-analytics.com/analytics.js';
+		r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+		ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+	</script>
+	 -->
+</body>
+
+</html>

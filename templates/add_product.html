@@ -1,0 +1,54 @@
+﻿{% extends 'base.html' %}
+{% block bodyclass%}"bg"{% endblock %}
+{% block add_card%}
+
+<form id="addPetForm" method="POST" action="/" class="test p-4 rounded shadow-lg mt-3" style="border: 4px solid rgba(243, 101, 219, 0.28);">
+    <h4 class="text-center font-weight-bold text-dark mb-3">Edit info for {{name}}!</h4>
+    {{ form.hidden_tag() }} <!--add type=hidden form fields -->
+    {% for field in form
+    if field.widget.input_type != 'hidden' %}
+    <div class="row text-center shadow text-shadow round p-2" style="color: deeppink; border: 3px solid rgba(243, 101, 219, 0.28); background-color: lightyellow">
+        <div class="col-4 round shadow" style="border: 3px solid rgba(243, 101, 219, 0.28); background-color: rgba(243, 101, 219, 0.28);">
+            {{ field.label(class_="pt-2 font-weight-bold") }}
+
+        </div>
+
+        <div class="col-8">
+
+            {{ field(class_="form-control shadow round mt-1") }}
+        </div>
+
+    </div>
+
+    <p class="text-center">
+
+
+
+
+
+
+
+
+
+        {% for error in field.errors %}
+        {{ error }}
+        {% endfor %}
+    </p>
+
+    {% endfor %}
+    <div class="row justify-content-center ">
+        <div class="col-6">
+            <button class="form-control btn btn-primary" type="submit">Submit</button>
+        </div>
+    </div>
+
+
+</form>
+
+
+{% endblock %}
+
+
+
+
+

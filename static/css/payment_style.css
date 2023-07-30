@@ -1,0 +1,19 @@
+@import url(https://square-fonts-production-f.squarecdn.com/square-sans.min.css);
+
+
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  
+  align-items: center;
+  justify-content: center;
+}
+
+.messages {
+  max-width: 700px;
+  padding: 40px;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+

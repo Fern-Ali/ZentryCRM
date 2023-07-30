@@ -1,0 +1,586 @@
+{% extends 'nav.html' %}
+{% block body_class %}"bg-effect"{% endblock %}
+{% block metalinks %}
+<title>Budly Feed</title>
+
+<!-- Google font -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet">
+
+<!-- bootstrap css -->
+
+<link href="{{ url_for('static', filename='general_assets/css/vendors/bootstrap.css') }}" rel="stylesheet">
+<!-- wow css -->
+
+<link href="{{ url_for('static', filename='general_assets/css/animate.min.css') }}" rel="stylesheet">
+
+<!-- font-awesome css -->
+<link href="{{ url_for('static', filename='general_assets/css/vendors/font-awesome.css') }}" rel="stylesheet">
+
+<!-- feather icon css -->
+<link href="{{ url_for('static', filename='general_assets/css/vendors/feather-icon.css') }}" rel="stylesheet">
+
+<!-- slick css -->
+<link href="{{ url_for('static', filename='general_assets/css/vendors/slick/slick.css') }}" rel="stylesheet">
+
+<link href="{{ url_for('static', filename='general_assets/css/vendors/slick/slick-theme.css') }}" rel="stylesheet">
+
+<!-- Iconly css -->
+<link href="{{ url_for('static', filename='general_assets/css/bulk-style.css') }}" rel="stylesheet">
+
+<!-- Template css -->
+<link href="{{ url_for('static', filename='general_assets/css/style.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+<!-- Breadcrumb Section Start -->
+<section class="breadscrumb-section pt-0">
+    <div class="container-fluid-lg" style="background-size: cover; background-image: url('https://images.unsplash.com/photo-1614853035986-b230d7d5679c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80')">    <div class="row">
+            <div class="col-12">
+                <div class="breadscrumb-contain">
+                    <!--<h2>See what your buds are talking about!</h2>-->
+                    <nav>
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">
+                                    <i class="fa-solid fa-house"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item" aria-current="page">Social</li>
+                            <li class="breadcrumb-item active" aria-current="page">Chatter Feed</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Blog Details Section Start -->
+    {% block twitter %}
+<section class="blog-section section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row g-sm-4 g-3">
+            <div class="col-xxl-3 col-xl-4 col-lg-5 d-lg-block d-none">
+                <div class="left-sidebar-box">
+                    <div class="left-search-box">
+                        <div class="search-box">
+                            <form class="search-form d-flex align-items-center" method="POST" action="/search">
+                                {{ search_form.hidden_tag() }}
+                                <input type="search" name="query" class="form-control" id="exampleFormControlInput4"
+                                       placeholder="Search....">
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="accordion left-accordion-box" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                    Recent Budly Chatter
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                                 aria-labelledby="panelsStayOpen-headingOne">
+                                <div class="accordion-body pt-0">
+                                    <div class="recent-post-box">
+                                        {% for msg in recent_messages %}
+                                        <div class="recent-box">
+                                            <a href="blog-detail.html" class="recent-image">
+                                                <img src="{{msg.user.image_url}}"
+                                                     class="img-fluid blur-up lazyload" alt="" style="border-radius: 50px; ">
+                                            </a>
+
+                                            <div class="recent-detail">
+                                                <a href="blog-detail.html">
+                                                    <h5 class="recent-name">{{ msg.text }}</h5>
+                                                </a>
+                                                <a style="color: #0da487" href="/users/{{ msg.user.id }}">@{{ msg.user.username }}</a>
+
+                                                <div class="row justify-content-center">
+                                                    <div class="col-6">
+                                                        <h6>{{ msg.timestamp.strftime('%d %B %Y') }}</h6>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <h5>
+                                                            <button class="btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}">
+                                                                <i class="fa-solid fa-bell"></i>
+                                                            </button>
+
+                                                        </h5>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <h5>
+                                                            <button class="btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}">
+                                                                <i class="fa-solid fa-thumbs-up"></i>
+                                                            </button>
+
+                                                        </h5>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseFour">
+                                    Trending Products
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse collapse show"
+                                 aria-labelledby="panelsStayOpen-headingFour">
+                                <div class="accordion-body">
+                                    <ul class="product-list product-list-2 border-0 p-0">
+                                        {% for prod in trending_products %}
+                                        <li>
+                                            <div class="offer-product">
+                                                <a href="/products/{{prod.id}}" class="offer-image">
+                                                    <img src="{{prod.image_url}}"
+                                                         class="blur-up lazyload" alt="">
+                                                </a>
+
+                                                <div class="offer-detail">
+                                                    <div>
+                                                        <a href="shop-left-sidebar.html">
+                                                            <h6 class="name">{{ prod.name }}</h6>
+                                                        </a>
+                                                        {% for tag in prod.effects_tags %}
+                                                        <span>| {{tag.name}} | </span>
+                                                        {% endfor %}
+                                                        <h6 class="price theme-color">$ {{ prod.price }}</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-xxl-9 col-xl-8 col-lg-7 ratio_50">
+                <div class="blog-detail-image rounded-3 mb-4" style="max-height: 200px; ">
+                    <img src="https://images.unsplash.com/photo-1681195035338-bbdea7af2bf3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=805&q=80" class="bg-img blur-up lazyload" alt="">
+                    <div class="blog-image-contain">
+                        <ul class="contain-list">
+                            <li>Explore</li>
+                            <li>Contribute</li>
+                            <li>Grow</li>
+                        </ul>
+                        <h2 class="theme-color">{% block title %}Budly Chatter{% endblock %}</h2>
+                        <ul class="contain-comment-list">
+                            <li>
+                                <div class="user-list">
+                                    <i data-feather="user"></i>
+                                    <span>{% block top100 %}Top 100{% endblock %}</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="user-list">
+                                    <i data-feather="calendar"></i>
+                                    <span>{{now.strftime('%d %B %Y')}}</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="user-list">
+                                    <i data-feather="message-square"></i>
+                                    <span>{{messages|length}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="blog-detail-contain">
+
+
+                    <div class="blog-details-quote">
+                        <h3> {{quote[0]['content']}}</h3>
+                        <h5>- {{quote[0]['author']}}</h5>
+                    </div>
+
+
+
+                </div>
+                {% block search_results %}
+                <div class="comment-box overflow-hidden" style="background-color: rgba(0,0,0,.1); ">
+                    <div class="leave-title">
+                        <!--<h3>{{currUser[0].username}}'s Chatter Feed</h3>-->
+                    </div>
+
+                    <div class="user-comment-box" style="overflow: scroll !important; height: 100vh">
+                        <ul>
+                            {% for msg in messages %}
+                            <!--<li>
+                    <div class="user-box border-color p-2 rounded" style="background-color: #f8f8f8;">
+                        <div class="reply-button">
+                            <i class="fa-solid fa-reply"></i>
+                            <span class="theme-color">Reply</span>
+                        </div>
+                        <div class="user-iamge">
+                            <img src="{{ msg.user.image_url }}"
+                                 class="img-fluid blur-up lazyload" alt="">
+                            <div class="user-name">
+                                <h6>{{ msg.timestamp.strftime('%d %B %Y') }}</h6>
+                                <h5 class="text-content"><a href="/users/{{ msg.user.id }}">@{{ msg.user.username }}</a></h5>
+                            </div>
+                        </div>
+
+                        <div class="user-contain">
+                            <p>
+                                {{ msg.text }}
+                            </p>
+                            <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                <button class="
+    btn
+    btn-sm
+    {{'btn-primary' if msg.id in likes else 'btn-secondary'}}">
+                                    <i class="fa fa-thumbs-up"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </li>-->
+                            <li class="row">
+
+                                <div class="user-box  row justify-content-center border-color p-2 rounded" background-color: #f8f8f8; ">
+                                    <!--<div class="reply-button">
+                <i class="fa-solid fa-reply"></i>
+                <span class="theme-color">Reply</span>
+            </div>-->
+                                    <div class="user-iamge col-11 col-sm-10 justify-content-center ">
+                                        <!--style="border-radius: 50px; border-left: 2px solid rgba(13, 164, 135, .20); border-right: 2px solid rgba(13, 164, 135, .20); "-->
+
+
+                                        <div class="row justify-content-center ">
+                                            <div class=" col-12 col-sm-10   p-2" style="border-radius: 50px; background-color: rgba(0,0,0,.9); border-left: 2px solid rgba(13, 164, 135, .45); border-right: 2px solid rgba(13, 164, 135, .45); ">
+                                                <div class="row justify-content-center">
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-1" style="background-color: rgba(255,255,255,0)">
+                                                            <div class="row">
+
+
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+                                                    <div class="row justify-content-center">
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="user-contain col-12 col-sm-11 ">
+                                                    <!--style="background-image: url({{msg.user.header_image_url}}); background-size: cover"-->
+                                                    <!--<div class="row">-->
+                                                    <!--<img src="{{msg.user.header_image_url}}" style="max-height: 85px;" />-->
+                                                    <!--</div>-->
+                                                    <div class="row align-items-center justify-content-center" style="align-items: center">
+                                                        <div class="row justify-content-center  " style="background-color: rgba(0,0,0,0)">
+                                                            <div class="row">
+                                                                <div class="col-2">
+                                                                    <a href="/users/{{ msg.user.id }}">
+                                                                        <img src="{{ msg.user.image_url }}" style="max-width: 70px; border-radius: 50px;"
+                                                                             class="img-fluid blur-up lazyload p-2" alt="">
+
+                                                                    </a>
+
+
+                                                                </div>
+                                                                <div class="col-9">
+                                                                    <h5 class="text-content text-left" style="display: inline" overflow: hidden;"><a href="/users/{{ msg.user.id }}"> {{ msg.user.username }}</a></h5>
+                                                                    <span class="text-info"><i class="fa-solid fa-angles-right text-warning"></i> @{{ msg.user.username }}</span>
+                                                                    <span class="text-secondary"><i class="fa-solid fa-angles-right text-warning"></i> {{ msg.timestamp.strftime('%d %B %Y') }} </span>
+                                                                    <p class="text-light mt-2" style="font-weight: bolder">
+                                                                        {{ msg.text }}
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-1">
+
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                            <div class="row justify-content-center" style="margin-left: 35px;">
+
+                                                                <div class="col-12">
+
+                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                                       data-bs-target="#view{{ msg.id }}">
+
+                                                                        <img class="img-fluid blur-up lazyload p-2" src="{{msg.user.header_image_url}}" style="width: 100%; height: 100%; border-radius: 40px; max-height: 500px; max-width: -webkit-fill-available; " />
+
+                                                                    </a>
+                                                                </div>
+
+
+
+                                                            </div>
+
+
+
+
+                                                        </div>
+
+                                                        <div class="row justify-content-center">
+                                                            <div class="col-2">
+
+                                                            </div>
+                                                            <div class="col-10">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="col-3 col-sm-3">
+                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                            <button class="mt-3 sm-mt-3 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487; ">
+                                                                                <i class="fa fa-address-card"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="col-3 col-sm-3">
+                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                            <button class="mt-3 sm-mt-3 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487; ">
+                                                                                <i class="fa fa-heart"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="col-3 col-sm-3">
+                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                            <button class="mt-3 sm-mt-2 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487;  ">
+                                                                                <i class="fa fa-bell"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="col-3 col-sm-3">
+                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                            <button class="mt-3 sm-mt-2 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487;  ">
+                                                                                <i class="fa fa-bong"></i>
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--<div class="row">
+
+                            </div>-->
+
+
+                                                </div>
+
+                                                <div class="col-8 col-sm-1 mt-sm-0 mt-2" style="background-color: rgba(255,255,255,.0)">
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </li>
+                            {% endfor %}
+                            <li>
+                                <div class="user-box border-color">
+                                    <div class="reply-button">
+                                        <i class="fa-solid fa-reply"></i>
+                                        <span class="theme-color">Reply</span>
+                                    </div>
+                                    <div class="user-iamge">
+                                        <img src="../assets/images/inner-page/user/2.jpg"
+                                             class="img-fluid blur-up lazyload" alt="">
+                                        <div class="user-name">
+                                            <h6>30 Jan, 2022</h6>
+                                            <h5 class="text-content">Glenn Greer</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="user-contain">
+                                        <p>
+                                            "Yeah, I think maybe you do. Right, gimme a Pepsi free. Of course, the
+                                            Enchantment Under The Sea Dance they're supposed to go to this, that's
+                                            where they kiss for the first time. You'll find out. Are you sure about
+                                            this storm?"
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="li-padding">
+                                <div class="user-box">
+                                    <div class="reply-button">
+                                        <i class="fa-solid fa-reply"></i>
+                                        <span class="theme-color">Reply</span>
+                                    </div>
+                                    <div class="user-iamge">
+                                        <img src="../assets/images/inner-page/user/3.jpg"
+                                             class="img-fluid blur-up lazyload" alt="">
+                                        <div class="user-name">
+                                            <h6>30 Jan, 2022</h6>
+                                            <h5 class="text-content">Glenn Greer</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="user-contain">
+                                        <p>
+                                            "Cheese slices goat cottage cheese roquefort cream cheese pecorino cheesy
+                                            feet when the cheese comes out everybody's happy"
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="leave-box">
+                    <div class="leave-title mt-0">
+                        <h3>Leave Comment</h3>
+                    </div>
+
+                    <div class="leave-comment">
+                        <div class="comment-notes">
+                            <p class="text-content mb-4">
+                                Your email address will not be published. Required fields
+                                are marked
+                            </p>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                <div class="blog-input">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                           placeholder="Full Name">
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                <div class="blog-input">
+                                    <input type="email" class="form-control" id="exampleFormControlInput2"
+                                           placeholder="Enter Email Address">
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                <div class="blog-input">
+                                    <input type="url" class="form-control" id="exampleFormControlInput3"
+                                           placeholder="Enter URL">
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="blog-input">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                              placeholder="Comments"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-check d-flex mt-4 p-0">
+                            <input class="checkbox_animated" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label text-content" for="flexCheckDefault">
+                                <span class="color color-1">
+                                    Save my name, email, and website in this
+                                    browser for the next time I comment.
+                                </span>
+                            </label>
+                        </div>
+
+                        <button class="coming-soon btn btn-animation ms-xxl-auto mt-xxl-0 mt-3 btn-md fw-bold">
+                            Post
+                            Comment
+                        </button>
+                    </div>
+                </div>
+                {% endblock %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Details Section End -->
+{% endblock %}
+{% block scripts %}
+<!-- Bg overlay Start -->
+<div class="bg-overlay"></div>
+<!-- Bg overlay End -->
+<!-- latest jquery-->
+
+<script src="{{ url_for('static', filename='general_assets/js/jquery-3.6.0.min.js') }}"></script>
+
+<!-- jquery ui-->
+
+<script src="{{ url_for('static', filename='general_assets/js/jquery-ui.min.js') }}"></script>
+
+<!-- Bootstrap js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/bootstrap-notify.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/popper.min.js') }}"></script>
+
+<!-- feather icon js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/feather/feather.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/feather/feather-icon.js') }}"></script>
+
+<!-- Lazyload Js -->
+
+<script src="{{ url_for('static', filename='general_assets/js/lazysizes.min.js') }}"></script>
+
+<!-- Slick js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/slick.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/slick-animation.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/custom_slick.js') }}"></script>
+
+<!-- WOW js -->
+
+<script src="{{ url_for('static', filename='general_assets/js/wow.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/custom-wow.js') }}"></script>
+
+
+<!-- script js -->
+<script src="{{ url_for('static', filename='general_assets/js/script.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,11 @@
+name,number,normal
+Assets,100,1
+Cash,110,1
+Merchandise,120,1
+Liabilities,200,-1
+Deferred Revenue,210,-1
+Revenue,300,-1
+Expenses,400,1
+Cost of Goods Sold,410,1
+Equity,500,-1
+Capital,510,-1

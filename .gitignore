@@ -1,0 +1,13 @@
+venv/
+__pycache__
+migrations/
+canna_kings
+s\033q
+"s\033q"
+hideme/
+main
+keys
+*.pyc
+*.ini
+*.py[cod]
+*$py.class

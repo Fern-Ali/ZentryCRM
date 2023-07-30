@@ -1,0 +1,264 @@
+﻿{% extends 'base.html' %}
+{% block metadata %}
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet" />
+
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='css/apexstyle.css') }}">-->
+{% endblock %}
+{% block fixnavicon1 %}style="margin-right:0px"{% endblock %}
+{% block fixnavicon2 %}style="margin-right:0px"{% endblock %}
+{% block fixnavicon3 %}style="margin-right:0px"{% endblock %}
+{% block content %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <!--<h1>ApexCharts</h1>-->
+        <nav>
+            <ol class="breadcrumb" style="background-color: transparent">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Finance</li>
+                <li class="breadcrumb-item active">Reports - Annual</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+
+
+    <section class="section dashboard">
+        <div class="row">
+
+ 
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Budly Co. Balance Sheet <span> / as of {{ now.day }} {{ months[now.month-1] }}, {{ now.year }}</span></h5>
+
+                        <div class="divTable">
+                            <div class="divTableBody">
+                                <div class="divTableRow bg bg-secondary text-light">
+                                    <div class="divTableCell font-weight-bold">
+                                        CONSOLIDATED BALANCE SHEET
+                                    </div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow" >
+                                    <div class="divTableCell font-weight-bold text-success">(USD)</div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow bg bg-secondary">
+                                    <div class="divTableCell"></div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell"></div>
+                                    <div class="divTableCell font-weight-bold">{{ now.day }} {{ months[now.month-1] }}, {{ now.year }}</div>
+                                </div>
+                                <div class="divTableRow bg bg-warning">
+                                    <div class="divTableCell"></div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow sheerlav text-light">
+                                    <div class="divTableCell">ASSETS</div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell font-italic">Current Assets:</div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Cash and cash equivalents
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[0]) }}</div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Inventories
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[1]) }}</div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Total current assets
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[0]+fin_data[1]) }}</div>
+                                </div>
+                                <div class="divTableRow bg bg-secondary">
+                                    <div class="divTableCell"></div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell font-italic">
+                                        Non-current assets:
+                                    </div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Marketable securities
+
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[2]) }}</div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Property, plant and equipment, net
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[3]) }}</div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Total non-current assets
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[2]+fin_data[3]) }}</div>
+                                </div>
+                                <div class="divTableRow lav">
+                                    <div class="divTableCell ">
+                                        Total assets:
+                                    </div>
+                                    <div class="divTableCell ">{{ "${:,.2f}".format(fin_data[0]+fin_data[1]+fin_data[2]+fin_data[3]) }}</div>
+                                </div>
+                                <div class="divTableRow bg bg-secondary">
+                                    <div class="divTableCell">
+
+                                    </div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow bg bg-warning">
+                                    <div class="divTableCell"></div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow sheerlav text-light">
+                                    <div class="divTableCell">
+                                        LIABILITIES AND SHAREHOLDERS' EQUITY:
+
+                                    </div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell font-italic">
+                                        Current liabilities:
+
+                                    </div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Accounts payable
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[4]) }}</div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Deferred Revenue
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[5]) }}</div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Total Current liabilities
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[4]+fin_data[5]) }}</div>
+                                </div>
+                                <div class="divTableRow bg bg-secondary">
+                                    <div class="divTableCell">
+
+                                    </div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell font-italic">
+                                        Non-current Liabilities:
+                                    </div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Term debt
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[6]) }}</div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Total non-current liabilities:
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[6]) }}</div>
+                                </div>
+                                <div class="divTableRow lav">
+                                    <div class="divTableCell">
+                                        Total liabilities:
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[4]+fin_data[5]+fin_data[6]) }}</div>
+                                </div>
+                                <div class="divTableRow bg bg-secondary">
+                                    <div class="divTableCell">
+
+                                    </div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow sheerlav text-light">
+                                    <div class="divTableCell">
+                                        SHAREHOLDERS' EQUITY:
+                                    </div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Paid-in Capital
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[7]) }}</div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">
+                                        Retained Earnings
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[8]) }}</div>
+                                </div>
+                                <div class="divTableRow lav">
+                                    <div class="divTableCell">
+                                        Total Shareholders' Equity
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[7]+fin_data[8]) }}</div>
+                                </div>
+                                <div class="divTableRow bg bg-secondary">
+                                    <div class="divTableCell">
+
+                                    </div>
+                                    <div class="divTableCell"></div>
+                                </div>
+                                <div class="divTableRow sheerlav text-light">
+                                    <div class="divTableCell ">
+                                        Total liabilities and shareholders' equity
+                                    </div>
+                                    <div class="divTableCell">{{ "${:,.2f}".format(fin_data[4]+fin_data[5]+fin_data[6]+fin_data[7]+fin_data[8]) }}</div>
+                                </div>
+                                <div class="divTableRow bg bg-secondary">
+                                    <div class="divTableCell">
+
+                                    </div>
+                                    <div class="divTableCell"></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    </section>
+
+</main><!-- End #main -->
+{% endblock %}
+
+<!-- DivTable.com -->
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+
+{% endblock %}

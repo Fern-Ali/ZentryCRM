@@ -1,0 +1,200 @@
+﻿{% extends 'base.html'  %}
+{% block bodyclass%} "" {% endblock %} <!--toggle-sidebar-->
+{% block metadata  %}
+<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/bootstrap.min.css') }}>
+<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/fontawesome-all.min.css') }}>
+<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/iofrm-style.css') }}>
+<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/iofrm-theme7.css') }}>
+
+{% endblock  %}
+
+{% block image_remove %}
+{% endblock %}
+
+{% block menustyle%}
+<!--"margin-left: 0;"-->
+{% endblock %}
+{% block removesidebar %}
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar " style="background-color: lavender;">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <li>
+            <div class="alert alert-dark  alert-dismissible fade show" role="alert">
+                <br />
+
+                <h5 class="mb-0 text-primary text-center ">Storefront & Admin Dashboard in one single streamlined platform!</h5>
+                <hr>
+
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </li>
+        <li>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <br />
+
+                <h5 class="mb-0 text-primary text-center ">Live Credit Card, ACH, GooglePay payment portal</h5>
+                <hr>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </li>
+        <li>
+            <div class="alert alert-dark  alert-dismissible fade show" role="alert">
+                <br />
+
+                <h5 class="mb-0 text-primary text-center ">Communicate with shoppers via chat feeds and help requests!</h5>
+                <hr>
+
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </li>
+        <li>
+            <div class="alert alert-info  alert-dismissible fade show" role="alert">
+                <br />
+
+                <h5 class="mb-0 text-primary text-center ">In-house database for Users, Products, Accounting, Sales, and many other indispensable features!</h5>
+                <hr>
+
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </li>
+        <li>
+            <div class="alert alert-dark  alert-dismissible fade show" role="alert">
+                <br />
+
+                <h5 class="mb-0 text-primary text-center ">Real-time Invoice generation at time-of-sale</h5>
+                <hr>
+
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </li>
+        <!--<li>
+        <div class="card lightwhite">
+            <div class="card-body">
+                <h5 class="card-title text-center">Include promos &amp; messages</h5>
+
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Primary Heading</h4>
+                    <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                    <hr>
+                    <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Secondary Heading</h4>
+                    <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                    <hr>
+                    <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Success Heading</h4>
+                    <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                    <hr>
+                    <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Danger Heading</h4>
+                    <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                    <hr>
+                    <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="alert alert-warning  alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Warning Heading</h4>
+                    <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                    <hr>
+                    <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="alert alert-info  alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Info Heading</h4>
+                    <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                    <hr>
+                    <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="alert alert-light border-light alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Lignt Heading</h4>
+                    <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                    <hr>
+                    <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <div class="alert alert-dark  alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Dark Heading</h4>
+                    <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                    <hr>
+                    <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+            </div>
+        </div>
+    </li>-->
+    </ul>
+
+</aside><!-- End Sidebar-->
+{% endblock %}
+{% block content  %}
+
+<div class="form-body">
+    <div class="website-logo">
+        <a href="index.html">
+            <div class="logo">
+                <img class="logo-size" src="images/logo-light.svg" alt="">
+            </div>
+        </a>
+    </div>
+    <div class="row justify-content-center">
+        <div class="img-holder" style="background-color: transparent">
+            <div class="bg"></div>
+            <div class="info-holder">
+                <img src="https://brandio.io/envato/iofrm/html/images/graphic3.svg" alt="">
+            </div>
+        </div>
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items p-4 pt-5 pb-5 rounded" style="background-color: rgba(100, 121, 234, 0.49);">
+                    <h3>Get more things done with Budly.</h3>
+                    <p class="text-light"><b>Access to the our beta starts here, with you. Welcome! </b></p>
+                    <div class="page-links">
+                        <a href="/login" class="active">Login</a><a href="/register">Register</a>
+                    </div>
+                    <form method="POST" action="/login">
+                        {{ form.hidden_tag() }}
+                        <!--<input class="form-control" type="text" name="username" placeholder="E-mail Address" required>-->
+                        {{ form.username(class_="form-control  round", placeholder_="username") }}
+                        {{ form.password(class_="form-control  round", placeholder_="password") }}
+                        <div class="form-button">
+                            <button id="submit" type="submit" class="ibtn">Login</button> <a href="#">Forget password?</a>
+                        </div>
+                    </form>
+                    <div class="other-links">
+                        <span>Or login with</span><a href="#">Facebook</a><a href="#">Google</a><a href="#">Linkedin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main1.js') }}"></script>
+
+{% endblock  %}

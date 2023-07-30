@@ -1,0 +1,183 @@
+﻿
+{% extends '/front-end/blog-detail.html' %}
+{% block title %}Search results for "{{ query }}" {% endblock %}
+{% block search_results %}
+<div class="row justify-content-center" style="background-color: rgba(0,0,0,.05); padding: 2%; border-radius: 10px; ">
+    <div class="col-8 col-xl-4">
+        <h3> Product results </h3>
+        {% if not products %}
+        <p>No products found</p>
+
+        {% else %}
+        <div class="user-comment-box">
+            <ul>
+                {% for prod in products %}
+                <li>
+                    <div class=" user-box border-color p-2" style="border-radius: 10px; background-color: rgba(13, 164, 135, 0.1); ">
+                        <!--<div class="reply-button">
+                <i class="fa-solid fa-reply"></i>
+                <span class="theme-color">Reply</span>
+            </div>-->
+                        <div class="user-iamge">
+                            <img src="{{ prod.image_url }}"
+                                 class="img-fluid blur-up lazyload" alt="">
+                            <div class="user-name">
+                                <h6>{{ prod.updated_at.strftime('%d %B %Y') }}</h6>
+                                <h5 class="text-content "><a href="/products/{{ prod.id }}">{{ prod.name }}</a></h5>
+                            </div>
+                        </div>
+
+                        <div class="user-contain mt-2">
+                            <p>
+                                {{ prod.description }}
+                            </p>
+                            <form method="POST" action="/users/add_favorite/{{ prod.id }}" id="messages-form">
+                                <button class="
+                btn
+                btn-sm
+                {{'btn-primary' if prod.id else 'btn-secondary'}}">
+                                    <i class="fa-solid fa-heart"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+                {% for prod in products_description %}
+                <li>
+                    <div class=" user-box border-color p-2" style="border-radius: 10px; background-color: rgba(13, 164, 135, 0.1); ">
+                        <!--<div class="reply-button">
+                <i class="fa-solid fa-reply"></i>
+                <span class="theme-color">Reply</span>
+            </div>-->
+                        <div class="user-iamge">
+                            <img src="{{ prod.image_url }}"
+                                 class="img-fluid blur-up lazyload" alt="">
+                            <div class="user-name">
+                                <h6>{{ prod.updated_at.strftime('%d %B %Y') }}</h6>
+                                <h5 class="text-content "><a href="/products/{{ prod.id }}">{{ prod.name }}</a></h5>
+                            </div>
+                        </div>
+
+                        <div class="user-contain mt-2">
+                            <p>
+                                {{ prod.description }}
+                            </p>
+                            <form method="POST" action="/users/add_favorite/{{ prod.id }}" id="messages-form">
+                                <button class="
+                btn
+                btn-sm
+                {{'btn-primary' if prod.id else 'btn-secondary'}}">
+                                    <i class="fa-solid fa-heart"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <p> {{products}}</p>
+        {% endif %}
+    </div>
+    
+    <div class="col-8 col-xl-4">
+        <h3> Comment results </h3>
+        {% if not comments %}
+        <p>No comments found</p>
+        {% else %}
+
+
+        <div class="user-comment-box">
+            <ul>
+                {% for msg in comments %}
+                <li>
+                    <div class="user-box border-color p-2" style="border-radius: 10px; background-color: rgba(13, 164, 135, 0.1); ">
+                        <!--<div class="reply-button">
+                            <i class="fa-solid fa-reply"></i>
+                            <span class="theme-color">Reply</span>
+                        </div>-->
+                        <div class="user-iamge">
+                            <img src="{{ msg.user.image_url }}"
+                                 class="img-fluid blur-up lazyload" alt="">
+                            <div class="user-name">
+                                <h6>{{ msg.timestamp.strftime('%d %B %Y') }}</h6>
+                                <h5 class="text-content"><a href="/users/{{ msg.user.id }}">@{{ msg.user.username }}</a></h5>
+                            </div>
+                        </div>
+
+                        <div class="user-contain">
+                            <p>
+                                {{ msg.text }}
+                            </p>
+                            <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                <button class="
+                btn
+                btn-sm
+                {{'btn-primary' if msg.id in likes else 'btn-secondary'}}">
+                                    <i class="fa fa-thumbs-up"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+        {% endif %}
+    </div>
+    
+    <div class="col-8 col-xl-4">
+        <h3> User results </h3>
+        {% if not users %}
+        <p>No users found</p>
+        {% else %}
+        <div class="user-comment-box">
+            <ul>
+                {% for user in users %}
+                <li>
+                    <div class="user-box border-color p-2" style="border-radius: 10px; background-color: rgba(13, 164, 135, 0.1); ">
+                        <!--<div class="reply-button">
+                            <i class="fa-solid fa-address-card"></i>
+                            <span class="theme-color">See Profile</span>
+                        </div>-->
+                        <div class="user-iamge">
+                            <img src="{{ user.image_url }}"
+                                 class="img-fluid blur-up lazyload" alt="">
+                            <div class="user-name">
+                                <h6>{{ user.location }}</h6>
+                                <h5 class="text-content"><a href="/users/{{ user.id }}">@{{ user.username }}</a></h5>
+                            </div>
+                        </div>
+
+                        <div class="user-contain">
+                            <p>
+                                {{ user.bio }}
+                            </p>
+                            <form method="POST" action="/users/follow/{{ user.id }}" id="messages-form">
+                                <button class="
+                btn
+                btn-sm
+                {{'btn-primary' if user.id in user.following else 'btn-secondary'}}">
+                                    <i class="fa-solid fa-address-card"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <p> {{users}}</p>
+        {% endif %}
+    </div>
+
+
+
+
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="multikart">
+    <meta name="keywords" content="multikart">
+    <meta name="author" content="multikart">
+
+    <title>Invoice View </title>
+
+
+    <link rel="shortcut icon" href={{ url_for('static', filename='invoice_assets/images/favicon.png') }} type="image/x-icon">
+
+
+    <!--Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Icons -->
+
+    <link rel="stylesheet" href={{ url_for('static', filename='invoice_assets/css/vendors/font-awesome.css') }} type="text/css">
+
+    <!-- Bootstrap css -->
+
+    <link href="{{ url_for('static', filename='invoice_assets/css/vendors/bootstrap.css') }}" rel="stylesheet">
+
+    <!-- Theme css -->
+
+    <link href="{{ url_for('static', filename='invoice_assets/css/style.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    <section class="theme-invoice-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-6 col-xl-8 mx-auto my-3">
+                    <div class="invoice-wrapper">
+                        <div class="invoice-header">
+                            <div class="header-image">
+                                <a href="/" class="logo d-flex align-items-center">
+                                    <!--<img src="{{ url_for('static', filename='img/logo.png') }}" class="bg-primary-light" alt="">-->
+                                    <div class="icon ">
+
+
+
+                                    </div>
+
+                                    <span class="d-none d-lg-block" style="font-size: 28px;"> Budly<i class="bx bxs-bot" style="color: mediumpurple; position:relative; top: 5px;"></i> </span>
+                                </a>
+                            </div>
+                            <div class="header-content">
+                                <h3>Invoice</h3>
+                            </div>
+                        </div>
+                        <div class="invoice-body">
+                            <div class="top-sec">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="details-box">
+                                            <div class="address-box">
+                                                <ul>
+                                                    <li>{{users[invoice[0].customer_id].first_name}} {{users[invoice[0].customer_id].last_name}} </li>
+
+                                                    {{test}}
+                                                    <!--<li>2345 Tail Ends Road,</li>
+    <li>ORADELL, New Jersey</li>
+    <li>NJ, 38740</li>-->
+                                                </ul>
+                                            </div>
+
+                                            <div class="address-box">
+                                                <ul>
+                                                    <li class="theme-color">Issue Date : <span class="text-content">{{invoice[0].date_billed}}</span></li>
+                                                    <li class="theme-color">Invoice No : <span
+                                                            class="text-content">{{invoice[0].id}}</span></li>
+                                                    <li class="theme-color">Email : <span
+                                                            class="text-content">{{users[invoice[0].customer_id].email}}</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invoice-table">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Invoice Date:</th>
+                                                <th>Invoice No:</th>
+                                                <th>Account No:</th>
+                                                <th>Due Amount:</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{invoice[0].date_billed}}</td>
+                                                <td>{{invoice[0].id}}</td>
+                                                <td>{{customers[invoice[0].customer_id].account_number}}</td>
+                                                <td>${{totalprice}}.00 </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="invoice-table-2">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th class="text-start">Item detail</th>
+                                                <th>Qty</th>
+                                                <th>Price</th>
+                                                <th>Discount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% if counter == 0 %}
+                                            <tr>
+                                                <td class="text-content">{{1}}</td>
+                                                <td>
+                                                    <ul class="text-start item-detail">
+                                                        <li>Consultation - North Office</li>
+                                                        <li class="text-content">
+                                                            Lorem ipsum dolor sit, amet,
+                                                            consectetur adipisicing elit.
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                                <td>1</td>
+                                                <td>${{invoice[0].amount}}.00</td>
+
+                                                <!--<td>{% if i == counter-1 %}$(-{{discount}}.00){% endif %}</td>-->
+
+                                            </tr>
+                                            
+                                            {% endif %}
+                                            {% for i in range(counter) %}
+                                            <tr>
+                                                <td class="text-content">{{baskets[invoice[0].id].products[i].id}}</td>
+                                                <td>
+                                                    <ul class="text-start item-detail">
+                                                        <li>{{baskets[invoice[0].id].products[i].name}}</li>
+                                                        <li class="text-content">
+                                                            Lorem ipsum dolor sit, amet,
+                                                            consectetur adipisicing elit.
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                                <td>1</td>
+                                                <td>${{baskets[invoice[0].id].products[i].price}}.00</td>
+
+                                                <td>{% if i == counter-1 %}$(-{{discount}}.00){% endif %}</td>
+
+                                            </tr>
+                                            {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="price-box">
+                                <ul>
+                                    <li>GRAND TOTAL</li>
+                                    <li class="theme-color">{{baskets[invoice[0].id].amount}}.00</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="invoice-footer">
+                            <div class="signature-box">
+                                <img src={{ url_for('static', filename='invoice_assets/images/sign.png') }} class="img-fluid" alt="">
+                                <h5>Authorised Sign</h5>
+                            </div>
+
+                            <div class="button-group">
+                                <ul>
+                                    <li>
+                                        <button class="btn theme-bg-color text-white rounded"
+                                            onclick="window.print();">Export As PDF</button>
+                                    </li>
+                                    <li>
+                                        <button class="btn text-white print-button rounded ms-2"
+                                            onclick="window.print();">Print</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

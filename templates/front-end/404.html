@@ -1,0 +1,113 @@
+{% extends 'nav.html' %}
+{% block html_title %} 404 Page not Found {% endblock %}
+
+
+{% block content %}
+<!-- Breadcrumb Section Start -->
+<!--<section class="breadscrumb-section pt-0">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadscrumb-contain">
+                    
+                    <nav>
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">
+                                    <i class="fa-solid fa-house"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">404</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
+<!-- Breadcrumb Section End -->
+<!-- 404 Section Start -->
+<section class="section-404 section-lg-space">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12">
+                <div class="image-404">
+                    <img src="{{ url_for('static', filename='general_assets/images/inner-page/404.png') }}" class="img-fluid blur-up lazyload" alt="">
+
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="contain-404">
+                    <h3 class="text-content">
+                        The page you are looking for could not be found. The link to this
+                        address may be outdated or we may have moved the since you last bookmarked it.
+                    </h3>
+                    <form method="POST" action="/add_to_cart/1" id="messages-form">
+                        <button class="
+                btn
+                btn-sm
+                btn-secondary">
+                            <i class="fa fa-thumbs-up"></i>
+                        </button>
+                    </form>
+                    <button onclick="location.href = 'index.html';"
+                            class="btn btn-md text-white theme-bg-color mt-4 mx-auto">
+                        Back To Home Screen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 404 Section End -->
+    {% endblock %}
+
+
+
+<!-- Tap to top end -->
+    {% block remove_stickycart %}
+    {% endblock %}
+    {% block scripts %}
+<!-- Bg overlay Start -->
+<div class="bg-overlay"></div>
+<!-- Bg overlay End -->
+<!-- latest jquery-->
+
+<script src="{{ url_for('static', filename='general_assets/js/jquery-3.6.0.min.js') }}"></script>
+
+<!-- jquery ui-->
+
+<script src="{{ url_for('static', filename='general_assets/js/jquery-ui.min.js') }}"></script>
+
+<!-- Bootstrap js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/bootstrap-notify.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/popper.min.js') }}"></script>
+
+<!-- feather icon js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/feather/feather.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/feather/feather-icon.js') }}"></script>
+
+<!-- Lazyload Js -->
+
+<script src="{{ url_for('static', filename='general_assets/js/lazysizes.min.js') }}"></script>
+
+<!-- Slick js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/slick.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/slick-animation.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/custom-slick-animated.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/custom_slick.js') }}"></script>
+
+<!-- script js -->
+<script src="{{ url_for('static', filename='general_assets/js/script.js') }}"></script>
+    {% endblock %}

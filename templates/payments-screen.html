@@ -1,0 +1,192 @@
+﻿{% extends 'base.html'%}
+{% block metadata %}
+<!-- link to the Web SDK library -->
+<script type="text/javascript" src="https://nd.squarecdn.com/2.2/w/w-669810/init/js/?q=%7B%22e%22%3A191457%2C%22oq%22%3A%221920%3A969%3A1920%3A1040%3A1920%3A1040%22%2C%22wfi%22%3A%22flap-1%22%2C%22ji%22%3A%222.3.1%22%2C%22yf%22%3A%7B%7D%2C%22uers%22%3A%22uggc%3A%2F%2Fybpnyubfg%3A8000%2F%22%2C%22ov%22%3A%22o2%7C1920k1080%201920k1040%2024%2024%7C300%7Cra-HF%7Coc1-2501pp0s72219oop%7Csnyfr%7C%7CZbmvyyn%2F5.0%20(Jvaqbjf%20AG%2010.0%3B%20Jva64%3B%20k64)%20NccyrJroXvg%2F537.36%20(XUGZY%2C%20yvxr%20Trpxb)%20Puebzr%2F112.0.0.0%20Fnsnev%2F537.36%7Cjt1-s2nno0056qp62o71%22%7D" id="ndsisync-1"></script>
+<script type="text/javascript" src={{ PAYMENT_FORM_URL }}></script>
+
+<script type="application/javascript">
+        window.applicationId = '{{ APPLICATION_ID }}'
+        window.locationId = '{{ LOCATION_ID }}'
+        window.currency = '{{ ACCOUNT_CURRENCY }}'
+        window.country = '{{ ACCOUNT_COUNTRY }}'
+        window.idempotencyKey = '{{indempotency_key}}'
+</script>
+
+
+<!-- link to the custom styles for Web SDK -->
+<link rel='stylesheet' , href='{{ url_for('static', filename='css/sq-payment.css') }}' />
+<link rel='stylesheet' , href='{{ url_for('static', filename='css/sq-style.css') }}' />
+{% endblock %}
+{% block content %}
+<main id="main" class="main ">
+    <div class="row justify-content-center">
+        <div class="center-body col">
+
+            <div id="loader1" class="loader-circle-9 ">
+
+                <i id="loader" class=" bx bxs-bot p-1" style=" width: auto; height: auto; vertical-align: auto; border: none; color: mediumpurple; background-color: rgba(100, 121, 234, 0.29); border-radius: 10px; ">
+                    <div id="loader" class="  bg-primary spinner-grow spinner-grow-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </i>
+                <!--Verifying...-->
+                <span class="visually-hidden ">Loading...</span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="container transparent hideForm">
+
+        <div class="pagetitle">
+            <h1 class="m-4">Payments Portal Demo - Shopper View</h1>
+            <nav>
+                <ol class="breadcrumb transparent">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item">Pages</li>
+                    <li class="breadcrumb-item active">Blank</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <section class="section ">
+            <div class="row">
+
+                <div class="col-lg-6 ">
+
+                    <div class="card lightwhite">
+
+
+
+                        <div class="card-body ">
+                            <h5 class="card-title text-center">Complete your purchase!</h5>
+
+                            <form class="payment-form " id="fast-checkout" method="POST" action="/process-payment">
+                                <div class="wrapper">
+                                    <div id="apple-pay-button" alt="apple-pay" type="button"></div>
+                                    <div id="google-pay-button" alt="google-pay" type="button"></div>
+                                    <div class="border">
+                                        <span>OR</span>
+                                    </div>
+
+                                    <div id="ach-wrapper">
+                                        <label for="ach-account-holder-name">Full Name</label>
+                                        <input id="ach-account-holder-name"
+                                               type="text"
+                                               placeholder="Jane Doe"
+                                               name="ach-account-holder-name"
+                                               autocomplete="name" />
+                                        <span id="ach-message"></span>
+                                        <button id="ach-button" type="button">
+                                            Pay with Bank Account
+                                        </button>
+                                        <div class="border">
+                                            <span>OR</span>
+                                        </div>
+                                    </div>
+
+                                    <div id="card-container"></div>
+                                    <button id="card-button" type="button">
+                                        Pay with Card
+                                    </button>
+                                    <span id="payment-flow-message"></span>
+                                </div>
+                            </form>
+                            <script type="text/javascript" src="{{ url_for('static', filename='js/sq-ach.js') }}"></script>
+                            <script type="text/javascript" src="{{ url_for('static', filename='js/sq-apple-pay.js') }}"></script>
+                            <script type="text/javascript" src="{{ url_for('static', filename='js/sq-google-pay.js') }}"></script>
+                            <script type="text/javascript" src="{{ url_for('static', filename='js/sq-card-pay.js') }}"></script>
+
+
+
+                            <!-- link to the local Web SDK initialization -->
+
+                            <script type="text/javascript" src="{{ url_for('static', filename='js/sq-payment-flow.js') }}"></script>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="card lightwhite">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Include promos &amp; messages</h5>
+
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <h4 class="alert-heading">Primary Heading</h4>
+                                <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                                <hr>
+                                <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                            <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                                <h4 class="alert-heading">Secondary Heading</h4>
+                                <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                                <hr>
+                                <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <h4 class="alert-heading">Success Heading</h4>
+                                <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                                <hr>
+                                <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <h4 class="alert-heading">Danger Heading</h4>
+                                <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                                <hr>
+                                <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                            <div class="alert alert-warning  alert-dismissible fade show" role="alert">
+                                <h4 class="alert-heading">Warning Heading</h4>
+                                <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                                <hr>
+                                <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                            <div class="alert alert-info  alert-dismissible fade show" role="alert">
+                                <h4 class="alert-heading">Info Heading</h4>
+                                <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                                <hr>
+                                <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                            <div class="alert alert-light border-light alert-dismissible fade show" role="alert">
+                                <h4 class="alert-heading">Lignt Heading</h4>
+                                <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                                <hr>
+                                <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                            <div class="alert alert-dark  alert-dismissible fade show" role="alert">
+                                <h4 class="alert-heading">Dark Heading</h4>
+                                <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                                <hr>
+                                <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+</main><!-- End #main -->
+{% endblock %}
+

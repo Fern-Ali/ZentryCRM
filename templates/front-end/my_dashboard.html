@@ -1,0 +1,2756 @@
+﻿{% extends '/front-end/front_end_base.html' %}
+
+
+{% block title %}{{g.user.username}} | dashboard {% endblock %}
+{% block html_title %}{{g.user.username}} dashboard {% endblock %}
+{% block remove_breadcrumb %}{% endblock %}
+{% block html_breadcrumb %} {{g.user.username}}'s Budly Dashboard  {% endblock %}
+{% block html_breadcrumb_mini %} {{g.user.username}}'s dashboard  {% endblock %}
+{% block remove_bottom_pane %}{% endblock %}
+{% block content %}
+
+<!-- User Dashboard Section Start -->
+<section class="pt-0 user-dashboard-section section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-xxl-3 col-lg-4">
+                <div class="dashboard-left-sidebar">
+                    <div class="close-button d-flex d-lg-none">
+                        <button class="close-sidebar">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    <div class="profile-box">
+                        <div class="cover-image">
+                            <img src={{g.user.header_image_url}} class="img-fluid blur-up lazyload"
+                                 alt="">
+                        </div>
+
+                        <div class="profile-contain">
+                            <div class="profile-image">
+                                <div class="position-relative">
+                                    <img src={{g.user.image_url}}
+                                         class="blur-up lazyload update_img" alt="">
+                                    <div class="cover-icon">
+                                        <i class="fa-solid fa-pen">
+                                            <input type="file" onchange="readURL(this,0)">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-name">
+                                <h3>{{g.user.username}}</h3>
+                                <h6 class="text-content">{{g.user.email}}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="nav nav-pills user-nav-pills" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-dashboard-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-dashboard" type="button" role="tab"
+                                    aria-controls="pills-dashboard" aria-selected="true">
+                                <i data-feather="home"></i>
+                                My Feed
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-likes-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-likes" type="button" role="tab" aria-controls="pills-likes"
+                                    aria-selected="false">
+                                <img src="{{ url_for('static', filename='general_assets/images/svg/like.svg') }}"
+                                     class="img-1 blur-up lazyload" style="max-width: 22px;  margin-right: 7px;" alt=""> Liked Chatter
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-following-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-following" type="button" role="tab" aria-controls="pills-following"
+                                    aria-selected="false">
+                                <img src="{{ url_for('static', filename='general_assets/images/svg/following.svg') }}"
+                                     class="img-1 blur-up lazyload" style="max-width: 22px; left:2px; margin-right: 7px;" alt=""> Following
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-followers-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-followers" type="button" role="tab" aria-controls="pills-followers"
+                                    aria-selected="false">
+                                <img src="{{ url_for('static', filename='general_assets/images/svg/followers.svg') }}"
+                                     class="img-1 blur-up lazyload" style="max-width: 22px; left:2px; margin-right: 7px;" alt=""> Followers
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-order-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-order" type="button" role="tab" aria-controls="pills-order"
+                                    aria-selected="false">
+                                <i data-feather="shopping-bag"></i>My Orders
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-wishlist-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-wishlist" type="button" role="tab"
+                                    aria-controls="pills-wishlist" aria-selected="false">
+                                <i data-feather="heart"></i>
+                                My Wishlist
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-card-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-card" type="button" role="tab" aria-controls="pills-card"
+                                    aria-selected="false">
+                                <i data-feather="credit-card"></i> Saved Card
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-address-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-address" type="button" role="tab"
+                                    aria-controls="pills-address" aria-selected="false">
+                                <i data-feather="map-pin"></i>
+                                Address
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-profile" type="button" role="tab"
+                                    aria-controls="pills-profile" aria-selected="false">
+                                <i data-feather="user"></i>
+                                Profile
+                            </button>
+                        </li>
+
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-security-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-security" type="button" role="tab"
+                                    aria-controls="pills-security" aria-selected="false">
+                                <i data-feather="shield"></i>
+                                Privacy
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-xxl-9 col-lg-8">
+                <button class="btn left-dashboard-show btn-animation btn-md fw-bold d-block mb-4 d-lg-none">
+                    Show
+                    Menu
+                </button>
+                <div class="dashboard-right-sidebar">
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-dashboard" role="tabpanel"
+                             aria-labelledby="pills-dashboard-tab">
+                            <div class="dashboard-home">
+
+                                <!--<div class="title">
+                                    <h2>My Chatter Feed</h2>
+                                    <span class="title-leaf">
+                                        <svg class="icon-width bg-gray">
+                                            <use xlink:href={{ url_for('static', filename='general_assets/svg/leaf.svg#leaf') }}></use>
+                                        </svg>
+                                    </span>
+                                </div>-->
+                                <!--<div class="dashboard-user-name">-->
+                                <!--<h6 class="text-content">Hello, <b class="text-title"></b></h6>-->
+                                <!--<p class="text-content">
+                                        Use your budly user dashboard to see your chatter feed, followers, likes, wishlist, orders, and account preferences.
+                                    </p>
+                                </div>-->
+                                <div class="title mb-0">
+                                    <h2>Join us at <span class="theme-color">budly chatter</span>!</h2>
+                                    <span class="title-leaf">
+                                        <svg class="icon-width bg-gray">
+                                            <use xlink:href={{ url_for('static', filename='general_assets/svg/leaf.svg#leaf') }}></use>
+                                        </svg>
+                                    </span>
+                                </div>
+
+
+                                <div class="dashboard-title">
+                                    <!--<h3 class="text-center">s feed</h3>-->
+
+
+                                </div>
+
+
+
+
+
+
+
+                                <div class="comment-box" style="background-color: rgba(13,164,135,.4); border-radius: 10px;">
+                                    <div class="leave-title">
+                                        <h3></h3>
+                                    </div>
+
+                                    <div class="user-comment-box" style="overflow: scroll !important; height: 100vh; background-color: rgba(0,0,0,.1); border-radius: 10px;">
+                                        <div class="total-box mt-2 p-1 mb-0">
+                                            <div class="row g-sm-4 g-3">
+
+
+                                                <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                    <div class="totle-contain">
+                                                        <img src="{{ url_for('static', filename='general_assets/images/svg/followers.svg') }}"
+                                                             class="img-1 blur-up lazyload" alt="">
+                                                        <img src="{{ url_for('static', filename='general_assets/images/svg/followers.svg') }}" class="blur-up lazyload"
+                                                             alt="">
+                                                        <div class="totle-detail">
+                                                            <h5>Followers</h5>
+                                                            <h3>{{g.user.followers|length}}</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                    <div class="totle-contain">
+                                                        <img src="{{ url_for('static', filename='general_assets/images/svg/like.svg') }}"
+                                                             class="img-1 blur-up lazyload" alt="">
+                                                        <img src="{{ url_for('static', filename='general_assets/images/svg/msg.svg') }}" class="blur-up lazyload"
+                                                             alt="">
+                                                        <div class="totle-detail">
+                                                            <h5>Likes</h5>
+                                                            <h3>{{g.user.likes|length}}</h3>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                                    <div class="totle-contain">
+                                                        <img src="{{ url_for('static', filename='general_assets/images/svg/following.svg') }}"
+                                                             class="img-1 blur-up lazyload" alt="">
+                                                        <img src="{{ url_for('static', filename='general_assets/images/svg/following.svg') }}"
+                                                             class="blur-up lazyload" alt="">
+                                                        <div class="totle-detail">
+                                                            <h5>Following</h5>
+                                                            <h3>{{g.user.following|length}}</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="p-2 p-4">
+
+                                            {% for msg in messages %}
+                                            <li class="row">
+
+                                                <div class="user-box  row justify-content-center border-color p-2 rounded" background-color: #f8f8f8; ">
+                                                    <!--<div class="reply-button">
+                                                        <i class="fa-solid fa-reply"></i>
+                                                        <span class="theme-color">Reply</span>
+                                                    </div>-->
+                                                    <div class="user-iamge col-11 col-sm-10 justify-content-center ">
+                                                        <!--style="border-radius: 50px; border-left: 2px solid rgba(13, 164, 135, .20); border-right: 2px solid rgba(13, 164, 135, .20); "-->
+
+
+                                                        <div class="row justify-content-center ">
+                                                            <div class=" col-12 col-sm-10   p-2" style="border-radius: 50px; background-color: rgba(0,0,0,.9); border-left: 2px solid rgba(13, 164, 135, .45); border-right: 2px solid rgba(13, 164, 135, .45); ">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="row justify-content-center">
+                                                                        <div class="col-1" style="background-color: rgba(255,255,255,0)">
+                                                                            <div class="row">
+
+
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                    </div>
+                                                                    <div class="row justify-content-center">
+
+                                                                    </div>
+
+                                                                </div>
+
+
+
+                                                                <div class="user-contain col-12 col-sm-11 ">
+                                                                    <!--style="background-image: url({{msg.user.header_image_url}}); background-size: cover"-->
+                                                                    <!--<div class="row">-->
+                                                                    <!--<img src="{{msg.user.header_image_url}}" style="max-height: 85px;" />-->
+                                                                    <!--</div>-->
+                                                                    <div class="row align-items-center justify-content-center" style="align-items: center">
+                                                                        <div class="row justify-content-center  " style="background-color: rgba(0,0,0,0)">
+                                                                            <div class="row">
+                                                                                <div class="col-2">
+                                                                                    <a href="/users/{{ msg.user.id }}">
+                                                                                        <img src="{{ msg.user.image_url }}" style="max-width: 70px; border-radius: 50px;"
+                                                                                             class="img-fluid blur-up lazyload p-2" alt="">
+
+                                                                                    </a>
+
+
+                                                                                </div>
+                                                                                <div class="col-9">
+                                                                                    <h5 class="text-content text-left" style="display: inline" overflow: hidden;"><a href="/users/{{ msg.user.id }}"> {{ msg.user.username }}</a></h5>
+                                                                                    <span class="text-info"><i class="fa-solid fa-angles-right text-warning"></i> @{{ msg.user.username }}</span>
+                                                                                    <span class="text-secondary"><i class="fa-solid fa-angles-right text-warning"></i> {{ msg.timestamp.strftime('%d %B %Y') }} </span>
+                                                                                    <p class="text-light mt-2" style="font-weight: bolder">
+                                                                                        {{ msg.text }}
+                                                                                    </p>
+                                                                                </div>
+                                                                                <div class="col-1">
+
+                                                                                </div>
+                                                                            </div>
+
+
+
+
+                                                                            <div class="row justify-content-center" style="margin-left: 35px;">
+
+                                                                                <div class="col-12">
+
+                                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                                                       data-bs-target="#view{{ msg.id }}">
+
+                                                                                        <img class="img-fluid blur-up lazyload p-2" src="{{msg.user.header_image_url}}" style="border-radius: 40px; max-height: 500px; max-width: -webkit-fill-available; " />
+
+                                                                                    </a>
+                                                                                </div>
+
+
+
+                                                                            </div>
+
+
+
+
+                                                                        </div>
+
+                                                                        <div class="row justify-content-center">
+                                                                            <div class="col-2">
+
+                                                                            </div>
+                                                                            <div class="col-10">
+                                                                                <div class="row justify-content-center">
+                                                                                    <div class="col-3 col-sm-3">
+                                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                                            <button class="mt-3 sm-mt-3 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487; ">
+                                                                                                <i class="fa fa-address-card"></i>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                    <div class="col-3 col-sm-3">
+                                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                                            <button class="mt-3 sm-mt-3 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487; ">
+                                                                                                <i class="fa fa-heart"></i>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                    <div class="col-3 col-sm-3">
+                                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                                            <button class="mt-3 sm-mt-2 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487;  ">
+                                                                                                <i class="fa fa-bell"></i>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                    <div class="col-3 col-sm-3">
+                                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                                            <button class="mt-3 sm-mt-2 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487;  ">
+                                                                                                <i class="fa fa-bong"></i>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <!--<div class="row">
+
+                                                                    </div>-->
+
+
+                                                                </div>
+
+                                                                <div class="col-8 col-sm-1 mt-sm-0 mt-2" style="background-color: rgba(255,255,255,.0)">
+
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </li>
+                                            {% endfor %}
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="leave-box">
+                                    <div class="leave-title mt-4">
+                                        <h3>Leave Comment</h3>
+                                    </div>
+
+                                    <div class="leave-comment">
+                                        <div class="comment-notes">
+                                            <p class="text-content mb-4 mt-2">
+                                                Your email address will not be published. Required fields
+                                                are marked
+                                            </p>
+                                        </div>
+                                        <div class="row g-3">
+                                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                                <div class="blog-input">
+                                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                           placeholder="Full Name">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                                <div class="blog-input">
+                                                    <input type="email" class="form-control" id="exampleFormControlInput2"
+                                                           placeholder="Enter Email Address">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                                <div class="blog-input">
+                                                    <input type="url" class="form-control" id="exampleFormControlInput3"
+                                                           placeholder="Enter URL">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="blog-input">
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                                              placeholder="Comments"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-check d-flex mt-4 p-0">
+                                            <input class="checkbox_animated" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label text-content" for="flexCheckDefault">
+                                                <span class="color color-1">
+                                                    Save my name, email, and website in this
+                                                    browser for the next time I comment.
+                                                </span>
+                                            </label>
+                                        </div>
+
+                                        <button class="coming-soon btn btn-animation ms-xxl-auto mt-xxl-0 mt-3 btn-md fw-bold">
+                                            Post
+                                            Comment
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade " id="pills-likes" role="tabpanel"
+                             aria-labelledby="pills-likes-tab">
+                            <div class="dashboard-home">
+                                <div class="title">
+                                    <h2>{{g.user.username}}'s Likes Feed</h2>
+                                    <span class="title-leaf">
+                                        <svg class="icon-width bg-gray">
+                                            <use xlink:href={{ url_for('static', filename='general_assets/svg/leaf.svg#leaf') }}></use>
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <div class="dashboard-user-name">
+                                    <h6 class="text-content">Hello, <b class="text-title">{{g.user.username}}</b></h6>
+                                    <p class="text-content">
+                                        From your My Account Dashboard you have the ability to
+                                        view a snapshot of your recent account activity and update your account
+                                        information. Select a link below to view or edit information.
+                                    </p>
+                                </div>
+
+                                <div class="total-box">
+                                    <div class="row g-sm-4 g-3">
+
+
+                                        <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                            <div class="totle-contain">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/followers.svg') }}"
+                                                     class="img-1 blur-up lazyload" alt="">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/followers.svg') }}" class="blur-up lazyload"
+                                                     alt="">
+                                                <div class="totle-detail">
+                                                    <h5>Followers</h5>
+                                                    <h3>{{g.user.followers|length}}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                            <div class="totle-contain">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/like.svg') }}"
+                                                     class="img-1 blur-up lazyload" alt="">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/msg.svg') }}" class="blur-up lazyload"
+                                                     alt="">
+                                                <div class="totle-detail">
+                                                    <h5>Likes</h5>
+                                                    <h3>{{g.user.likes|length}}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                            <div class="totle-contain">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/following.svg') }}"
+                                                     class="img-1 blur-up lazyload" alt="">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/following.svg') }}"
+                                                     class="blur-up lazyload" alt="">
+                                                <div class="totle-detail">
+                                                    <h5>Following</h5>
+                                                    <h3>{{g.user.following|length}}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dashboard-title">
+                                    <!--<h3 class="text-center">{{g.user.username}}'s feed</h3>-->
+                                    >
+
+                                </div>
+
+
+
+                                >
+
+
+
+                                <div class="comment-box ">
+                                    <div class="leave-title">
+                                        <h3></h3>
+                                    </div>
+
+                                    <div class="user-comment-box">
+                                        <ul class="p-2">
+                                            {% for msg in messages %}
+                                            <li class="row">
+
+                                                <div class="user-box  row justify-content-center border-color p-2 rounded" background-color: #f8f8f8; ">
+                                                    <!--<div class="reply-button">
+                                                        <i class="fa-solid fa-reply"></i>
+                                                        <span class="theme-color">Reply</span>
+                                                    </div>-->
+                                                    <div class="user-iamge col-11 col-sm-10 justify-content-center ">
+                                                        <!--style="border-radius: 50px; border-left: 2px solid rgba(13, 164, 135, .20); border-right: 2px solid rgba(13, 164, 135, .20); "-->
+
+
+                                                        <div class="row justify-content-center ">
+                                                            <div class=" col-12 col-sm-10   p-2" style="border-radius: 50px; background-color: rgba(0,0,0,.9); border-left: 2px solid rgba(13, 164, 135, .45); border-right: 2px solid rgba(13, 164, 135, .45); ">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="row justify-content-center">
+                                                                        <div class="col-1" style="background-color: rgba(255,255,255,0)">
+                                                                            <div class="row">
+
+
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                    </div>
+                                                                    <div class="row justify-content-center">
+
+                                                                    </div>
+
+                                                                </div>
+
+
+
+                                                                <div class="user-contain col-12 col-sm-11 ">
+                                                                    <!--style="background-image: url({{msg.user.header_image_url}}); background-size: cover"-->
+                                                                    <!--<div class="row">-->
+                                                                    <!--<img src="{{msg.user.header_image_url}}" style="max-height: 85px;" />-->
+                                                                    <!--</div>-->
+                                                                    <div class="row align-items-center justify-content-center" style="align-items: center">
+                                                                        <div class="row justify-content-center  " style="background-color: rgba(0,0,0,0)">
+                                                                            <div class="row">
+                                                                                <div class="col-2">
+                                                                                    <a href="/users/{{ msg.user.id }}">
+                                                                                        <img src="{{ msg.user.image_url }}" style="max-width: 70px; border-radius: 50px;"
+                                                                                             class="img-fluid blur-up lazyload p-2" alt="">
+
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="col-9">
+                                                                                    <h5 class="text-content text-left" style="display: inline" overflow: hidden;"><a href="/users/{{ msg.user.id }}"> {{ msg.user.username }}</a></h5>
+                                                                                    <span class="text-info"><i class="fa-solid fa-angles-right text-warning"></i> @{{ msg.user.username }}</span>
+                                                                                    <span class="text-secondary"><i class="fa-solid fa-angles-right text-warning"></i> {{ msg.timestamp.strftime('%d %B %Y') }} </span>
+                                                                                    <p class="text-light mt-2" style="font-weight: bolder">
+                                                                                        {{ msg.text }}
+                                                                                    </p>
+                                                                                </div>
+                                                                                <div class="col-1">
+
+                                                                                </div>
+                                                                            </div>
+
+
+
+
+                                                                            <div class="row justify-content-center" style="margin-left: 35px;">
+
+                                                                                <div class="col-12">
+
+                                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                                                       data-bs-target="#view{{ msg.id }}">
+
+                                                                                        <img class="img-fluid blur-up lazyload p-2" src="{{msg.user.header_image_url}}" style="border-radius: 40px; max-height: 500px; max-width: -webkit-fill-available; " />
+
+                                                                                    </a>
+                                                                                </div>
+
+                                                                            </div>
+
+
+
+
+                                                                        </div>
+
+                                                                        <div class="row justify-content-center">
+                                                                            <div class="col-2">
+
+                                                                            </div>
+                                                                            <div class="col-10">
+                                                                                <div class="row justify-content-center">
+                                                                                    <div class="col-3 col-sm-3">
+                                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                                            <button class="mt-3 sm-mt-3 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487; ">
+                                                                                                <i class="fa fa-address-card"></i>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                    <div class="col-3 col-sm-3">
+                                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                                            <button class="mt-3 sm-mt-3 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487; ">
+                                                                                                <i class="fa fa-heart"></i>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                    <div class="col-3 col-sm-3">
+                                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                                            <button class="mt-3 sm-mt-2 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487;  ">
+                                                                                                <i class="fa fa-bell"></i>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                    <div class="col-3 col-sm-3">
+                                                                                        <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                                                            <button class="mt-3 sm-mt-2 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487;  ">
+                                                                                                <i class="fa fa-bong"></i>
+                                                                                            </button>
+                                                                                        </form>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <!--<div class="row">
+
+                                                                    </div>-->
+
+
+                                                                </div>
+
+                                                                <div class="col-8 col-sm-1 mt-sm-0 mt-2" style="background-color: rgba(255,255,255,.0)">
+
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </li>
+                                            {% endfor %}
+
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="leave-box">
+                                    <div class="leave-title mt-4">
+                                        <h3>Leave Comment</h3>
+                                    </div>
+
+                                    <div class="leave-comment">
+                                        <div class="comment-notes">
+                                            <p class="text-content mb-4 mt-2">
+                                                Your email address will not be published. Required fields
+                                                are marked
+                                            </p>
+                                        </div>
+                                        <div class="row g-3">
+                                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                                <div class="blog-input">
+                                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                           placeholder="Full Name">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                                <div class="blog-input">
+                                                    <input type="email" class="form-control" id="exampleFormControlInput2"
+                                                           placeholder="Enter Email Address">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                                <div class="blog-input">
+                                                    <input type="url" class="form-control" id="exampleFormControlInput3"
+                                                           placeholder="Enter URL">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="blog-input">
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                                              placeholder="Comments"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-check d-flex mt-4 p-0">
+                                            <input class="checkbox_animated" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label text-content" for="flexCheckDefault">
+                                                <span class="color color-1">
+                                                    Save my name, email, and website in this
+                                                    browser for the next time I comment.
+                                                </span>
+                                            </label>
+                                        </div>
+
+                                        <button class="coming-soon btn btn-animation ms-xxl-auto mt-xxl-0 mt-3 btn-md fw-bold">
+                                            Post
+                                            Comment
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show" id="pills-following" role="tabpanel"
+                             aria-labelledby="pills-following-tab">
+                            <div class="dashboard-home">
+                                <div class="title">
+                                    <h2>{{g.user.username}}'s Followed Users </h2>
+                                    <span class="title-leaf">
+                                        <svg class="icon-width bg-gray">
+                                            <use xlink:href={{ url_for('static', filename='general_assets/svg/leaf.svg#leaf') }}></use>
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <div class="dashboard-user-name">
+                                    <h6 class="text-content">Hello, <b class="text-title">{{g.user.username}}</b></h6>
+                                    <p class="text-content">
+                                        From your My Account Dashboard you have the ability to
+                                        view a snapshot of your recent account activity and update your account
+                                        information. Select a link below to view or edit information.
+                                    </p>
+                                </div>
+
+                                <div class="total-box">
+                                    <div class="row g-sm-4 g-3">
+
+
+                                        <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                            <div class="totle-contain">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/followers.svg') }}"
+                                                     class="img-1 blur-up lazyload" alt="">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/followers.svg') }}" class="blur-up lazyload"
+                                                     alt="">
+                                                <div class="totle-detail">
+                                                    <h5>Followers</h5>
+                                                    <h3>{{g.user.followers|length}}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                            <div class="totle-contain">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/like.svg') }}"
+                                                     class="img-1 blur-up lazyload" alt="">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/msg.svg') }}" class="blur-up lazyload"
+                                                     alt="">
+                                                <div class="totle-detail">
+                                                    <h5>Likes</h5>
+                                                    <h3>{{g.user.likes|length}}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-4 col-lg-6 col-md-4 col-sm-6">
+                                            <div class="totle-contain">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/following.svg') }}"
+                                                     class="img-1 blur-up lazyload" alt="">
+                                                <img src="{{ url_for('static', filename='general_assets/images/svg/following.svg') }}"
+                                                     class="blur-up lazyload" alt="">
+                                                <div class="totle-detail">
+                                                    <h5>Following</h5>
+                                                    <h3>{{g.user.following|length}}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dashboard-title">
+                                    <!--<h3 class="text-center">{{g.user.username}}'s feed</h3>-->
+                                    >
+
+                                </div>
+
+
+
+                                >
+
+
+
+                                <div class="comment-box ">
+                                    <div class="leave-title">
+                                        <h3></h3>
+                                    </div>
+
+                                    <div class="user-comment-box">
+                                        <ul class="p-2">
+                                            {% for msg in g.user.following %}
+                                            <li class="row">
+
+                                                <div class="user-box  row justify-content-center border-color p-2 rounded" background-color: #f8f8f8; ">
+                                                    <!--<div class="reply-button">
+                                                        <i class="fa-solid fa-reply"></i>
+                                                        <span class="theme-color">Reply</span>
+                                                    </div>-->
+                                                    <div class="user-iamge col-11 col-sm-10 justify-content-center ">
+                                                        <!--style="border-radius: 50px; border-left: 2px solid rgba(13, 164, 135, .20); border-right: 2px solid rgba(13, 164, 135, .20); "-->
+
+
+                                                        <div class="row justify-content-center ">
+                                                            <div class=" col-12 col-sm-10 col-xl-7  p-2" style="border-radius: 50px; background-color: rgba(0,0,0,.9); border-left: 2px solid rgba(13, 164, 135, .45); border-right: 2px solid rgba(13, 164, 135, .45); ">
+                                                                <div class="row justify-content-center">
+                                                                    <div class="row justify-content-center">
+                                                                        <div class="col-1" style="background-color: rgba(255,255,255,0)">
+                                                                            <div class="row">
+
+
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                    </div>
+                                                                    <div class="row justify-content-center">
+
+                                                                    </div>
+
+                                                                </div>
+
+
+
+                                                                <div class="user-contain col-12 col-sm-11 ">
+                                                                    <!--style="background-image: url({}); background-size: cover"-->
+                                                                    <!--<div class="row">-->
+                                                                    <!--<img src="{" style="max-height: 85px;" />-->
+                                                                    <!--</div>-->
+                                                                    <div class="row align-items-center justify-content-center" style="align-items: center">
+                                                                        <div class="row justify-content-center  " style="background-color: rgba(0,0,0,0)">
+                                                                            <div class="row">
+                                                                                <div class="col-2">
+                                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                                                       data-bs-target="#view_user{{ msg.id }}">
+                                                                                        <img src="{{ msg.image_url }}" style="max-width: 70px; border-radius: 50px;"
+                                                                                             class="img-fluid blur-up lazyload p-2" alt="">
+
+                                                                                    </a>
+
+                                                                                </div>
+                                                                                <div class="col-9">
+                                                                                    <h5 class="text-content text-left" style="display: inline" overflow: hidden;"><a href="/users/{{ msg.id }}"> {{ msg.username }}</a></h5>
+                                                                                    <span class="text-info"><i class="fa-solid fa-angles-right text-warning"></i> @{{ msg.username }}</span>
+                                                                                    <span class="text-secondary"><i class="fa-solid fa-angles-right text-warning"></i> {{ now.strftime('%d %B %Y') }} </span>
+                                                                                    <p class="text-light mt-2" style="font-weight: bolder">
+                                                                                        {{ msg.bio }}
+                                                                                    </p>
+                                                                                </div>
+                                                                                <div class="col-1">
+
+                                                                                </div>
+                                                                            </div>
+
+
+
+
+                                                                            <div class="row justify-content-center" style="margin-left: 35px;">
+
+                                                                                <!--<div class="col-12">
+                                                                                    <img class="" src="{{msg.header_image_url}}" style="border-radius: 40px; max-height: 500px; max-width: -webkit-fill-available; " />
+                                                                                </div>-->
+
+                                                                            </div>
+
+
+
+
+                                                                        </div>
+
+
+
+                                                                    </div>
+                                                                    <!--<div class="row">
+
+                                                                    </div>-->
+
+
+                                                                </div>
+
+                                                                <div class="col-8 col-sm-1 mt-sm-0 mt-2" style="background-color: rgba(255,255,255,.0)">
+
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </li>
+                                            {% endfor %}
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="leave-box">
+                                    <div class="leave-title mt-4">
+                                        <h3>Leave Comment</h3>
+                                    </div>
+
+                                    <div class="leave-comment">
+                                        <div class="comment-notes">
+                                            <p class="text-content mb-4 mt-2">
+                                                Your email address will not be published. Required fields
+                                                are marked
+                                            </p>
+                                        </div>
+                                        <div class="row g-3">
+                                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                                <div class="blog-input">
+                                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                           placeholder="Full Name">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                                <div class="blog-input">
+                                                    <input type="email" class="form-control" id="exampleFormControlInput2"
+                                                           placeholder="Enter Email Address">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xxl-4 col-lg-12 col-sm-6">
+                                                <div class="blog-input">
+                                                    <input type="url" class="form-control" id="exampleFormControlInput3"
+                                                           placeholder="Enter URL">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="blog-input">
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                                              placeholder="Comments"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-check d-flex mt-4 p-0">
+                                            <input class="checkbox_animated" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label text-content" for="flexCheckDefault">
+                                                <span class="color color-1">
+                                                    Save my name, email, and website in this
+                                                    browser for the next time I comment.
+                                                </span>
+                                            </label>
+                                        </div>
+
+                                        <button class="coming-soon btn btn-animation ms-xxl-auto mt-xxl-0 mt-3 btn-md fw-bold">
+                                            Post
+                                            Comment
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show" id="pills-wishlist" role="tabpanel"
+                             aria-labelledby="pills-wishlist-tab">
+                            <div class="dashboard-wishlist">
+                                <div class="title">
+                                    <h2>My Wishlist History</h2>
+                                    <span class="title-leaf title-leaf-gray">
+                                        <svg class="icon-width bg-gray">
+
+                                            <use xlink:href={{ url_for('static', filename='general_assets/svg/leaf.svg#leaf') }}></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="row g-sm-4 g-3">
+                                    {% for wish in wishlist %}
+                                    <div class="col-xxl-3 col-lg-6 col-md-4 col-sm-6">
+                                        <div class="product-box-3 theme-bg-white h-100">
+                                            <div class="product-header">
+                                                <div class="product-image">
+                                                    <a href="product-left-thumbnail.html">
+                                                        <img src={{ wish.image_url }}
+                                                             class="img-fluid blur-up lazyload" alt="">
+                                                    </a>
+
+                                                    <div class="product-header-top">
+                                                        <button class="btn wishlist-button close_button">
+                                                            <i data-feather="x"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="product-footer">
+                                                <div class="product-detail">
+                                                    <span class="span-name">{{ categories[wish.sector_id-1].name }}</span>
+                                                    <a href="product-left-thumbnail.html">
+                                                        <h5 class="name">{{ wish.name }}</h5>
+                                                    </a>
+                                                    <p class="text-content mt-1 mb-2 product-content">
+                                                        {{ wish.sector_id }}
+                                                    </p>
+                                                    <h6 class="unit mt-1">{{ wish.effect_tags }}</h6>
+                                                    <h5 class="price">
+                                                        <span class="theme-color">${{ wish.price }}</span>
+                                                        <del>${{ "%.0f"| format(1.08*(wish.price)) }}</del>
+                                                    </h5>
+                                                    <div class="add-to-cart-box mt-2">
+                                                        <button class="btn btn-add-cart addcart-button"
+                                                                tabindex="0">
+                                                            Add
+                                                            <span class="add-icon">
+                                                                <i class="fa-solid fa-plus"></i>
+                                                            </span>
+                                                        </button>
+                                                        <div class="cart_qty qty-box">
+                                                            <div class="input-group">
+                                                                <button type="button" class="qty-left-minus"
+                                                                        data-type="minus" data-field="">
+                                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                </button>
+                                                                <input class="form-control input-number qty-input"
+                                                                       type="text" name="quantity" value="0">
+                                                                <button type="button" class="qty-right-plus"
+                                                                        data-type="plus" data-field="">
+                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show" id="pills-order" role="tabpanel"
+                             aria-labelledby="pills-order-tab">
+                            <div class="dashboard-order">
+                                <div class="title">
+                                    <h2>My Orders History</h2>
+                                    <span class="title-leaf title-leaf-gray">
+                                        <svg class="icon-width bg-gray">
+
+                                            <use xlink:href={{ url_for('static', filename='general_assets/svg/leaf.svg#leaf') }}></use>
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <div class="order-contain">
+
+                                    {% for basket in orders %}
+                                    {% for prod in basket.products %}
+                                    <div class="order-box dashboard-bg-box">
+                                        <div class="order-container">
+                                            <div class="order-icon">
+                                                <i data-feather="box"></i>
+                                            </div>
+
+                                            <div class="order-detail">
+                                                <h4>Delivered <span class="success-bg">Success</span></h4>
+                                                <h6 class="text-content">
+                                                    Thank you for your order! Your payment has been processed and your goods have been delivered.
+                                                </h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="product-order-detail">
+                                            <a href="product-left-thumbnail.html" class="order-image">
+                                                <img src="{{prod.image_url}}" style="max-width: 150px;"
+                                                     class="blur-up lazyload" alt="">
+                                            </a>
+
+                                            <div class="order-wrap">
+                                                <a href="product-left-thumbnail.html">
+                                                    <h3>{{prod.name}}</h3>
+                                                </a>
+                                                <p class="text-content">
+                                                    We do not mass-produce any of our range, but operate a batch process system. This means that all our items are made with that bit more care and love – and you can see that in the finished item!
+                                                </p>
+                                                <ul class="product-size">
+                                                    <li>
+                                                        <div class="size-box">
+                                                            <h6 class="text-content">Price : </h6>
+                                                            <h5>${{prod.price}}</h5>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="size-box">
+                                                            <h6 class="text-content">Rate : </h6>
+                                                            <div class="product-rating ms-2">
+                                                                <ul class="rating">
+                                                                    <li>
+                                                                        <i data-feather="star" class="fill"></i>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i data-feather="star" class="fill"></i>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i data-feather="star" class="fill"></i>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i data-feather="star" class="fill"></i>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i data-feather="star"></i>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="size-box">
+                                                            <h6 class="text-content">Sold By : </h6>
+                                                            <h5>Budly, Co - {{ basket.submitted_at.strftime('%d %B %Y')}}</h5>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="size-box">
+                                                            <h6 class="text-content">Quantity : </h6>
+                                                            <h5>Single</h5>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    {% endfor %}
+
+
+                                    <div class="order-box dashboard-bg-box">
+                                        <div class="order-container">
+                                            <div class="order-icon">
+                                                <i data-feather="box"></i>
+                                            </div>
+
+                                            <div class="order-detail">
+                                                <h4>Example Order <span>Pending</span></h4>
+                                                <h6 class="text-content">
+                                                    Cheesy grin boursin cheesy grin cheesecake
+                                                    blue castello cream cheese lancashire melted cheese.
+                                                </h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="product-order-detail">
+                                            <a href="product-left-thumbnail.html" class="order-image">
+                                                <img src="https://images.unsplash.com/photo-1628527304948-06157ee3c8a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt=""
+                                                     style="max-width: 150px;" class="blur-up lazyload">
+                                            </a>
+
+                                            <div class="order-wrap">
+                                                <a href="product-left-thumbnail.html">
+                                                    <h3>Peanut Butter Bite Premium Butter Cookies 600 g</h3>
+                                                </a>
+                                                <p class="text-content">
+                                                    Cow bavarian bergkase mascarpone paneer
+                                                    squirty cheese fromage frais cheese slices when the cheese comes
+                                                    out everybody's happy.
+                                                </p>
+                                                <ul class="product-size">
+                                                    <li>
+                                                        <div class="size-box">
+                                                            <h6 class="text-content">Price : </h6>
+                                                            <h5>$20.68</h5>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="size-box">
+                                                            <h6 class="text-content">Rate : </h6>
+                                                            <div class="product-rating ms-2">
+                                                                <ul class="rating">
+                                                                    <li>
+                                                                        <i data-feather="star" class="fill"></i>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i data-feather="star" class="fill"></i>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i data-feather="star" class="fill"></i>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i data-feather="star" class="fill"></i>
+                                                                    </li>
+                                                                    <li>
+                                                                        <i data-feather="star"></i>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="size-box">
+                                                            <h6 class="text-content">Sold By : </h6>
+                                                            <h5>Fresho</h5>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="size-box">
+                                                            <h6 class="text-content">Quantity : </h6>
+                                                            <h5>250 G</h5>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show" id="pills-address" role="tabpanel"
+                             aria-labelledby="pills-address-tab">
+                            <div class="dashboard-address">
+                                <div class="title title-flex">
+                                    <div>
+                                        <h2>My Address Book</h2>
+                                        <span class="title-leaf">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href={{ url_for('static', filename='general_assets/svg/leaf.svg#leaf') }}></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                    <button class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3"
+                                            data-bs-toggle="modal" data-bs-target="#add-address">
+                                        <i data-feather="plus"
+                                           class="me-2"></i> Add New Address
+                                    </button>
+                                </div>
+
+                                <div class="row g-sm-4 g-3">
+                                    <div class="col-xxl-4 col-xl-6 col-lg-12 col-md-6">
+                                        <div class="address-box">
+                                            <div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="jack"
+                                                           id="flexRadioDefault2" checked>
+                                                </div>
+
+                                                <div class="label">
+                                                    <label>Home</label>
+                                                </div>
+
+                                                <div class="table-responsive address-table">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="2">Jack Jennas</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Address :</td>
+                                                                <td>
+                                                                    <p>
+                                                                        8424 James Lane South San Francisco, CA 94080
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Pin Code :</td>
+                                                                <td>+380</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Phone :</td>
+                                                                <td>+ 812-710-3798</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="button-group">
+                                                <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#editProfile">
+                                                    <i data-feather="edit"></i>
+                                                    Edit
+                                                </button>
+                                                <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#removeProfile">
+                                                    <i data-feather="trash-2"></i>
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-4 col-xl-6 col-lg-12 col-md-6">
+                                        <div class="address-box">
+                                            <div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="jack"
+                                                           id="flexRadioDefault3">
+                                                </div>
+
+                                                <div class="label">
+                                                    <label>Office</label>
+                                                </div>
+
+                                                <div class="table-responsive address-table">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="2">Terry S. Sutton</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Address :</td>
+                                                                <td>
+                                                                    <p>2280 Rose Avenue Kenner, LA 70062</p>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Pin Code :</td>
+                                                                <td>+25</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Phone :</td>
+                                                                <td>+ 504-228-0969</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="button-group">
+                                                <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#editProfile">
+                                                    <i data-feather="edit"></i>
+                                                    Edit
+                                                </button>
+                                                <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#removeProfile">
+                                                    <i data-feather="trash-2"></i>
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-4 col-xl-6 col-lg-12 col-md-6">
+                                        <div class="address-box">
+                                            <div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="jack"
+                                                           id="flexRadioDefault4">
+                                                </div>
+
+                                                <div class="label">
+                                                    <label>Neighbour</label>
+                                                </div>
+
+                                                <div class="table-responsive address-table">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="2">Juan M. McKeon</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Address :</td>
+                                                                <td>
+                                                                    <p>1703 Carson Street Lexington, KY 40593</p>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Pin Code :</td>
+                                                                <td>+78</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Phone :</td>
+                                                                <td>+ 859-257-0509</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="button-group">
+                                                <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#editProfile">
+                                                    <i data-feather="edit"></i>
+                                                    Edit
+                                                </button>
+                                                <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#removeProfile">
+                                                    <i data-feather="trash-2"></i>
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-4 col-xl-6 col-lg-12 col-md-6">
+                                        <div class="address-box">
+                                            <div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="jack"
+                                                           id="flexRadioDefault5">
+                                                </div>
+
+                                                <div class="label">
+                                                    <label>Home 2</label>
+                                                </div>
+
+                                                <div class="table-responsive address-table">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="2">Gary M. Bailey</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Address :</td>
+                                                                <td>
+                                                                    <p>
+                                                                        2135 Burning Memory Lane Philadelphia, PA
+                                                                        19135
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Pin Code :</td>
+                                                                <td>+26</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Phone :</td>
+                                                                <td>+ 215-335-9916</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="button-group">
+                                                <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#editProfile">
+                                                    <i data-feather="edit"></i>
+                                                    Edit
+                                                </button>
+                                                <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#removeProfile">
+                                                    <i data-feather="trash-2"></i>
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-4 col-xl-6 col-lg-12 col-md-6">
+                                        <div class="address-box">
+                                            <div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="jack"
+                                                           id="flexRadioDefault1">
+                                                </div>
+
+                                                <div class="label">
+                                                    <label>Home 2</label>
+                                                </div>
+
+                                                <div class="table-responsive address-table">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td colspan="2">Gary M. Bailey</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Address :</td>
+                                                                <td>
+                                                                    <p>
+                                                                        2135 Burning Memory Lane Philadelphia, PA
+                                                                        19135
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Pin Code :</td>
+                                                                <td>+26</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Phone :</td>
+                                                                <td>+ 215-335-9916</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="button-group">
+                                                <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#editProfile">
+                                                    <i data-feather="edit"></i>
+                                                    Edit
+                                                </button>
+                                                <button class="btn btn-sm add-button w-100" data-bs-toggle="modal"
+                                                        data-bs-target="#removeProfile">
+                                                    <i data-feather="trash-2"></i>
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show" id="pills-card" role="tabpanel"
+                             aria-labelledby="pills-card-tab">
+                            <div class="dashboard-card">
+                                <div class="title title-flex">
+                                    <div>
+                                        <h2>My Card Details</h2>
+                                        <span class="title-leaf">
+                                            <svg class="icon-width bg-gray">
+                                                <use xlink:href={{ url_for('static', filename='general_assets/svg/leaf.svg#leaf') }}></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                    <button class="btn theme-bg-color text-white btn-sm fw-bold mt-lg-0 mt-3"
+                                            data-bs-toggle="modal" data-bs-target="#editCard">
+                                        <i data-feather="plus"
+                                           class="me-2"></i> Add New Card
+                                    </button>
+                                </div>
+
+                                <div class="row g-4">
+                                    <div class="col-xxl-4 col-xl-6 col-lg-12 col-sm-6">
+                                        <div class="payment-card-detail">
+                                            <div class="card-details">
+                                                <div class="card-number">
+                                                    <h4>XXXX - XXXX - XXXX - 2548</h4>
+                                                </div>
+
+                                                <div class="valid-detail">
+                                                    <div class="title">
+                                                        <span>valid</span>
+                                                        <span>thru</span>
+                                                    </div>
+                                                    <div class="date">
+                                                        <h3>08/05</h3>
+                                                    </div>
+                                                    <div class="primary">
+                                                        <span class="badge bg-pill badge-light">primary</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="name-detail">
+                                                    <div class="name">
+                                                        <h5>Audrey Carol</h5>
+                                                    </div>
+                                                    <div class="card-img">
+
+                                                        <img src={{ url_for('static', filename='general_assets/images/payment-icon/1.jpg') }}
+                                                             class="img-fluid blur-up lazyloaded" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="edit-card">
+                                                <a data-bs-toggle="modal" data-bs-target="#editCard"
+                                                   href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                   data-bs-target="#removeProfile">
+                                                    <i class="far fa-minus-square"></i> delete
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="edit-card-mobile">
+                                            <a data-bs-toggle="modal" data-bs-target="#editCard"
+                                               href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                            <a href="javascript:void(0)">
+                                                <i class="far fa-minus-square"></i>
+                                                delete
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-4 col-xl-6 col-lg-12 col-sm-6">
+                                        <div class="payment-card-detail">
+                                            <div class="card-details card-visa">
+                                                <div class="card-number">
+                                                    <h4>XXXX - XXXX - XXXX - 1536</h4>
+                                                </div>
+
+                                                <div class="valid-detail">
+                                                    <div class="title">
+                                                        <span>valid</span>
+                                                        <span>thru</span>
+                                                    </div>
+                                                    <div class="date">
+                                                        <h3>12/23</h3>
+                                                    </div>
+                                                    <div class="primary">
+                                                        <span class="badge bg-pill badge-light">primary</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="name-detail">
+                                                    <div class="name">
+                                                        <h5>Leah Heather</h5>
+                                                    </div>
+                                                    <div class="card-img">
+                                                        <img src={{ url_for('static', filename='general_assets/images/payment-icon/2.jpg') }}
+                                                             class="img-fluid blur-up lazyloaded" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="edit-card">
+                                                <a data-bs-toggle="modal" data-bs-target="#editCard"
+                                                   href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                   data-bs-target="#removeProfile">
+                                                    <i class="far fa-minus-square"></i> delete
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="edit-card-mobile">
+                                            <a data-bs-toggle="modal" data-bs-target="#editCard"
+                                               href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                            <a href="javascript:void(0)">
+                                                <i class="far fa-minus-square"></i>
+                                                delete
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xxl-4 col-xl-6 col-lg-12 col-sm-6">
+                                        <div class="payment-card-detail">
+                                            <div class="card-details dabit-card">
+                                                <div class="card-number">
+                                                    <h4>XXXX - XXXX - XXXX - 1366</h4>
+                                                </div>
+
+                                                <div class="valid-detail">
+                                                    <div class="title">
+                                                        <span>valid</span>
+                                                        <span>thru</span>
+                                                    </div>
+                                                    <div class="date">
+                                                        <h3>05/21</h3>
+                                                    </div>
+                                                    <div class="primary">
+                                                        <span class="badge bg-pill badge-light">primary</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="name-detail">
+                                                    <div class="name">
+                                                        <h5>mark jecno</h5>
+                                                    </div>
+                                                    <div class="card-img">
+                                                        <img src={{ url_for('static', filename='general_assets/images/payment-icon/3.jpg') }}
+                                                             class="img-fluid blur-up lazyloaded" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="edit-card">
+                                                <a data-bs-toggle="modal" data-bs-target="#editCard"
+                                                   href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                   data-bs-target="#removeProfile">
+                                                    <i class="far fa-minus-square"></i> delete
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="edit-card-mobile">
+                                            <a data-bs-toggle="modal" data-bs-target="#editCard"
+                                               href="javascript:void(0)"><i class="far fa-edit"></i> edit</a>
+                                            <a href="javascript:void(0)">
+                                                <i class="far fa-minus-square"></i>
+                                                delete
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show" id="pills-profile" role="tabpanel"
+                             aria-labelledby="pills-profile-tab">
+                            <div class="dashboard-profile">
+                                <div class="title">
+                                    <h2>My Profile</h2>
+                                    <span class="title-leaf">
+                                        <svg class="icon-width bg-gray">
+                                            <use xlink:href={{ url_for('static', filename='general_assets/svg/leaf.svg#leaf') }}></use>
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <div class="profile-detail dashboard-bg-box">
+                                    <div class="dashboard-title">
+                                        <h3>{{ g.user.username }}</h3>
+                                    </div>
+                                    <div class="profile-name-detail">
+                                        <div class="d-sm-flex align-items-center d-block">
+                                            <h3>@{{ g.user.username }}</h3>
+                                            <div class="product-rating profile-rating">
+                                                <ul class="rating">
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i data-feather="star" class="fill"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i data-feather="star"></i>
+                                                    </li>
+                                                    <li>
+                                                        <i data-feather="star"></i>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+                                           data-bs-target="#editProfile">Edit</a>
+                                    </div>
+
+                                    <div class="location-profile">
+                                        <ul>
+                                            <li>
+                                                <div class="location-box">
+                                                    <i data-feather="map-pin"></i>
+                                                    <h6>{{ g.user.location }}</h6>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <div class="location-box">
+                                                    <i data-feather="mail"></i>
+                                                    <h6>{{ g.user.email }}</h6>
+                                                </div>
+                                            </li>
+
+                                            <li>
+                                                <div class="location-box">
+                                                    <i data-feather="check-square"></i>
+                                                    <h6>Licensed for 2 years</h6>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="profile-description">
+                                        <p>
+                                            Residences can be classified by and how they are connected to
+                                            neighbouring residences and land. Different types of housing tenure can
+                                            be used for the same physical type.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="profile-about dashboard-bg-box">
+                                    <div class="row">
+                                        <div class="col-xxl-7">
+                                            <div class="dashboard-title mb-3">
+                                                <h3>Profile About</h3>
+                                            </div>
+
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Username :</td>
+                                                            <td>{{ g.user.username }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Email :</td>
+                                                            <td>{{ g.user.email }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Profile Photo :</td>
+                                                            <td>
+                                                                <img src="{{ g.user.image_url }}" style="max-width: 100px; border-radius: 50px" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Bio :</td>
+                                                            <td>{{ g.user.bio }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Location :</td>
+                                                            <td>{{ g.user.location }}</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="dashboard-title mb-3">
+                                                <h3>Login Details</h3>
+                                            </div>
+
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Email :</td>
+                                                            <td>
+                                                                <a href="javascript:void(0)">
+                                                                    {{ g.user.email }}
+                                                                    <span data-bs-toggle="modal"
+                                                                          data-bs-target="#editProfile">Edit</span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Password :</td>
+                                                            <td>
+                                                                <a href="javascript:void(0)">
+                                                                    ●●●●●●
+                                                                    <span data-bs-toggle="modal"
+                                                                          data-bs-target="#editProfile">Edit</span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xxl-5">
+                                            <div class="profile-image">
+
+                                                <img src={{ url_for('static', filename='general_assets/images/inner-page/dashboard-profile.png') }}
+                                                     class="img-fluid blur-up lazyload" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show" id="pills-security" role="tabpanel"
+                             aria-labelledby="pills-security-tab">
+                            <div class="dashboard-privacy">
+                                <div class="dashboard-bg-box">
+                                    <div class="dashboard-title mb-4">
+                                        <h3>Privacy</h3>
+                                    </div>
+
+                                    <div class="privacy-box">
+                                        <div class="d-flex align-items-start">
+                                            <h6>Allows others to see my profile</h6>
+                                            <div class="form-check form-switch switch-radio ms-auto">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                       id="redio" aria-checked="false">
+                                                <label class="form-check-label" for="redio"></label>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-content">all peoples will be able to see my profile</p>
+                                    </div>
+
+                                    <div class="privacy-box">
+                                        <div class="d-flex align-items-start">
+                                            <h6>who has save this profile only that people see my profile</h6>
+                                            <div class="form-check form-switch switch-radio ms-auto">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                       id="redio2" aria-checked="false">
+                                                <label class="form-check-label" for="redio2"></label>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-content">all peoples will not be able to see my profile</p>
+                                    </div>
+
+                                    <button class="btn theme-bg-color btn-md fw-bold mt-4 text-white">
+                                        Save
+                                        Changes
+                                    </button>
+                                </div>
+
+                                <div class="dashboard-bg-box mt-4">
+                                    <div class="dashboard-title mb-4">
+                                        <h3>Account settings</h3>
+                                    </div>
+
+                                    <div class="privacy-box">
+                                        <div class="d-flex align-items-start">
+                                            <h6>Deleting Your Account Will Permanently</h6>
+                                            <div class="form-check form-switch switch-radio ms-auto">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                       id="redio3" aria-checked="false">
+                                                <label class="form-check-label" for="redio3"></label>
+                                            </div>
+                                        </div>
+                                        <p class="text-content">
+                                            Once your account is deleted, you will be logged out
+                                            and will be unable to log in back.
+                                        </p>
+                                    </div>
+
+                                    <div class="privacy-box">
+                                        <div class="d-flex align-items-start">
+                                            <h6>Deleting Your Account Will Temporary</h6>
+                                            <div class="form-check form-switch switch-radio ms-auto">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                       id="redio4" aria-checked="false">
+                                                <label class="form-check-label" for="redio4"></label>
+                                            </div>
+                                        </div>
+
+                                        <p class="text-content">
+                                            Once your account is deleted, you will be logged out
+                                            and you will be create new account
+                                        </p>
+                                    </div>
+
+                                    <button class="btn theme-bg-color btn-md fw-bold mt-4 text-white">
+                                        Delete My
+                                        Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- User Dashboard Section End -->
+<!-- Edit Card Start -->
+<div class="modal fade theme-modal" id="editCard" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel8">Edit Card</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+                    <div class="col-xxl-6">
+                        <form>
+                            <div class="form-floating theme-form-floating">
+                                <input type="text" class="form-control" id="finame" value="Mark">
+                                <label for="finame">First Name</label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-xxl-6">
+                        <form>
+                            <div class="form-floating theme-form-floating">
+                                <input type="text" class="form-control" id="laname" value="Jecno">
+                                <label for="laname">Last Name</label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-xxl-4">
+                        <form>
+                            <div class="form-floating theme-form-floating">
+                                <select class="form-select" id="floatingSelect12"
+                                        aria-label="Floating label select example">
+                                    <option selected>Card Type</option>
+                                    <option value="kindom">Visa Card</option>
+                                    <option value="states">MasterCard Card</option>
+                                    <option value="fra">RuPay Card</option>
+                                    <option value="china">Contactless Card</option>
+                                    <option value="spain">Maestro Card</option>
+                                </select>
+                                <label for="floatingSelect12">Card Type</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-animation btn-md fw-bold"
+                        data-bs-dismiss="modal">
+                    Cancel
+                </button>
+                <button type="button" class="btn theme-bg-color btn-md fw-bold text-light">Update Card</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Card End -->
+<!-- Remove Profile Modal Start -->
+<div class="modal fade theme-modal remove-profile" id="removeProfile" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header d-block text-center">
+                <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="remove-box">
+                    <p>
+                        The permission for the use/group, preview is inherited from the object, object will create a
+                        new permission for this object
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn theme-bg-color btn-md fw-bold text-light"
+                        data-bs-target="#removeAddress" data-bs-toggle="modal">
+                    Yes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade theme-modal remove-profile" id="removeAddress" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel12">Done!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="remove-box text-center">
+                    <h4 class="text-content">It's Removed.</h4>
+                </div>
+            </div>
+            <div class="modal-footer pt-0">
+                <button type="button" class="btn theme-bg-color btn-md fw-bold text-light"
+                        data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Remove Profile Modal End -->
+<!-- Deal Box Modal Start -->
+<div class="modal fade theme-modal deal-modal" id="deal-box" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title w-100" id="deal_today">Deal Today</h5>
+                    <p class="mt-1 text-content">Recommended deals for you.</p>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="deal-offer-box">
+                    <ul class="deal-offer-list">
+                        <li class="list-1">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src={{ wishlist[0].image_url }} class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>{{ wishlist[0].name }}</h5>
+                                    <h6>${{ wishlist[0].price }} <del>{{ "%.0f"| format(1.08*(wishlist[0].price)) }}</del> <span>2 Units!</span></h6>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="list-2">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src={{ wishlist[1].image_url }} class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>{{ wishlist[1].name }}</h5>
+                                    <h6>${{ wishlist[1].price }} <del>{{ "%.0f"| format(1.08*(wishlist[1].price)) }}</del> <span>2 Units!</span></h6>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="list-3">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src={{ wishlist[2].image_url }} class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>{{ wishlist[2].name }}</h5>
+                                    <h6>${{ wishlist[2].price }} <del>{{ "%.0f"| format(1.08*(wishlist[2].price)) }}</del> <span>2 Units!</span></h6>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="list-1">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src={{ wishlist[3].image_url }} class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>{{ wishlist[3].name }}</h5>
+                                    <h6>${{ wishlist[3].price }} <del>{{ "%.0f"| format(1.08*(wishlist[3].price)) }}</del> <span>2 Units!</span></h6>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Deal Box Modal End -->
+<!-- Tap to top start -->
+<div class="theme-option">
+    <div class="back-to-top">
+        <a id="back-to-top" href="#">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+    </div>
+</div>
+<!-- Tap to top end -->
+<!-- Bg overlay Start -->
+<div class="bg-overlay"></div>
+<!-- Bg overlay End -->
+<!-- Add address modal box start -->
+<div class="modal fade theme-modal" id="add-address" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add a new address</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input type="text" class="form-control" id="fname" placeholder="Enter First Name">
+                        <label for="fname">First Name</label>
+                    </div>
+                </form>
+
+                <form>
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input type="text" class="form-control" id="lname" placeholder="Enter Last Name">
+                        <label for="lname">Last Name</label>
+                    </div>
+                </form>
+
+                <form>
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input type="email" class="form-control" id="email" placeholder="Enter Email Address">
+                        <label for="email">Email Address</label>
+                    </div>
+                </form>
+
+                <form>
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="address"
+                                  style="height: 100px"></textarea>
+                        <label for="address">Enter Address</label>
+                    </div>
+                </form>
+
+                <form>
+                    <div class="form-floating mb-4 theme-form-floating">
+                        <input type="email" class="form-control" id="pin" placeholder="Enter Pin Code">
+                        <label for="pin">Pin Code</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn theme-bg-color btn-md text-white" data-bs-dismiss="modal">
+                    Save
+                    changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add address modal box end -->
+<!-- Location Modal Start -->
+<div class="modal location-modal fade theme-modal" id="locationModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Choose your Delivery Location</h5>
+                <p class="mt-1 text-content">Enter your address and we will specify the offer for your area.</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="location-list">
+                    <div class="search-input">
+                        <input type="search" class="form-control" placeholder="Search Your Area">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+
+                    <div class="disabled-box">
+                        <h6>Select a Location</h6>
+                    </div>
+
+                    <ul class="location-select custom-height">
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Alabama</h6>
+                                <span>Min: $130</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Arizona</h6>
+                                <span>Min: $150</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>California</h6>
+                                <span>Min: $110</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Colorado</h6>
+                                <span>Min: $140</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Florida</h6>
+                                <span>Min: $160</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Georgia</h6>
+                                <span>Min: $120</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Kansas</h6>
+                                <span>Min: $170</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Minnesota</h6>
+                                <span>Min: $120</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>New York</h6>
+                                <span>Min: $110</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Washington</h6>
+                                <span>Min: $130</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Location Modal End -->
+<!-- User Modal Box Start -->
+{% for msg in g.user.following %}
+<div class="modal fade theme-modal view-modal" id=view_user{{ msg.id }} tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header p-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="background-color: rgba(13, 164, 135, .1);">
+                <ul class="p-2">
+
+                    <li class="row">
+
+                        <div class="user-box  row justify-content-center border-color p-2 rounded" background-color: #f8f8f8; ">
+                            <!--<div class="reply-button">
+                                <i class="fa-solid fa-reply"></i>
+                                <span class="theme-color">Reply</span>
+                            </div>-->
+                            <div class="user-iamge col-11 col-sm-10 justify-content-center ">
+                                <!--style="border-radius: 50px; border-left: 2px solid rgba(13, 164, 135, .20); border-right: 2px solid rgba(13, 164, 135, .20); "-->
+
+
+                                <div class="row justify-content-center ">
+                                    <div class=" col-12 col-sm-10 col-xl-7  p-2" style="border-radius: 50px; background-color: rgba(0,0,0,.9); border-left: 2px solid rgba(13, 164, 135, .45); border-right: 2px solid rgba(13, 164, 135, .45); ">
+                                        <div class="row justify-content-center">
+                                            <div class="row justify-content-center">
+                                                <div class="col-1" style="background-color: rgba(255,255,255,0)">
+                                                    <div class="row">
+
+
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="row justify-content-center">
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="user-contain col-12 col-sm-11 ">
+                                            <!--style="background-image: url({}); background-size: cover"-->
+                                            <!--<div class="row">-->
+                                            <!--<img src="{" style="max-height: 85px;" />-->
+                                            <!--</div>-->
+                                            <div class="row align-items-center justify-content-center" style="align-items: center">
+                                                <div class="row justify-content-center  " style="background-color: rgba(0,0,0,0)">
+                                                    <div class="row">
+                                                        <div class="col-2">
+                                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                               data-bs-target="#view_user{{ msg.id }}">
+                                                                <img src="{{ msg.image_url }}" style="max-width: 70px; border-radius: 50px;"
+                                                                     class="img-fluid blur-up lazyload p-2" alt="">
+
+                                                            </a>
+
+                                                        </div>
+                                                        <div class="col-9">
+                                                            <h5 class="text-content text-left" style="display: inline" overflow: hidden;"><a href="/users/{{ msg.id }}"> {{ msg.username }}</a></h5>
+                                                            <span class="text-info"><i class="fa-solid fa-angles-right text-warning"></i> @{{ msg.username }}</span>
+                                                            <span class="text-secondary"><i class="fa-solid fa-angles-right text-warning"></i> {{ now.strftime('%d %B %Y') }} </span>
+                                                            <p class="text-light mt-2" style="font-weight: bolder">
+                                                                {{ msg.bio }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-1">
+
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                    <div class="row justify-content-center" style="margin-left: 35px;">
+
+                                                        <!--<div class="col-12">
+                                                            <img class="" src="{{msg.header_image_url}}" style="border-radius: 40px; max-height: 500px; max-width: -webkit-fill-available; " />
+                                                        </div>-->
+
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+
+                                            </div>
+                                            <!--<div class="row">
+
+                                            </div>-->
+
+
+                                        </div>
+
+                                        <div class="col-8 col-sm-1 mt-sm-0 mt-2" style="background-color: rgba(255,255,255,.0)">
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </li>
+                </ul>
+
+                <!-- Product Slider Section Start -->
+                <!-- Product Slider Section Start -->
+
+                <div class="row pt-3 bg bg-dark" style="border-radius: 10px;">
+                    <div class="col-12">
+                        <div class="slider-3-product product-wrapper">
+                            <div>
+                                <div class="product-slider-image">
+                                    <img src="https://images.unsplash.com/photo-1495001258031-d1b407bc1776?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt=""
+                                         class="img-fluid blur-up lazyload">
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="product-slider-image">
+                                    <img src="https://images.unsplash.com/photo-1494765669467-3db176fb8571?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt=""
+                                         class="img-fluid blur-up lazyload">
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="product-slider-image">
+                                    <img src="https://images.unsplash.com/photo-1555529952-996f6b90e74e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt=""
+                                         class="img-fluid blur-up lazyload">
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="product-slider-image">
+                                    <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt=""
+                                         class="img-fluid blur-up lazyload">
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="product-slider-image">
+                                    <img src="https://images.unsplash.com/photo-1577583032445-5d8c0ac48298?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt=""
+                                         class="img-fluid blur-up lazyload">
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="product-slider-image">
+                                    <img src="https://images.unsplash.com/photo-1528503908550-8a048b6b4312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt=""
+                                         class="img-fluid blur-up lazyload">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Product Slider Section End -->
+                <!-- Product Slider Section End -->
+                <div class="row justify-content-center g-sm-4 g-2">
+                    <!--<div class="col-lg-6">
+                        <img src={{ msg.header_image_url }} class="img-fluid blur-up lazyload"
+                             alt="" style="opacity: .3">
+                        <div class="slider-image">
+
+                        </div>
+                    </div>-->
+                    <hr />
+                    <div class="col-lg-10">
+                        <div class="right-sidebar-modal">
+
+                            <!--<div class="total-box">
+                            <div class="row g-sm-4 g-3">
+                                <div class="col-3 justify-content-center">
+                                    <img src="{{ msg.image_url }}" style="max-width: 100px; border-radius: 50px;" />
+                                </div>
+                                <div class="col-xxl-3 col-lg-6 col-md-4 col-sm-6">
+                                    <div class="totle-contain">-->
+                            <!--<img src="{{ url_for('static', filename='general_assets/images/svg/followers.svg') }}"
+                            class="img-1 blur-up lazyload" alt="" style="filter: grayscale(1); position: absolute; width: calc(54px + (60 - 54) * ((100vw - 320px) / (1920 - 320))); transform: translateY(-50%) rotate(-7deg); opacity: 0.2; right: -19px; top: 50%; ">-->
+                            <!--<img src="{{ url_for('static', filename='general_assets/images/svg/followers.svg') }}" class="blur-up lazyload"
+                                         alt="" style="width: calc(54px + (60 - 54) * ((100vw - 320px) / (1920 - 320)));">
+                                    <div class="totle-detail">
+                                        <h5>Followers</h5>
+                                        <h3>{{msg.followers|length}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-3 col-lg-6 col-md-4 col-sm-6">
+                                <div class="totle-contain">-->
+                            <!--<img src="{{ url_for('static', filename='general_assets/images/svg/like.svg') }}"
+                            class="img-1 blur-up lazyload" alt="" style="filter: grayscale(1); position: absolute; width: calc(54px + (60 - 54) * ((100vw - 320px) / (1920 - 320))); transform: translateY(-50%) rotate(-7deg); opacity: 0.2; right: -19px; top: 50%; ">-->
+                            <!--<img src="{{ url_for('static', filename='general_assets/images/svg/msg.svg') }}" class="blur-up lazyload"
+                                         alt="" style="width: calc(54px + (60 - 54) * ((100vw - 320px) / (1920 - 320)));">
+                                    <div class="totle-detail">
+                                        <h5>Likes</h5>
+                                        <h3>{{msg.likes|length}}</h3>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-3 col-lg-6 col-md-4 col-sm-6">
+                                <div class="totle-contain">-->
+                            <!--<img src="{{ url_for('static', filename='general_assets/images/svg/following.svg') }}"
+                            class="img-1 blur-up lazyload" alt="" style="filter: grayscale(1); position: absolute; width: calc(54px + (60 - 54) * ((100vw - 320px) / (1920 - 320))); transform: translateY(-50%) rotate(-7deg); opacity: 0.2; right: -19px; top: 50%; ">-->
+                            <!--<img src="{{ url_for('static', filename='general_assets/images/svg/following.svg') }}"
+                                                 class="blur-up lazyload" alt="" style="width: calc(54px + (60 - 54) * ((100vw - 320px) / (1920 - 320)));">
+                                            <div class="totle-detail">
+                                                <h5>Following</h5>
+                                                <h3>{{msg.following|length}}</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+{% endfor %}
+<!-- User Modal Box End -->
+{% for msg in messages %}
+<!-- Quick View MSG Modal Box Start -->
+<div class="modal fade theme-modal view-modal" id="view{{msg.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header p-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-sm-4 g-2">
+
+
+                    <div class="col-lg-3">
+                        <div class="right-sidebar-modal">
+                            <h4 class="title-name text-center">{{msg.user.username}}</h4>
+                            <h4 class="price text-center">{{ msg.timestamp.strftime('%d %B %Y') }}</h4>
+                            <div class="profile-box row justify-content-center">
+                                <div class="cover-image col-6">
+                                    <img src={{msg.user.image_url}} class="img-fluid blur-up lazyload"
+                                         alt="" style="border-radius: 50%">
+                                </div>
+
+                                <div class="product-rating row justify-content-center">
+
+                                    <div class="row justify-content-center">
+                                        <div class="col-6">
+
+                                            <ul class="rating">
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star" class="fill"></i>
+                                                </li>
+                                                <li>
+                                                    <i data-feather="star"></i>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <span class="ms-2">{{ msg.user.messages|length }} budly chatters </span>
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="ms-2 text-danger">verified user</span>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="product-detail">
+                                <!--<h4>Product Details :</h4>-->
+                                <p>
+                                    {{ msg.text }}
+                                </p>
+                            </div>
+
+                            <!--<ul class="brand-list">
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>Brand Name:</h5>
+                                        <h6>Black Forest</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>Product Code:</h5>
+                                        <h6>W0690034</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>Product Type:</h5>
+                                        <h6>{{msg}}</h6>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="select-size">
+                                <h4>Quantity :</h4>
+                                <select class="form-select select-form-size">
+                                    <option selected>Select Size</option>
+                                    <option value="1.2">1/2 KG</option>
+                                    <option value="0">1 KG</option>
+                                    <option value="1.5">1/5 KG</option>
+                                    <option value="red">Red Roses</option>
+                                    <option value="pink">With Pink Roses</option>
+                                </select>
+                            </div>-->
+                            <!--<div class="modal-button">
+                                <button onclick="location.href = 'cart.html';"
+                                        class="btn btn-md add-cart-button icon">
+                                    Add
+                                    To Cart
+                                </button>
+                                <button onclick="location.href = '/users/{{msg.user.id}}';"
+                                        class="btn theme-bg-color view-button icon text-white fw-bold btn-md">
+                                    View More Details
+                                </button>
+                            </div>-->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9">
+                        <div class="slider-image">
+                            <img src={{ msg.user.header_image_url }} class="img-fluid blur-up lazyload"
+                                 alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Quick View Modal Box End -->
+    {% endfor %}
+{% endblock %}

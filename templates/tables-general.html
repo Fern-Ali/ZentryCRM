@@ -1,0 +1,1371 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>General Tables</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item active">General</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section row justify-content-center">
+
+
+        <div class="">
+            <div class="row justify-content-center ">
+                <div class="col-10">
+                    <ul id="tabs">
+                        <li><a href="#" class="tab-btn " name="tab1">Products</a></li>
+                        <li><a href="#" class="tab-btn" name="tab2">Category</a></li>
+                        <li><a href="#" class="tab-btn" name="tab3">Strain</a></li>
+                        <li><a href="#" class="tab-btn" name="tab4">Sector</a></li>
+                        <li><a href="#" class="tab-btn" name="tab5">Facilty</a></li>
+                        <li><a href="#" class="tab-btn" name="tab6">Seeds</a></li>
+                        <li><a href="#" class="tab-btn" name="tab7">Images</a></li>
+                    </ul>
+                </div>
+                
+
+                <div id="content" class="rounded col-10 shadow" style="display: table; background-color: rgba(100, 121, 234, 0.49)">
+                    <div id="tab1" class="tab row  justify-content-center">
+
+                        <div class="row justify-content-center card">
+
+                            <div class="    rounded  card-body" style=" background-color: rgba(255, 255, 255, .9); ">
+
+                                <h5 class="card-title">Products Table</h5>
+
+                                <div class="card table-responsive">
+                                    <table class=" table table-striped datatable rounded  border  " style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19); ">
+                                        <thead>
+
+                                            <tr class="">
+
+                                                <th scope="col">#</th>
+
+                                                <th scope="col" id="name_row"></th>
+
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col"> Description</th>
+                                                <th scope="col">Favorite</th>
+                                                <th scope="col">Category</th>
+                                                <th scope="col">Sector</th>
+
+
+                                                <th scope="col">Seedling</th>
+                                                <th scope="col">Strain</th>
+                                                <th scope="col">Plant Facility</th>
+                                                <th scope="col">Updated At</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            {% for product in products%}
+
+
+
+                                            <tr class="table-secondary">
+
+                                                <th scope="row">{{ product.id }} </th>
+                                                <td style=" "><img class="rounded" src={{ product.image_url }} style=" mix-blend-mode: darken; max-width: 100px; max-height: 150px;"></td>
+                                                <td id={{ product.name }} class="name_row">{{ product.name }}</td>
+                                                <td>{{ product.description }}</td>
+                                                <td class="">{{ product.is_favorite }}</td>
+                                                <td>{{ categories[(product.category_id)-1].name }}</td>
+
+                                                <td>{{ product.sectors.name }}</td>
+
+
+
+                                                <td>Batch {{ product.seedling_id }}</td>
+                                                {% for strain in strains %}
+                                                {% if strain.id == product.strain_id %}
+
+                                                <td>{{ strain.name }}</td>
+
+                                                {% endif %}
+                                                {% endfor %}
+                                                <td>{{ product.plant_facility_id }}</td>
+                                                <td>{{ product.updated_at }}</td>
+
+                                            </tr>
+
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- End Default Table Example -->
+                        </div>
+
+
+                    </div>
+
+
+                    <div id="tab2" class="tab row justify-content-center">
+
+
+                        <div class="card ">
+                            <div class="card-body">
+                                <h5 class="card-title">Strains Table</h5>
+                                <div class=" card  table-responsive">
+                                    <table class=" table table-striped datatable rounded  border  " style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19); ">
+                                        <thead>
+
+                                            <tr class="">
+
+                                                <th scope="col">#</th>
+
+
+
+                                                <th scope="col">Strain Name</th>
+                                                <th scope="col"> Category ID</th>
+
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            {% for strain in strains %}
+
+
+
+                                            <tr class="table-secondary">
+
+                                                <th scope="row">{{ strain.id }}</th>
+
+                                                <td id={{ strain.name }} class="name_row">{{ strain.name }}</td>
+                                                <td>{{ strain.category_id }}</td>
+
+
+                                            </tr>
+
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- End Default Table Example -->
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div id="tab3" class="tab row justify-content-center">
+                        <div class="card ">
+                            <div class="card-body">
+                                <h5 class="card-title">Categories Table</h5>
+                                <div class=" card  table-responsive">
+                                    <table class=" table table-striped datatable rounded  border  " style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19); ">
+                                        <thead>
+
+                                            <tr class="">
+
+                                                <th scope="col">#</th>
+
+
+
+                                                <th scope="col">Category Name</th>
+                                                <th scope="col"> Products</th>
+
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            {% for cat in categories %}
+
+
+
+                                            <tr class="table-secondary">
+
+                                                <th scope="row">{{ cat.id }}</th>
+
+                                                <td id={{ cat.name }} class="name_row">{{ cat.name }}</td>
+
+                                                <td>
+                                                    <ul>
+                                                        {% for prod in cat.products %}
+                                                        <li> {{ prod.name }} </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </td>
+                                            </tr>
+
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- End Default Table Example -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab4" class="tab row justify-content-center">
+                        <div class="card ">
+                            <div class="card-body">
+                                <h5 class="card-title">Categories Table</h5>
+                                <div class=" card  table-responsive">
+                                    <table class=" table table-striped datatable rounded  border  " style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19); ">
+                                        <thead>
+
+                                            <tr class="">
+
+                                                <th scope="col">#</th>
+
+
+
+                                                <th scope="col">Category Name</th>
+                                                <th scope="col"> Products</th>
+
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            {% for cat in categories %}
+
+
+
+                                            <tr class="table-secondary">
+
+                                                <th scope="row">{{ cat.id }}</th>
+
+                                                <td id={{ cat.name }} class="name_row">{{ cat.name }}</td>
+
+                                                <td>
+                                                    <ul>
+                                                        {% for prod in cat.products %}
+                                                        <li> {{ prod.name }} </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </td>
+                                            </tr>
+
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- End Default Table Example -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab5" class="tab row  justify-content-center">
+
+                        <div class="row justify-content-center card">
+
+                            <div class="    rounded  card-body" style=" background-color: rgba(255, 255, 255, .9); ">
+
+                                <h5 class="card-title">Products Table</h5>
+
+                                <div class="card table-responsive">
+                                    <table class=" table table-striped datatable rounded  border  " style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19); ">
+                                        <thead>
+
+                                            <tr class="">
+
+                                                <th scope="col">#</th>
+
+                                                <th scope="col" id="name_row"></th>
+
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col"> Description</th>
+                                                <th scope="col">Favorite</th>
+                                                <th scope="col">Category</th>
+                                                <th scope="col">Sector</th>
+
+
+                                                <th scope="col">Seedling</th>
+                                                <th scope="col">Strain</th>
+                                                <th scope="col">Plant Facility</th>
+                                                <th scope="col">Updated At</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            {% for product in products%}
+
+
+
+                                            <tr class="table-secondary">
+
+                                                <th scope="row">{{ product.id }} </th>
+                                                <td style=" "><img class="rounded" src={{ product.image_url }} style=" mix-blend-mode: darken; max-width: 100px; max-height: 150px;"></td>
+                                                <td id={{ product.name }} class="name_row">{{ product.name }}</td>
+                                                <td>{{ product.description }}</td>
+                                                <td class="">{{ product.is_favorite }}</td>
+                                                <td>{{ categories[(product.category_id)-1].name }}</td>
+
+                                                <td>{{ product.sectors.name }}</td>
+
+
+
+                                                <td>Batch {{ product.seedling_id }}</td>
+                                                {% for strain in strains %}
+                                                {% if strain.id == product.strain_id %}
+
+                                                <td>{{ strain.name }}</td>
+
+                                                {% endif %}
+                                                {% endfor %}
+                                                <td>{{ product.plant_facility_id }}</td>
+                                                <td>{{ product.updated_at }}</td>
+
+                                            </tr>
+
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- End Default Table Example -->
+                        </div>
+
+
+                    </div>
+                    <div id="tab6" class="tab row  justify-content-center">
+
+                        <div class="row justify-content-center card">
+
+                            <div class="    rounded  card-body" style=" background-color: rgba(255, 255, 255, .9); ">
+
+                                <h5 class="card-title">Products Table</h5>
+
+                                <div class="card table-responsive">
+                                    <table class=" table table-striped datatable rounded  border  " style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19); ">
+                                        <thead>
+
+                                            <tr class="">
+
+                                                <th scope="col">#</th>
+
+                                                <th scope="col" id="name_row"></th>
+
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col"> Description</th>
+                                                <th scope="col">Favorite</th>
+                                                <th scope="col">Category</th>
+                                                <th scope="col">Sector</th>
+
+
+                                                <th scope="col">Seedling</th>
+                                                <th scope="col">Strain</th>
+                                                <th scope="col">Plant Facility</th>
+                                                <th scope="col">Updated At</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            {% for product in products%}
+
+
+
+                                            <tr class="table-secondary">
+
+                                                <th scope="row">{{ product.id }} </th>
+                                                <td style=" "><img class="rounded" src={{ product.image_url }} style=" mix-blend-mode: darken; max-width: 100px; max-height: 150px;"></td>
+                                                <td id={{ product.name }} class="name_row">{{ product.name }}</td>
+                                                <td>{{ product.description }}</td>
+                                                <td class="">{{ product.is_favorite }}</td>
+                                                <td>{{ categories[(product.category_id)-1].name }}</td>
+
+                                                <td>{{ product.sectors.name }}</td>
+
+
+
+                                                <td>Batch {{ product.seedling_id }}</td>
+                                                {% for strain in strains %}
+                                                {% if strain.id == product.strain_id %}
+
+                                                <td>{{ strain.name }}</td>
+
+                                                {% endif %}
+                                                {% endfor %}
+                                                <td>{{ product.plant_facility_id }}</td>
+                                                <td>{{ product.updated_at }}</td>
+
+                                            </tr>
+
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- End Default Table Example -->
+                        </div>
+
+
+                    </div>
+                    <div id="tab7" class="tab row  justify-content-center">
+
+                        <div class="row justify-content-center card">
+
+                            <div class="    rounded  card-body" style=" background-color: rgba(255, 255, 255, .9); ">
+
+                                <h5 class="card-title">Products Table</h5>
+
+                                <div class="card table-responsive">
+                                    <table class=" table table-striped datatable rounded  border  " style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19); ">
+                                        <thead>
+
+                                            <tr class="">
+
+                                                <th scope="col">#</th>
+
+                                                <th scope="col" id="name_row"></th>
+
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col"> Description</th>
+                                                <th scope="col">Favorite</th>
+                                                <th scope="col">Category</th>
+                                                <th scope="col">Sector</th>
+
+
+                                                <th scope="col">Seedling</th>
+                                                <th scope="col">Strain</th>
+                                                <th scope="col">Plant Facility</th>
+                                                <th scope="col">Updated At</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            {% for product in products%}
+
+
+
+                                            <tr class="table-secondary">
+
+                                                <th scope="row">{{ product.id }} </th>
+                                                <td style=" "><img class="rounded" src={{ product.image_url }} style=" mix-blend-mode: darken; max-width: 100px; max-height: 150px;"></td>
+                                                <td id={{ product.name }} class="name_row">{{ product.name }}</td>
+                                                <td>{{ product.description }}</td>
+                                                <td class="">{{ product.is_favorite }}</td>
+                                                <td>{{ categories[(product.category_id)-1].name }}</td>
+
+                                                <td>{{ product.sectors.name }}</td>
+
+
+
+                                                <td>Batch {{ product.seedling_id }}</td>
+                                                {% for strain in strains %}
+                                                {% if strain.id == product.strain_id %}
+
+                                                <td>{{ strain.name }}</td>
+
+                                                {% endif %}
+                                                {% endfor %}
+                                                <td>{{ product.plant_facility_id }}</td>
+                                                <td>{{ product.updated_at }}</td>
+
+                                            </tr>
+
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <!-- End Default Table Example -->
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!--<div class="col-10 card">
+            <div class="row justify-content-center card-body">
+                <div class="col-3">
+                    <div class="row justify-content-center">
+                        <a class="scroll-to" href="#strains">
+                            <span class="col-6 mt-4 btn shadow text-light" style="background-color: pink">Strains</span> <i class="lar la-user"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="row justify-content-center">
+                        <button class="col-6 mt-4 btn shadow text-light" style="background-color: pink"> Strains </button>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="row justify-content-center">
+                        <button class="col-6 mt-4 btn btn-success"> Categories </button>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="row justify-content-center">
+                        <button class="col-6 mt-4 btn btn-secondary"> Users </button>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-10 card">
+            <div class="row justify-content-center card-body">-->
+                <!--this was to have checkbox options for product page to select cateogories to show. found a better method.-->
+                <!--<input class="form-check-input namebox" type="checkbox" id="name">
+        <label class="form-check-label " for="name">
+            Name
+        </label>
+
+        <input class="form-check-input" type="checkbox" id="description">
+        <label class="form-check-label" for="description">
+            Description
+        </label>
+
+        <input class="form-check-input" type="checkbox" id="favorite">
+        <label class="form-check-label" for="favorite">
+            Favorites Status
+        </label>
+
+        <input class="form-check-input" type="checkbox" id="category">
+        <label class="form-check-label" for="category">
+            Category
+        </label>
+
+        <input class="form-check-input" type="checkbox" id="updated_at">
+        <label class="form-check-label" for="updated_at">
+            Updated At
+        </label>
+
+        <input class="form-check-input" type="checkbox" id="image_url">
+        <label class="form-check-label" for="image_url">
+            Product Image
+        </label>
+
+        <input class="form-check-input" type="checkbox" id="seedling">
+        <label class="form-check-label" for="seedling">
+            Seedling
+        </label>
+
+        <input class="form-check-input" type="checkbox" id="plant_facility">
+        <label class="form-check-label" for="plant_facility">
+            Plant Facility
+        </label>-->
+                <!-- Default Table -->
+                <!--<div class=" card p-4  table-responsive">
+            <table class=" table table-striped datatable rounded  border  " style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19); ">
+                <thead>
+
+                    <tr class="">
+
+                        <th scope="col">#</th>
+
+                        <th scope="col" id="name_row"></th>
+
+                        <th scope="col">Product Name</th>
+                        <th scope="col"> Description</th>
+                        <th scope="col">Favorite</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Sector</th>
+
+
+                        <th scope="col">Seedling</th>
+                        <th scope="col">Strain</th>
+                        <th scope="col">Plant Facility</th>
+                        <th scope="col">Updated At</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    {% for product in products%}
+
+
+
+                    <tr class="table-secondary">
+
+                        <th scope="row">{{ product.id }} </th>
+                        <td style=" "><img class="rounded" src={{ product.image_url }} style=" mix-blend-mode: darken; max-width: 100px; max-height: 150px;"></td>
+                        <td id={{ product.name }} class="name_row">{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.is_favorite }}</td>
+                        <td></td>
+
+                        <td>{{ product.sectors.name }}</td>
+
+
+
+                        <td>Batch {{ product.seedling_id }}</td>
+                        {% for strain in strains %}
+                        {% if strain.id == product.strain_id %}
+
+                        <td>{{ strain.name }}</td>
+
+                        {% endif %}
+                        {% endfor %}
+                        <td>{{ product.plant_facility_id }}</td>
+                        <td>{{ product.updated_at }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>-->
+                <!-- End Default Table Example -->
+                <!--</div>
+        </div>
+
+
+        <section class="strains">
+            <div class="row justify-content-center">
+                <div class="card col-10">
+                    <div class="card-body">
+                        <h5 class="card-title">Strains Table</h5>
+                        <div class=" card  table-responsive">
+                            <table class=" table table-striped datatable rounded  border  " style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19); ">
+                                <thead>
+
+                                    <tr class="">
+
+                                        <th scope="col">#</th>
+
+
+
+                                        <th scope="col">Strain Name</th>
+                                        <th scope="col"> Category ID</th>
+
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    {% for strain in strains %}
+
+
+
+                                    <tr class="table-secondary">
+
+                                        <th scope="row">{{ strain.id }}</th>
+
+                                        <td id={{ strain.name }} class="name_row">{{ strain.name }}</td>
+                                        <td>{{ strain.category_id }}</td>
+
+
+                                    </tr>
+
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>-->
+                <!-- End Default Table Example -->
+                <!--</div>
+                </div>
+            </div>
+
+        </section>
+
+
+
+        <div class="card col-6">
+            <div class="card-body">
+                <h5 class="card-title">Categories Table</h5>
+                <div class=" card  table-responsive">
+                    <table class=" table table-striped datatable rounded  border  " style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19); ">
+                        <thead>
+
+                            <tr class="">
+
+                                <th scope="col">#</th>
+
+
+
+                                <th scope="col">Category Name</th>
+                                <th scope="col"> Products</th>
+
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            {% for cat in categories %}
+
+
+
+                            <tr class="table-secondary">
+
+                                <th scope="row">{{ cat.id }}</th>
+
+                                <td id={{ cat.name }} class="name_row">{{ cat.name }}</td>
+
+                                <td>
+                                    <ul>
+                                        {% for prod in cat.products %}
+                                        <li> {{ prod.name }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>-->
+                <!-- End Default Table Example -->
+                <!--</div>
+        </div>-->
+                <!--<div class="col-lg-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Default Table</h5>-->
+                <!-- Default Table -->
+                <!--<table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Start Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Brandon Jacob</td>
+                    <td>Designer</td>
+                    <td>28</td>
+                    <td>2016-05-25</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Bridie Kessler</td>
+                    <td>Developer</td>
+                    <td>35</td>
+                    <td>2014-12-05</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Ashleigh Langosh</td>
+                    <td>Finance</td>
+                    <td>45</td>
+                    <td>2011-08-12</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Angus Grady</td>
+                    <td>HR</td>
+                    <td>34</td>
+                    <td>2012-06-11</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Raheem Lehner</td>
+                    <td>Dynamic Division Officer</td>
+                    <td>47</td>
+                    <td>2011-04-19</td>
+                </tr>
+            </tbody>
+        </table>-->
+                <!-- End Default Table Example -->
+                <!--</div>
+        </div>-->
+                <!--<div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Dark Table</h5>-->
+                <!-- Dark Table -->
+                <!--<table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Start Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Brandon Jacob</td>
+                    <td>Designer</td>
+                    <td>28</td>
+                    <td>2016-05-25</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Bridie Kessler</td>
+                    <td>Developer</td>
+                    <td>35</td>
+                    <td>2014-12-05</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Ashleigh Langosh</td>
+                    <td>Finance</td>
+                    <td>45</td>
+                    <td>2011-08-12</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Angus Grady</td>
+                    <td>HR</td>
+                    <td>34</td>
+                    <td>2012-06-11</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Raheem Lehner</td>
+                    <td>Dynamic Division Officer</td>
+                    <td>47</td>
+                    <td>2011-04-19</td>
+                </tr>
+            </tbody>
+        </table>-->
+                <!-- End Dark Table -->
+                <!--</div>
+        </div>-->
+                <!--<div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Active Table</h5>
+                <p>Highlight a table row or cell by adding a <code>.table-active</code> class.</p>-->
+                <!-- Active Table -->
+                <!--<table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Start Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Brandon Jacob</td>
+                    <td>Designer</td>
+                    <td>28</td>
+                    <td>2016-05-25</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Bridie Kessler</td>
+                    <td class="table-active">Developer</td>
+                    <td>35</td>
+                    <td>2014-12-05</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Ashleigh Langosh</td>
+                    <td>Finance</td>
+                    <td>45</td>
+                    <td>2011-08-12</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Angus Grady</td>
+                    <td>HR</td>
+                    <td>34</td>
+                    <td class="table-active">2012-06-11</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td class="table-active">Raheem Lehner</td>
+                    <td>Dynamic Division Officer</td>
+                    <td>47</td>
+                    <td>2011-04-19</td>
+                </tr>
+            </tbody>
+        </table>-->
+                <!-- End Active Table -->
+                <!--</div>
+        </div>-->
+                <!--<div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Tables without borders</h5>
+                <p>Add <code>.table-borderless</code> for a table without borders.</p>-->
+                <!-- Active Table -->
+                <!--<table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Start Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Brandon Jacob</td>
+                    <td>Designer</td>
+                    <td>28</td>
+                    <td>2016-05-25</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Bridie Kessler</td>
+                    <td>Developer</td>
+                    <td>35</td>
+                    <td>2014-12-05</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Ashleigh Langosh</td>
+                    <td>Finance</td>
+                    <td>45</td>
+                    <td>2011-08-12</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Angus Grady</td>
+                    <td>HR</td>
+                    <td>34</td>
+                    <td>2012-06-11</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Raheem Lehner</td>
+                    <td>Dynamic Division Officer</td>
+                    <td>47</td>
+                    <td>2011-04-19</td>
+                </tr>
+            </tbody>
+        </table>-->
+                <!-- End Tables without borders -->
+                <!--</div>
+        </div>-->
+                <!--<div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Table Variants</h5>
+                <p>Use contextual classes <code>.table-primary .table-secondary .table-success .table-danger .table-warning .table-info .table-light .table-dark</code> to color tables, table rows or individual cells.</p>-->
+                <!-- Table Variants -->
+                <!--<table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Class</th>
+                    <th scope="col">Heading</th>
+                    <th scope="col">Heading</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Default</th>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+
+                <tr class="table-primary">
+                    <th scope="row">Primary</th>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+                <tr class="table-secondary">
+                    <th scope="row">Secondary</th>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+                <tr class="table-success">
+                    <th scope="row">Success</th>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+                <tr class="table-danger">
+                    <th scope="row">Danger</th>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+                <tr class="table-warning">
+                    <th scope="row">Warning</th>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+                <tr class="table-info">
+                    <th scope="row">Info</th>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+                <tr class="table-light">
+                    <th scope="row">Light</th>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+                <tr class="table-dark">
+                    <th scope="row">Dark</th>
+                    <td>Cell</td>
+                    <td>Cell</td>
+                </tr>
+            </tbody>
+        </table>-->
+                <!-- End Table Variants -->
+                <!--</div>
+        </div>-->
+                <!--</div>-->
+                <!--<div class="col-lg-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Table with stripped rows</h5>-->
+                <!-- Table with stripped rows -->
+                <!--<table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Start Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Brandon Jacob</td>
+                    <td>Designer</td>
+                    <td>28</td>
+                    <td>2016-05-25</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Bridie Kessler</td>
+                    <td>Developer</td>
+                    <td>35</td>
+                    <td>2014-12-05</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Ashleigh Langosh</td>
+                    <td>Finance</td>
+                    <td>45</td>
+                    <td>2011-08-12</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Angus Grady</td>
+                    <td>HR</td>
+                    <td>34</td>
+                    <td>2012-06-11</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Raheem Lehner</td>
+                    <td>Dynamic Division Officer</td>
+                    <td>47</td>
+                    <td>2011-04-19</td>
+                </tr>
+            </tbody>
+        </table>-->
+                <!-- End Table with stripped rows -->
+                <!--</div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Table with hoverable rows</h5>-->
+                <!-- Table with hoverable rows -->
+                <!--<table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Start Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Brandon Jacob</td>
+                    <td>Designer</td>
+                    <td>28</td>
+                    <td>2016-05-25</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Bridie Kessler</td>
+                    <td>Developer</td>
+                    <td>35</td>
+                    <td>2014-12-05</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Ashleigh Langosh</td>
+                    <td>Finance</td>
+                    <td>45</td>
+                    <td>2011-08-12</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Angus Grady</td>
+                    <td>HR</td>
+                    <td>34</td>
+                    <td>2012-06-11</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Raheem Lehner</td>
+                    <td>Dynamic Division Officer</td>
+                    <td>47</td>
+                    <td>2011-04-19</td>
+                </tr>
+            </tbody>
+        </table>-->
+                <!-- End Table with hoverable rows -->
+                <!--</div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bordered Table</h5>
+                <p>Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p>-->
+                <!-- Bordered Table -->
+                <!--<table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Start Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Brandon Jacob</td>
+                    <td>Designer</td>
+                    <td>28</td>
+                    <td>2016-05-25</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Bridie Kessler</td>
+                    <td>Developer</td>
+                    <td>35</td>
+                    <td>2014-12-05</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Ashleigh Langosh</td>
+                    <td>Finance</td>
+                    <td>45</td>
+                    <td>2011-08-12</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Angus Grady</td>
+                    <td>HR</td>
+                    <td>34</td>
+                    <td>2012-06-11</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Raheem Lehner</td>
+                    <td>Dynamic Division Officer</td>
+                    <td>47</td>
+                    <td>2011-04-19</td>
+                </tr>
+            </tbody>
+        </table>-->
+                <!-- End Bordered Table -->
+                <!--<p><a href="https://getbootstrap.com/docs/5.0/utilities/borders/#border-color" target="_blank">Border color utilities</a> can be added to change colors:</p>-->
+                <!-- Primary Color Bordered Table -->
+                <!--<table class="table table-bordered border-primary">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Start Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Brandon Jacob</td>
+                    <td>Designer</td>
+                    <td>28</td>
+                    <td>2016-05-25</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Bridie Kessler</td>
+                    <td>Developer</td>
+                    <td>35</td>
+                    <td>2014-12-05</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Ashleigh Langosh</td>
+                    <td>Finance</td>
+                    <td>45</td>
+                    <td>2011-08-12</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Angus Grady</td>
+                    <td>HR</td>
+                    <td>34</td>
+                    <td>2012-06-11</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Raheem Lehner</td>
+                    <td>Dynamic Division Officer</td>
+                    <td>47</td>
+                    <td>2011-04-19</td>
+                </tr>
+            </tbody>
+        </table>-->
+                <!-- End Primary Color Bordered Table -->
+                <!--</div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Small tables</h5>
+                <p>Add <code>.table-sm</code> to make any <code>.table</code> more compact by cutting all cell padding in half.</p>-->
+                <!-- Small tables -->
+                <!--<table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Start Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Brandon Jacob</td>
+                    <td>Designer</td>
+                    <td>28</td>
+                    <td>2016-05-25</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Bridie Kessler</td>
+                    <td>Developer</td>
+                    <td>35</td>
+                    <td>2014-12-05</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Ashleigh Langosh</td>
+                    <td>Finance</td>
+                    <td>45</td>
+                    <td>2011-08-12</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Angus Grady</td>
+                    <td>HR</td>
+                    <td>34</td>
+                    <td>2012-06-11</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Raheem Lehner</td>
+                    <td>Dynamic Division Officer</td>
+                    <td>47</td>
+                    <td>2011-04-19</td>
+                </tr>
+            </tbody>
+        </table>-->
+                <!-- End small tables -->
+                <!--</div>
+            </div>
+
+        </div>-->
+            </div>
+        </div>
+        
+    </section>
+
+</main><!-- End #main -->
+{%  endblock %}
+
+
+
+
+<!--this was to have checkbox options for product page to select cateogories to show. found a better method.-->
+<!--<input class="form-check-input namebox" type="checkbox" id="name">
+<label class="form-check-label " for="name">
+    Name
+</label>
+
+<input class="form-check-input" type="checkbox" id="description">
+<label class="form-check-label" for="description">
+    Description
+</label>
+
+<input class="form-check-input" type="checkbox" id="favorite">
+<label class="form-check-label" for="favorite">
+    Favorites Status
+</label>
+
+<input class="form-check-input" type="checkbox" id="category">
+<label class="form-check-label" for="category">
+    Category
+</label>
+
+<input class="form-check-input" type="checkbox" id="updated_at">
+<label class="form-check-label" for="updated_at">
+    Updated At
+</label>
+
+<input class="form-check-input" type="checkbox" id="image_url">
+<label class="form-check-label" for="image_url">
+    Product Image
+</label>
+
+<input class="form-check-input" type="checkbox" id="seedling">
+<label class="form-check-label" for="seedling">
+    Seedling
+</label>
+
+<input class="form-check-input" type="checkbox" id="plant_facility">
+<label class="form-check-label" for="plant_facility">
+    Plant Facility
+</label>-->
+<!-- Default Table -->

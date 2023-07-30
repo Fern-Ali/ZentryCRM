@@ -1,0 +1,300 @@
+﻿{% extends 'nav.html' %}
+{% block body_class %}"bg-effect"{% endblock %}
+{% block metalinks %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Zentry">
+<meta name="keywords" content="Zentry">
+<meta name="author" content="Zentry">
+
+<title>{{ g.user.username }}'s Cart</title>
+
+<!-- Google font -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet">
+
+<!-- bootstrap css -->
+<link id="rtl-link" rel="stylesheet" type="text/css" href="{{ url_for('static', filename='general_assets/css/vendors/bootstrap.css') }}">
+
+<!-- wow css -->
+<link href="{{ url_for('static', filename='general_assets/css/animate.min.css') }}" rel="stylesheet">
+
+<!-- font-awesome css -->
+<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='general_assets/css/vendors/font-awesome.css') }}>
+
+<!-- feather icon css -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='general_assets/css/vendors/feather-icon.css') }}">
+
+<!-- slick css -->
+<link href="{{ url_for('static', filename='general_assets/css/vendors/slick/slick.css') }}" rel="stylesheet">
+
+<link href="{{ url_for('static', filename='general_assets/css/vendors/slick/slick-theme.css') }}" rel="stylesheet">
+
+<!-- Iconly css -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='general_assets/css/bulk-style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='general_assets/css/vendors/animate.css') }}">
+
+<!-- Template css -->
+<link id="color-link" rel="stylesheet" type="text/css" href="{{ url_for('static', filename='general_assets/css/style.css') }}">
+<link href="{{ url_for('static', filename='bubble_menu/style.css') }}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- Breadcrumb Section Start -->
+<section class="breadscrumb-section pt-0">
+    <div class="container-fluid-lg" style="background-size: cover; background-image: url('https://images.unsplash.com/photo-1614853035986-b230d7d5679c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80')">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadscrumb-contain">
+                    <h2>Cart</h2>
+                    <nav>
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">
+                                    <i class="fa-solid fa-house"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Cart Section Start -->
+<section class="cart-section section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row g-sm-5 g-3">
+            <div class="col-xxl-9">
+                <div class="cart-table">
+                    <div class="table-responsive-xl">
+                        <table class="table">
+                            <tbody>
+                                {% for prod in carty %}
+                                <tr class="product-box-contain">
+                                    <td class="product-detail">
+                                        <div class="product border-0">
+                                            <a href="/products/{{ prod[0].id }}" class="product-image">
+                                                <img src="{{ prod[0].image_url }}"
+                                                     class="img-fluid blur-up lazyload" alt="">
+                                            </a>
+                                            <div class="product-detail">
+                                                <ul>
+                                                    <li class="name">
+                                                        <a style="color:#0da487" href="/products/{{ prod[0].id }}">{{ prod[0].name }}</a>
+                                                    </li>
+
+                                                    <li class="text-content">
+                                                        <span class="text-title">
+                                                            Sold
+                                                            By:
+                                                        </span> Budly Co.
+                                                    </li>
+
+                                                    <li style="color: #f8f8f8" class="text-content">
+                                                        <span id="qtyTitle" style="color: #f8f8f8" class="">Quantity</span>- {{ prod[1] }}
+                                                        <form method="POST" action="/update_cart/{{ prod[0].id }}" id="{{ prod[0].id }}">
+                                                            <input name="quant" id="quant" value="#" type="text" style="display:none; color: white; background-color:white" />
+                                                        </form>
+
+                                                    </li>
+
+                                                    <li>
+                                                        <h5 class="text-content d-inline-block">Price :</h5>
+                                                        <span>${{ prod[0].price }}</span>
+                                                        <span class="text-content">${{ "%.0f"| format(1.12*(prod[0].price)) }}</span>
+                                                    </li>
+
+                                                    <li>
+                                                        <h5 class="saving theme-color">Saving : ${{ "%.0f"| format((1.12*(prod[0].price) - prod[0].price))}}</h5>
+                                                    </li>
+
+                                                    <li class="quantity-price-box">
+                                                        <div class="cart_qty">
+                                                            <div class="input-group">
+                                                                <button type="button" class="btn qty-left-minus"
+                                                                        data-type="minus" data-field="">
+                                                                    <i class="theme-color fa fa-minus ms-0"
+                                                                       aria-hidden="true"></i>
+                                                                </button>
+                                                                <input class="form-control input-number qty-input"
+                                                                       type="text" name="quantity" value="0">
+                                                                <button type="button" class="btn qty-right-plus"
+                                                                        data-type="plus" data-field="">
+                                                                    <i class="theme-color fa fa-plus ms-0"
+                                                                       aria-hidden="true"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <h5>Total: ${{ prod[0].price*prod[1] }}</h5>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="price">
+                                        <h4 class="table-title text-content">Price</h4>
+                                        <h5 id="priceh5">${{ prod[0].price }} <del style="opacity: .7;" class="text-content">{{ "%.0f"| format(1.12*(prod[0].price)) }}</del></h5>
+                                        <h6 class="theme-color"><em> (-${{ "%.0f"| format((1.12*(prod[0].price) - prod[0].price))}})  </em></h6>
+                                    </td>
+
+                                    <td class="quantity">
+                                        <h4 class="table-title text-content">Qty</h4>
+                                        <div class="quantity-price">
+                                            <div class="cart_qty">
+                                                <div class="input-group">
+                                                    <button type="button" class="btn qty-left-minus" id="changeqtyminus"
+                                                            data-type="minus" data-field="">
+                                                        <i class="theme-color fa fa-minus ms-0" aria-hidden="true"></i>
+                                                    </button>
+                                                    <input class="theme-color form-control input-number qty-input" type="text"
+                                                           name="quantity" value="{{ prod[1] }}" style="font-weight:700" id="qty{{ prod[0].id }}">
+                                                    <button type="button" class="btn qty-right-plus" id="changeqtyplus"
+                                                            data-type="plus" data-field="">
+                                                        <i class=" theme-color fa fa-plus ms-0" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="subtotal price ">
+                                        <h4 class="table-title text-content">Total</h4>
+                                        <h5 id="totalh5" class="finalPrice">${{ prod[0].price*prod[1] }}</h5>
+                                        <h6 class="theme-color highPrice"> <i class="fa-solid fa-cart-arrow-down"></i> <em> -(${{ "%.0f"| format(((1.12*prod[0].price) - prod[0].price)*prod[1]) }}) </em></h6>
+                                    </td>
+
+                                    <td class="save-remove">
+                                        <h4 class="table-title text-content">Action</h4>
+                                        <a id="{{ prod[0].id }}" class="save notifi-wishlist" href="javascript:void(0)"><i class="fa-solid fa-arrow-rotate-right m-1"></i>Buy later</a>
+                                        <a id="{{ prod[0].id }}" class="remove close_button deleteCartItem" href="javascript:void(0)"><i class="fa-solid fa-trash-can m-1"></i>Remove</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xxl-3">
+                <div class="summery-box p-sticky">
+                    <div class="summery-header">
+                        <h3>Cart Total</h3>
+                    </div>
+
+                    <div class="summery-contain">
+                        <div class="coupon-cart">
+                            <h6 class="text-content mb-2">Coupon Apply</h6>
+                            <div class="mb-3 coupon-box input-group">
+                                <input type="email" class="form-control" id="exampleFormControlInput1"
+                                       placeholder="Enter Coupon Code Here...">
+                                <button class="btn-apply">Apply</button>
+                            </div>
+                        </div>
+                        <ul>
+                            <li>
+                                <h4>Subtotal</h4>
+                                <h4 id="subtotal" class="price">${{ "%.0f"| format(0) }}</h4>
+                            </li>
+
+                            <li>
+                                <h4>Total discount</h4>
+                                <h4 id="totalDiscount" class="price">(-) ${{ "%.0f"| format(0) }}</h4>
+                            </li>
+
+                            <li class="align-items-start">
+                                <h4>Shipping</h4>
+                                <h4 class="price text-end theme-color">free</h4>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="summery-total">
+                        <li class="list-total border-top-0">
+                            <h4>Total (USD)</h4>
+                            <h4 id="grandTotal" class="price theme-color">${{ "%.0f"| format(total) }}</h4>
+                        </li>
+                    </ul>
+
+                    <div class="button-group cart-button">
+                        <ul>
+                            <li>
+                                <button class="btn btn-animation proceed-btn fw-bold" onclick="location.href = '/checkout';">
+                                    Proceeed To Checkout
+                                </button>
+                            </li>
+
+                            <li>
+                                <button onclick="location.href = '/shop';"
+                                        class="btn btn-light shopping-button text-dark">
+                                    <i class="fa-solid fa-arrow-left-long"></i>Return To Shopping
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Cart Section End -->
+{% endblock %}
+
+{% block remove_stickycart %}
+
+{% endblock %}
+{% block scripts %}
+<!-- Bg overlay Start -->
+<div class="bg-overlay"></div>
+<!-- Bg overlay End -->
+<!-- latest jquery-->
+<script src="{{ url_for('static', filename='general_assets/js/jquery-3.6.0.min.js') }}"></script>
+
+<!-- jquery ui-->
+<script src="{{ url_for('static', filename='general_assets/js/jquery-ui.min.js') }}"></script>
+
+<!-- Bootstrap js-->
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/bootstrap-notify.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/popper.min.js') }}"></script>
+
+<!-- feather icon js-->
+<script src="{{ url_for('static', filename='general_assets/js/feather/feather.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/feather/feather-icon.js') }}"></script>
+
+<!-- Lazyload Js -->
+<script src="{{ url_for('static', filename='general_assets/js/lazysizes.min.js') }}"></script>
+
+<!-- Slick js-->
+<script src="{{ url_for('static', filename='general_assets/js/slick/slick.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/slick-animation.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/custom-slick-animated.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/custom_slick.js') }}"></script>
+
+<!-- Quantity js -->
+<script src="{{ url_for('static', filename='general_assets/js/quantity-2.js') }}"></script>
+
+<!-- script js -->
+<script src="{{ url_for('static', filename='general_assets/js/script.js') }}"></script>
+
+{% endblock %}
+
+

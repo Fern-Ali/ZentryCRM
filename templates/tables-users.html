@@ -1,0 +1,154 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Demographics</h1>
+        <h6 class="text-success card-title ">  ✔️ Live Updates</h6>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Pages</li>
+                <li class="breadcrumb-item active">user_de</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-6">
+
+                <!-- Default Table -->
+                <div class=" card  table-responsive" style="outline: 5px solid rgba(100, 121, 234, 0.19); padding: 4px;">
+                    <div class="card-body p-2" style="background-color: rgba(100, 121, 234, 0.19);" >
+                        <h5 class="card-title shadow text-center" style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: white; " >User Data</h5>
+                        
+                        <table class=" table table-striped datatable rounded  border  " style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19); ">
+                            <thead >
+
+                                <tr class="">
+
+                                    <th scope="col">#</th>
+
+                                    <th scope="col" id="name_row">Profile Photo</th>
+
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+
+                                    <th scope="col">email</th>
+                                    <th scope="col">bio</th>
+
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                {% for user in users%}
+
+
+
+                                <tr>
+
+                                    <th scope="row">{{ user.id }}</th>
+                                    <td><img class="rounded" src={{ user.image_url }} style="max-width: 100px; border: 3px solid white;"></td>
+                                    <td id={{ user.first_name }} class="name_row">{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.bio }}</td>
+
+
+
+                                </tr>
+
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    <!-- End Default Table Example -->
+
+                </div>
+
+            <div class="col-lg-6">
+
+                <div class=" card lightwhite table-responsive" style="outline: 5px solid rgba(100, 121, 234, 0.19); padding: 4px;">
+                    <div class="card-body p-2" style="background-color: rgba(100, 121, 234, 0.19);">
+                        <h5 class="card-title shadow text-center" style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: white; ">Include promos & messages</h5>
+
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <h4 class="alert-heading">Primary Heading</h4>
+                            <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                            <hr>
+                            <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                            <h4 class="alert-heading">Secondary Heading</h4>
+                            <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                            <hr>
+                            <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <h4 class="alert-heading">Success Heading</h4>
+                            <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                            <hr>
+                            <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <h4 class="alert-heading">Danger Heading</h4>
+                            <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                            <hr>
+                            <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <div class="alert alert-warning  alert-dismissible fade show" role="alert">
+                            <h4 class="alert-heading">Warning Heading</h4>
+                            <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                            <hr>
+                            <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <div class="alert alert-info  alert-dismissible fade show" role="alert">
+                            <h4 class="alert-heading">Info Heading</h4>
+                            <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                            <hr>
+                            <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <div class="alert alert-light border-light alert-dismissible fade show" role="alert">
+                            <h4 class="alert-heading">Lignt Heading</h4>
+                            <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                            <hr>
+                            <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <div class="alert alert-dark  alert-dismissible fade show" role="alert">
+                            <h4 class="alert-heading">Dark Heading</h4>
+                            <p>Et suscipit deserunt earum itaque dignissimos recusandae dolorem qui. Molestiae rerum perferendis laborum. Occaecati illo at laboriosam rem molestiae sint.</p>
+                            <hr>
+                            <p class="mb-0">Temporibus quis et qui aspernatur laboriosam sit eveniet qui sunt.</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+{% endblock %}

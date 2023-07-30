@@ -1,0 +1,661 @@
+﻿{% extends 'nav.html' %}
+{% block body_class %}"bg-effect"{% endblock %}
+{% block metalinks %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Zentry">
+<meta name="keywords" content="Zentry">
+<meta name="author" content="Zentry">
+<link rel="icon" href="{{ url_for('static', filename='be_assets/images/favicon.png') }}" type="image/x-icon">
+<title>Search results for "{{ query }}" </title>
+
+<!-- Google font -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet">
+
+<!-- bootstrap css -->
+
+<link href="{{ url_for('static', filename='general_assets/css/vendors/bootstrap.css') }}" rel="stylesheet">
+<!-- wow css -->
+
+<link href="{{ url_for('static', filename='general_assets/css/animate.min.css') }}" rel="stylesheet">
+
+<!-- font-awesome css -->
+<link href="{{ url_for('static', filename='general_assets/css/vendors/font-awesome.css') }}" rel="stylesheet">
+
+<!-- feather icon css -->
+<link href="{{ url_for('static', filename='general_assets/css/vendors/feather-icon.css') }}" rel="stylesheet">
+
+<!-- slick css -->
+<link href="{{ url_for('static', filename='general_assets/css/vendors/slick/slick.css') }}" rel="stylesheet">
+
+<link href="{{ url_for('static', filename='general_assets/css/vendors/slick/slick-theme.css') }}" rel="stylesheet">
+
+<!-- Iconly css -->
+<link href="{{ url_for('static', filename='general_assets/css/bulk-style.css') }}" rel="stylesheet">
+
+<!-- Template css -->
+<link href="{{ url_for('static', filename='general_assets/css/style.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- Breadcrumb Section Start -->
+<section class="breadscrumb-section pt-0">
+    <div class="container-fluid-lg" style="background-size: cover; background-image: url('https://images.unsplash.com/photo-1614853035986-b230d7d5679c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80')">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadscrumb-contain">
+                    <!--<h2>See what your buds are talking about!</h2>-->
+                    <nav>
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">
+                                    <i class="fa-solid fa-house"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item" aria-current="page">Social</li>
+                            <li class="breadcrumb-item active" aria-current="page">Chatter Feed</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Blog Details Section Start -->
+    {% block twitter %}
+<section class="blog-section section-b-space">
+    <div class="container-fluid-lg">
+        <div class="row g-sm-4 g-3">
+            <div class="col-xxl-3 col-xl-4 col-lg-5 d-lg-block d-none">
+                <div class="left-sidebar-box">
+                    <div class="left-search-box">
+                        <div class="search-box">
+                            <form class="search-form d-flex align-items-center" method="POST" action="/search">
+                                {{ search_form.hidden_tag() }}
+                                <input type="search" name="query" class="form-control" id="exampleFormControlInput4"
+                                       placeholder="Search....">
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="accordion left-accordion-box" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                    Recent Budly Chatter
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                                 aria-labelledby="panelsStayOpen-headingOne">
+                                <div class="accordion-body pt-0">
+                                    <div class="recent-post-box">
+                                        {% for msg in recent_messages %}
+                                        <div class="recent-box">
+                                            <a href="blog-detail.html" class="recent-image">
+                                                <img src="{{msg.user.image_url}}"
+                                                     class="img-fluid blur-up lazyload" alt="" style="border-radius: 50px; ">
+                                            </a>
+
+                                            <div class="recent-detail">
+                                                <a href="blog-detail.html">
+                                                    <h5 class="recent-name">{{ msg.text }}</h5>
+                                                </a>
+                                                <a style="color: #0da487" href="/users/{{ msg.user.id }}">@{{ msg.user.username }}</a>
+
+                                                <div class="row justify-content-center">
+                                                    <div class="col-6">
+                                                        <h6>{{ msg.timestamp.strftime('%d %B %Y') }}</h6>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <h5>
+                                                            <button class="btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}">
+                                                                <i class="fa-solid fa-bell"></i>
+                                                            </button>
+
+                                                        </h5>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <h5>
+                                                            <button class="btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}">
+                                                                <i class="fa-solid fa-thumbs-up"></i>
+                                                            </button>
+
+                                                        </h5>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseFour">
+                                    Trending Products
+                                </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse collapse show"
+                                 aria-labelledby="panelsStayOpen-headingFour">
+                                <div class="accordion-body">
+                                    <ul class="product-list product-list-2 border-0 p-0">
+                                        {% for prod in trending_products %}
+                                        <li>
+                                            <div class="offer-product">
+                                                <a href="/products/{{prod.id}}" class="offer-image">
+                                                    <img src="{{prod.image_url}}"
+                                                         class="blur-up lazyload" alt="">
+                                                </a>
+
+                                                <div class="offer-detail">
+                                                    <div>
+                                                        <a href="shop-left-sidebar.html">
+                                                            <h6 class="name">{{ prod.name }}</h6>
+                                                        </a>
+                                                        {% for tag in prod.effects_tags %}
+                                                        <span>| {{tag.name}} | </span>
+                                                        {% endfor %}
+                                                        <h6 class="price theme-color">$ {{ prod.price }}</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-xxl-9 col-xl-8 col-lg-7 ratio_50">
+                <div class="blog-detail-image rounded-3 mb-4" style="max-height: 200px; ">
+                    <img src="https://images.unsplash.com/photo-1681195035338-bbdea7af2bf3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=805&q=80" class="bg-img blur-up lazyload" alt="">
+                    <div class="blog-image-contain">
+                        <ul class="contain-list">
+                            <li>Explore</li>
+                            <li>Contribute</li>
+                            <li>Grow</li>
+                        </ul>
+                        <h2 class="theme-color">{% block title %}Search results for "{{ query }}"{% endblock %}</h2>
+                        <ul class="contain-comment-list">
+                            <li>
+                                <div class="user-list">
+                                    <i data-feather="user"></i>
+                                    <span>{{g.user.username}}</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="user-list">
+                                    <i data-feather="calendar"></i>
+                                    <span>{{now.strftime('%d %B %Y')}}</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="user-list">
+                                    <i data-feather="message-square"></i>
+                                    <span>{{messages|length}}</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="blog-detail-contain">
+
+
+                    <div class="blog-details-quote">
+                        <h3> {{quote[0]['content']}}</h3>
+                        <h5>- {{quote[0]['author']}}</h5>
+                    </div>
+
+
+
+                </div>
+                {% block search_results %}
+                <div class="row justify-content-center" style="background-color: rgba(0,0,0,.05); padding: 2%; border-radius: 10px; ">
+                    <div class="col-8 col-xl-4">
+                        <h3> Product results </h3>
+                        {% if not products %}
+                        <p>No products found</p>
+
+                        {% else %}
+                        <div class="user-comment-box">
+                            <ul>
+                                {% for prod in products %}
+                                <li>
+                                    <div class=" user-box border-color p-2" style="border-radius: 10px; background-color: rgba(13, 164, 135, 0.1); ">
+                                        <!--<div class="reply-button">
+                                            <i class="fa-solid fa-reply"></i>
+                                            <span class="theme-color">Reply</span>
+                                        </div>-->
+                                        <div class="user-iamge">
+                                            <img src="{{ prod.image_url }}"
+                                                 class="img-fluid blur-up lazyload" alt="">
+                                            <div class="user-name">
+                                                <h6>{{ prod.updated_at.strftime('%d %B %Y') }}</h6>
+                                                <h5 class="text-content "><a href="/products/{{ prod.id }}">{{ prod.name }}</a></h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="user-contain mt-2">
+                                            <p>
+                                                {{ prod.description }}
+                                            </p>
+                                            <form method="POST" action="/users/add_favorite/{{ prod.id }}" id="messages-form">
+                                                <button class="
+                btn
+                btn-sm
+                {{'btn-primary' if prod.id else 'btn-secondary'}}">
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                                {% for prod in products_description %}
+                                <li>
+                                    <div class=" user-box border-color p-2" style="border-radius: 10px; background-color: rgba(13, 164, 135, 0.1); ">
+                                        <!--<div class="reply-button">
+                                            <i class="fa-solid fa-reply"></i>
+                                            <span class="theme-color">Reply</span>
+                                        </div>-->
+                                        <div class="user-iamge">
+                                            <img src="{{ prod.image_url }}"
+                                                 class="img-fluid blur-up lazyload" alt="">
+                                            <div class="user-name">
+                                                <h6>{{ prod.updated_at.strftime('%d %B %Y') }}</h6>
+                                                <h5 class="text-content "><a href="/products/{{ prod.id }}">{{ prod.name }}</a></h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="user-contain mt-2">
+                                            <p>
+                                                {{ prod.description }}
+                                            </p>
+                                            <form method="POST" action="/users/add_favorite/{{ prod.id }}" id="messages-form">
+                                                <button class="
+                btn
+                btn-sm
+                {{'btn-primary' if prod.id else 'btn-secondary'}}">
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <p> {{products}}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-8 col-xl-4">
+                        <h3> Comment results </h3>
+                        {% if not comments %}
+                        <p>No comments found</p>
+                        {% else %}
+
+
+                        <div class="user-comment-box">
+                            <ul>
+                                {% for msg in comments %}
+                                <li>
+                                    <div class="user-box border-color p-2" style="border-radius: 10px; background-color: rgba(13, 164, 135, 0.1); ">
+                                        <!--<div class="reply-button">
+                                            <i class="fa-solid fa-reply"></i>
+                                            <span class="theme-color">Reply</span>
+                                        </div>-->
+                                        <div class="user-iamge">
+                                            <img src="{{ msg.user.image_url }}"
+                                                 class="img-fluid blur-up lazyload" alt="">
+                                            <div class="user-name">
+                                                <h6>{{ msg.timestamp.strftime('%d %B %Y') }}</h6>
+                                                <h5 class="text-content"><a href="/users/{{ msg.user.id }}">@{{ msg.user.username }}</a></h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="user-contain">
+                                            <p>
+                                                {{ msg.text }}
+                                            </p>
+                                            <form method="POST" action="/users/add_like/{{ msg.id }}" id="messages-form">
+                                                <button class="
+                btn
+                btn-sm
+                {{'btn-primary' if msg.id in likes else 'btn-secondary'}}">
+                                                    <i class="fa fa-thumbs-up"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+
+                        {% endif %}
+                    </div>
+
+                    <div class="col-8 col-xl-4">
+                        <h3> User results </h3>
+                        {% if not users %}
+                        <p>No users found</p>
+                        {% else %}
+                        <div class="user-comment-box">
+                            <ul>
+                                {% for user in users %}
+                                <li>
+                                    <div class="user-box border-color p-2" style="border-radius: 10px; background-color: rgba(13, 164, 135, 0.1); ">
+                                        <!--<div class="reply-button">
+                                            <i class="fa-solid fa-address-card"></i>
+                                            <span class="theme-color">See Profile</span>
+                                        </div>-->
+                                        <div class="user-iamge">
+                                            <img src="{{ user.image_url }}"
+                                                 class="img-fluid blur-up lazyload" alt="">
+                                            <div class="user-name">
+                                                <h6>{{ user.location }}</h6>
+                                                <h5 class="text-content"><a href="/users/{{ user.id }}">@{{ user.username }}</a></h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="user-contain">
+                                            <p>
+                                                {{ user.bio }}
+                                            </p>
+                                            <form method="POST" action="/users/follow/{{ user.id }}" id="messages-form">
+                                                <button class="
+                btn
+                btn-sm
+                {{'btn-primary' if user.id in user.following else 'btn-secondary'}}">
+                                                    <i class="fa-solid fa-address-card"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <p> {{users}}</p>
+                        {% endif %}
+                    </div>
+
+
+
+
+                </div>
+                {% endblock %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Details Section End -->
+{% endblock %}
+
+{% block modals %}
+<!-- Location Modal Start -->
+<div class="modal location-modal fade theme-modal" id="locationModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Choose your Delivery Location</h5>
+                <p class="mt-1 text-content">Enter your address and we will specify the offer for your area.</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="location-list">
+                    <div class="search-input">
+                        <input type="search" class="form-control" placeholder="Search Your Area">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+
+                    <div class="disabled-box">
+                        <h6>Select a Location</h6>
+                    </div>
+
+                    <ul class="location-select custom-height">
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Alabama</h6>
+                                <span>Min: $130</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Arizona</h6>
+                                <span>Min: $150</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>California</h6>
+                                <span>Min: $110</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Colorado</h6>
+                                <span>Min: $140</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Florida</h6>
+                                <span>Min: $160</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Georgia</h6>
+                                <span>Min: $120</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Kansas</h6>
+                                <span>Min: $170</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Minnesota</h6>
+                                <span>Min: $120</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>New York</h6>
+                                <span>Min: $110</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)">
+                                <h6>Washington</h6>
+                                <span>Min: $130</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Location Modal End -->
+<!-- Deal Box Modal Start -->
+<div class="modal fade theme-modal deal-modal" id="deal-box" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title w-100" id="deal_today">Deal Today</h5>
+                    <p class="mt-1 text-content">Recommended deals for you.</p>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="deal-offer-box">
+                    <ul class="deal-offer-list">
+                        <li class="list-1">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src="../assets/images/vegetable/product/10.png" class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
+                                    <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="list-2">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src="../assets/images/vegetable/product/11.png" class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
+                                    <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="list-3">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src="../assets/images/vegetable/product/12.png" class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
+                                    <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="list-1">
+                            <div class="deal-offer-contain">
+                                <a href="shop-left-sidebar.html" class="deal-image">
+                                    <img src="../assets/images/vegetable/product/13.png" class="blur-up lazyload"
+                                         alt="">
+                                </a>
+
+                                <a href="shop-left-sidebar.html" class="deal-contain">
+                                    <h5>Blended Instant Coffee 50 g Buy 1 Get 1 Free</h5>
+                                    <h6>$52.57 <del>57.62</del> <span>500 G</span></h6>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Deal Box Modal End -->
+<!-- Tap to top start -->
+<div class="theme-option">
+    <div class="back-to-top">
+        <a id="back-to-top" href="#">
+            <i class="fas fa-chevron-up"></i>
+        </a>
+    </div>
+</div>
+<!-- Tap to top end -->
+{% endblock %}
+{% block scripts %}
+<!-- Bg overlay Start -->
+<div class="bg-overlay"></div>
+<!-- Bg overlay End -->
+<script src="{{ url_for('static', filename='general_assets/js/jquery-3.6.0.min.js') }}"></script>
+
+<!-- jquery ui-->
+
+<script src="{{ url_for('static', filename='general_assets/js/jquery-ui.min.js') }}"></script>
+
+<!-- Bootstrap js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/bootstrap-notify.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/popper.min.js') }}"></script>
+
+<!-- feather icon js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/feather/feather.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/feather/feather-icon.js') }}"></script>
+
+<!-- Lazyload Js -->
+
+<script src="{{ url_for('static', filename='general_assets/js/lazysizes.min.js') }}"></script>
+
+<!-- Slick js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/slick.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/slick-animation.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/custom_slick.js') }}"></script>
+
+<!-- WOW js -->
+
+<script src="{{ url_for('static', filename='general_assets/js/wow.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/custom-wow.js') }}"></script>
+
+
+<!-- script js -->
+<script src="{{ url_for('static', filename='general_assets/js/script.js') }}"></script>
+{% endblock %}
+
+

@@ -1,0 +1,589 @@
+﻿{% extends 'base.html' %}
+{% block content %}
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>General Tables</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item active">General</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section row justify-content-center">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card card-table">
+                        <div class="card-body">
+                            <div class="title-header option-title">
+                                <h5>Order List</h5>
+                                <a href="#" class="btn btn-solid">Download all orders</a>
+                            </div>
+                            <div>
+                                <div class="card table-responsive">
+                                    <div id="table_id_wrapper" class="dataTables_wrapper no-footer">
+                                        <div id="table_id_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="table_id"></label></div>
+                                        <table class="table table-striped all-package order-table theme-table datatable no-footer" id="table_id" style="outline: 5px solid rgba(100, 121, 234, 0.09); background-color: rgba(100, 121, 234, 0.19);">
+                                            <thead>
+                                                <tr>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 186.578px;">Order Image</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 186.578px;">Order Code</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 186.578px;">Date</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 186.578px;">Payment Method</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 186.578px;">Delivery Status</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 186.578px;">Amount</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 198.531px;">Option</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                {% for product in products%}
+                                                <tr data-bs-toggle="offcanvas" href="#order-details" class="odd">
+                                                    <td>
+                                                        <a class="d-block">
+                                                            <span class="order-image">
+                                                                <img src={{ product.image_url }} class="img-fluid" style=" mix-blend-mode: darken; max-width: 100px; max-height: 150px;" alt="users">
+                                                            </span>
+                                                        </a>
+                                                    </td>
+
+                                                    <td> 406-4883635</td>
+
+                                                    <td>Jul 20, 2022</td>
+
+                                                    <td>Paypal</td>
+
+                                                    <td class="order-success">
+                                                        <span>Success</span>
+                                                    </td>
+
+                                                    <td>$15</td>
+
+                                                    <td>
+
+                                                        <ul style="display: flex; list-style-type: none;">
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <i class="ri-eye-line p-2" style="color: #747dc6; font-size: 24px;"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#">
+                                                                    <i class="ri-pencil-line " style="color: #4aa4d9; font-size: 24px; "></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                                                                    <i class="ri-delete-bin-line p-2" style="color: #ef3f3e; font-size: 24px; "></i>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="btn btn-sm btn-success text-white " href="order-tracking.html">
+                                                                    Tracking
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                                <tr data-bs-toggle="offcanvas" href="#order-details" class="even">
+                                                    <td>
+                                                        <span class="order-image">
+                                                            <img src="assets/images/product/2.png" alt="users">
+                                                        </span>
+                                                    </td>
+
+                                                    <td> 573-685572</td>
+
+                                                    <td>Jul 25, 2022</td>
+
+                                                    <td>Paypal</td>
+
+                                                    <td class="order-success">
+                                                        <span>Success</span>
+                                                    </td>
+
+                                                    <td>$15</td>
+
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                                                                    <i class="ri-delete-bin-line"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="btn btn-sm btn-solid text-white" href="order-tracking.html">
+                                                                    Tracking
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr data-bs-toggle="offcanvas" href="#order-details" class="odd">
+                                                    <td>
+                                                        <span class="order-image">
+                                                            <img src="assets/images/product/3.png" alt="users">
+                                                        </span>
+                                                    </td>
+
+                                                    <td> 759-4568734</td>
+
+                                                    <td>Jul 29, 2022</td>
+
+                                                    <td>Stripe</td>
+
+                                                    <td class="order-pending">
+                                                        <span>Pending</span>
+                                                    </td>
+
+                                                    <td>$15</td>
+
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                                                                    <i class="ri-delete-bin-line"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="btn btn-sm btn-solid text-white" href="order-tracking.html">
+                                                                    Tracking
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr data-bs-toggle="offcanvas" href="#order-details" class="even">
+                                                    <td>
+                                                        <span class="order-image">
+                                                            <img src="assets/images/product/4.png" alt="users">
+                                                        </span>
+                                                    </td>
+
+                                                    <td> 546-7664537</td>
+
+                                                    <td>Jul 30, 2022</td>
+
+                                                    <td>Paypal</td>
+
+                                                    <td class="order-success">
+                                                        <span>Success</span>
+                                                    </td>
+
+                                                    <td>$15</td>
+
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                                                                    <i class="ri-delete-bin-line"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="btn btn-sm btn-solid text-white" href="order-tracking.html">
+                                                                    Tracking
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr data-bs-toggle="offcanvas" href="#order-details" class="odd">
+                                                    <td>
+                                                        <span class="order-image">
+                                                            <img src="assets/images/product/5.png" alt="users">
+                                                        </span>
+                                                    </td>
+
+                                                    <td> 479-7533144</td>
+
+                                                    <td>Aug 01, 2022</td>
+
+                                                    <td>Stripe</td>
+
+                                                    <td class="order-success">
+                                                        <span>Success</span>
+                                                    </td>
+
+                                                    <td>$15</td>
+
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                                                                    <i class="ri-delete-bin-line"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="btn btn-sm btn-solid text-white" href="order-tracking.html">
+                                                                    Tracking
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr data-bs-toggle="offcanvas" href="#order-details" class="even">
+                                                    <td>
+                                                        <span class="order-image">
+                                                            <img src="assets/images/product/6.png" alt="users">
+                                                        </span>
+                                                    </td>
+
+                                                    <td> 456-1245789</td>
+
+                                                    <td>Aug 10, 2022</td>
+
+                                                    <td>Stripe</td>
+
+                                                    <td class="order-cancle">
+                                                        <span>Cancel</span>
+                                                    </td>
+
+                                                    <td>$15</td>
+
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                                                                    <i class="ri-delete-bin-line"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="btn btn-sm btn-solid text-white" href="order-tracking.html">
+                                                                    Tracking
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr data-bs-toggle="offcanvas" href="#order-details" class="odd">
+                                                    <td>
+                                                        <span class="order-image">
+                                                            <img src="assets/images/product/7.png" alt="users">
+                                                        </span>
+                                                    </td>
+
+                                                    <td> 057-3657895</td>
+
+                                                    <td>Aug 18, 2022</td>
+
+                                                    <td>Paypal</td>
+
+                                                    <td class="order-cancle">
+                                                        <span>Cancel</span>
+                                                    </td>
+
+                                                    <td>$15</td>
+
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                                                                    <i class="ri-delete-bin-line"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="btn btn-sm btn-solid text-white" href="order-tracking.html">
+                                                                    Tracking
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr data-bs-toggle="offcanvas" href="#order-details" class="even">
+                                                    <td>
+                                                        <span class="order-image">
+                                                            <img src="assets/images/product/8.png" alt="users">
+                                                        </span>
+                                                    </td>
+
+                                                    <td> 123-1234567</td>
+
+                                                    <td>Aug 29, 2022</td>
+
+                                                    <td>Paypla</td>
+
+                                                    <td class="order-success">
+                                                        <span>Success</span>
+                                                    </td>
+
+                                                    <td>$15</td>
+
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                                                                    <i class="ri-delete-bin-line"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="btn btn-sm btn-solid text-white" href="order-tracking.html">
+                                                                    Tracking
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr data-bs-toggle="offcanvas" href="#order-details" class="odd">
+                                                    <td>
+                                                        <span class="order-image">
+                                                            <img src="assets/images/product/9.png" alt="users">
+                                                        </span>
+                                                    </td>
+
+                                                    <td> 987-9876543</td>
+
+                                                    <td>Sep 09, 2022</td>
+
+                                                    <td>Paypal</td>
+
+                                                    <td class="order-success">
+                                                        <span>Success</span>
+                                                    </td>
+
+                                                    <td>$15</td>
+
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                                                                    <i class="ri-delete-bin-line"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="btn btn-sm btn-solid text-white" href="order-tracking.html">
+                                                                    Tracking
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr data-bs-toggle="offcanvas" href="#order-details" class="even">
+                                                    <td>
+                                                        <span class="order-image">
+                                                            <img src="assets/images/product/10.png" alt="users">
+                                                        </span>
+                                                    </td>
+
+                                                    <td> 147-3692584</td>
+
+                                                    <td>Sep 17, 2022</td>
+
+                                                    <td>Stripe</td>
+
+                                                    <td class="order-success">
+                                                        <span>Success</span>
+                                                    </td>
+
+                                                    <td>$15</td>
+
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                                                                    <i class="ri-delete-bin-line"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="btn btn-sm btn-solid text-white" href="order-tracking.html">
+                                                                    Tracking
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr data-bs-toggle="offcanvas" href="#order-details" class="odd">
+                                                    <td>
+                                                        <span class="order-image">
+                                                            <img src="assets/images/product/11.png" alt="users">
+                                                        </span>
+                                                    </td>
+
+                                                    <td> 586-5865224</td>
+
+                                                    <td>Sep 20, 2022</td>
+
+                                                    <td>Stripe</td>
+
+                                                    <td class="order-pending">
+                                                        <span>Pending</span>
+                                                    </td>
+
+                                                    <td>$15</td>
+
+                                                    <td>
+                                                        <ul>
+                                                            <li>
+                                                                <a href="order-detail.html">
+                                                                    <i class="ri-eye-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)">
+                                                                    <i class="ri-pencil-line"></i>
+                                                                </a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                                                                    <i class="ri-delete-bin-line"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="btn btn-sm btn-solid text-white" href="order-tracking.html">
+                                                                    Tracking
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+        {% endblock%}

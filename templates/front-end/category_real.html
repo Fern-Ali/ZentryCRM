@@ -1,0 +1,886 @@
+﻿{% extends 'nav.html' %}
+{% block body_class %}"bg-effect"{% endblock %}
+{% block metalinks %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Zentry">
+<meta name="keywords" content="Zentry">
+<meta name="author" content="Zentry">
+
+<title>{{ category.name }} | Budly </title>
+
+<!-- Google font -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet">
+
+<!-- bootstrap css -->
+<link id="rtl-link" rel="stylesheet" type="text/css" href="{{ url_for('static', filename='general_assets/css/vendors/bootstrap.css') }}">
+
+<!-- wow css -->
+<link href="{{ url_for('static', filename='general_assets/css/animate.min.css') }}" rel="stylesheet">
+
+<!-- font-awesome css -->
+<link rel="stylesheet" type="text/css" href={{ url_for('static', filename='general_assets/css/vendors/font-awesome.css') }}>
+
+<!-- feather icon css -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='general_assets/css/vendors/feather-icon.css') }}">
+
+<!-- slick css -->
+<link href="{{ url_for('static', filename='general_assets/css/vendors/slick/slick.css') }}" rel="stylesheet">
+
+<link href="{{ url_for('static', filename='general_assets/css/vendors/slick/slick-theme.css') }}" rel="stylesheet">
+
+<!-- Iconly css -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='general_assets/css/bulk-style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='general_assets/css/vendors/animate.css') }}">
+
+<!-- Template css -->
+<link id="color-link" rel="stylesheet" type="text/css" href="{{ url_for('static', filename='general_assets/css/style.css') }}">
+<link href="{{ url_for('static', filename='bubble_menu/style.css') }}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<!-- Breadcrumb Section Start -->
+<section class="breadscrumb-section pt-0">
+    <div class="container-fluid-lg" style="background-size: cover; background-image: url('https://images.unsplash.com/photo-1614853035986-b230d7d5679c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadscrumb-contain">
+                    {% if category %}
+                    <h2 class="bg bg-light text-secondary p-2" style="border-radius: 5px">{{ category.name }}</h2>
+                    {% else %}
+                    <h2 class="bg bg-light text-secondary p-2" style="border-radius: 5px">Budly Product Line</h2>
+                    {% endif %}
+                    <nav>
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="/shop">
+                                    <i class="fa-solid fa-house"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+<!-- Category Section Start -->
+<section class="wow fadeInUp">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-12">
+                <div class="slider-7_1 no-space shop-box no-arrow">
+                    <div>
+                        <div class="shop-category-box af-category-box">
+                            <a href="/category/{{ categories['1']['id'] }}">
+                                <div class="shop-category-image " style="background-color: transparent">
+                                    <img src="{{ url_for('static', filename='general_assets/images/svg/plant.svg') }}" onmouseover="hover(this);" onmouseout="unhover(this);" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name" style="background-color: transparent">
+                                    <h6 style="color: rgb(13, 164, 135); font-weight: 600; ">{{ categories['1']['name'] }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="shop-category-box af-category-box">
+                            <a href="/category/{{ categories['2']['id'] }}">
+                                <div class="shop-category-image " style="background-color: transparent">
+                                    <img src="{{ url_for('static', filename='general_assets/images/svg/vape.svg') }}" onmouseover="hover(this);" onmouseout="unhover(this);" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name" style="background-color: transparent">
+                                    <h6 style="color: rgb(13, 164, 135); font-weight: 600; ">{{ categories['2']['name'] }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="shop-category-box af-category-box">
+                            <a href="/category/{{ categories['3']['id']}}">
+                                <div class="shop-category-image " style="background-color: transparent">
+                                    <img src="{{ url_for('static', filename='general_assets/images/svg/cloud.svg') }}" onmouseover="hover(this);" onmouseout="unhover(this);" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name" style="background-color: transparent">
+                                    <h6 style="color: rgb(13, 164, 135); font-weight: 600; ">{{ categories['3']['name'] }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="shop-category-box af-category-box">
+                            <a href="/category/{{ categories['4']['id'] }}">
+                                <div class="shop-category-image " style="background-color: transparent">
+                                    <img src="{{ url_for('static', filename='general_assets/images/svg/radish.svg') }}" onmouseover="hover(this);" onmouseout="unhover(this);" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name " style="background-color: transparent">
+                                    <h6 style="color: rgb(13, 164, 135); font-weight: 600; ">{{ categories['4']['name'] }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="shop-category-box af-category-box">
+                            <a href="/category/{{ categories['5']['id'] }}">
+                                <div class="shop-category-image " style="background-color: transparent">
+                                    <img src="{{ url_for('static', filename='general_assets/images/svg/umbrella.svg') }}" onmouseover="hover(this);" onmouseout="unhover(this);" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name" style="background-color: transparent">
+                                    <h6 style="color: rgb(13, 164, 135); font-weight: 600; ">{{ categories['5']['name'] }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="shop-category-box af-category-box">
+                            <a href="/category/{{ categories['6']['id'] }}">
+                                <div class="shop-category-image " style="background-color: transparent">
+                                    <img src="{{ url_for('static', filename='general_assets/images/svg/headphone.svg') }}" onmouseover="hover(this);" onmouseout="unhover(this);" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name" style="background-color: transparent">
+                                    <h6 style="color: rgb(13, 164, 135); font-weight: 600; ">{{ categories['6']['name'] }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="shop-category-box af-category-box">
+                            <a href="/category/{{ categories['7']['id'] }}">
+                                <div class="shop-category-image " style="background-color: transparent">
+                                    <img src="{{ url_for('static', filename='general_assets/images/svg/box.svg') }}" onmouseover="hover(this);" onmouseout="unhover(this);" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name" style="background-color: transparent">
+                                    <h6 style="color: rgb(13, 164, 135); font-weight: 600; ">{{ categories['7']['name'] }}</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="shop-category-box af-category-box">
+                            <a href="/products">
+                                <div class="shop-category-image " style="background-color: transparent">
+                                    <img src="{{ url_for('static', filename='general_assets/images/svg/tag.svg') }}" onmouseover="hover(this);" onmouseout="unhover(this);" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name" style="background-color: transparent">
+                                    <h6 style="color: rgb(13, 164, 135); font-weight: 600; ">Deals</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="shop-category-box af-category-box">
+                            <a href="/products">
+                                <div class="shop-category-image " style="background-color: transparent">
+                                    <img src="{{ url_for('static', filename='general_assets/images/svg/air.svg') }}" onmouseover="hover(this);" onmouseout="unhover(this);" class="blur-up lazyload" alt="">
+                                </div>
+                                <div class="category-box-name" style="background-color: transparent">
+                                    <h6 style="color: rgb(13, 164, 135); font-weight: 600; ">Coming Soon</h6>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Category Section End -->
+<!-- Shop Section Start -->
+<section class="section-b-space shop-section">
+    <div class="container-fluid-lg">
+        <div class="row">
+            <div class="col-custome-3 wow fadeInUp">
+                <div class="left-box">
+                    <div class="ratio_156 pt-25" style="padding-right: 25px; padding-top: 50px;">
+                        <div class="home-contain">
+                            <img src="https://images.unsplash.com/photo-1595309979208-2f0c3fa26184?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80" class="bg-img blur-up lazyload"
+                                 alt="">
+                            <div class="home-detail p-top-left home-p-medium">
+                                <div>
+                                    <!--<h6 class="text-yellow home-banner p-1" style="">Curated cannabis</h6>-->
+                                    <h3 class="text-uppercase fw-normal p-2" style="border-radius: 5px; background-color: rgba(255,255,255,.7)">
+                                        <span class="theme-color fw-bold">Freshest</span> Products
+                                    </h3>
+                                    <h3 class="fw-light">every day</h3>
+                                    <button onclick="location.href = '/products';"
+                                            class="btn btn-animation btn-md fw-bold mend-auto">
+                                        Shop Now <i class="fa-solid fa-arrow-right icon"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ratio_156 pt-25" style="padding-right: 25px;">
+                        <div class="vendor-box" style=" border-radius: 10px;">
+                            <div class="verndor-contain" style="padding: 3px; border-radius: 10px;">
+                                <div class="vendor-image">
+                                    <img src="{{ url_for('static', filename='general_assets/images/product/vendor.png') }}" alt="" class="blur-up lazyload">
+
+                                </div>
+
+                                <div class="vendor-name">
+                                    <h5 class="fw-500">Budly Co.</h5>
+
+                                    <div class="product-rating mt-1">
+                                        <ul class="rating">
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star"></i>
+                                            </li>
+                                        </ul>
+                                        <span>(36 Reviews)</span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <p class="vendor-detail">
+                                Budly & Company is a sustainable
+                                cannabis distributor that offers ethically-sourced medical-grade cannabis products and other retail items. Your satisfaction is our mission!
+                            </p>
+
+                            <div class="vendor-list">
+                                <ul>
+                                    <li>
+                                        <div class="address-contact">
+                                            <i data-feather="map-pin"></i>
+                                            <h5>Address: <span class="text-content">1288 Franklin Avenue</span></h5>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="address-contact">
+                                            <i data-feather="headphones"></i>
+                                            <h5>Contact Seller: <span class="text-content">(+1)-123-456-789</span></h5>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="col-custome-9 wow fadeInUp">
+                <div class="show-button">
+                    <div class="filter-button-group mt-0">
+                        <div class="filter-button d-inline-block d-lg-none">
+                            <a><i class="fa-solid fa-filter"></i> Filter Menu</a>
+                        </div>
+                    </div>
+
+                    <div class="top-filter-menu">
+                        <div class="category-dropdown">
+                            <h5 class="text-content">Sort By :</h5>
+                            <div class="dropdown">
+                                <button class="dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown">
+                                    <span>Most Popular</span> <i class="fa-solid fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li>
+                                        <a class="dropdown-item" id="pop" href="javascript:void(0)">Popularity</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" id="low" href="javascript:void(0)">
+                                            Low - High
+                                            Price
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" id="high" href="javascript:void(0)">
+                                            High - Low
+                                            Price
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" id="rating" href="javascript:void(0)">
+                                            Average
+                                            Rating
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" id="aToz" href="javascript:void(0)">A - Z Order</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" id="zToa" href="javascript:void(0)">Z - A Order</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" id="off" href="javascript:void(0)">
+                                            % Off - Hight To
+                                            Low
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="grid-option d-none d-md-block">
+                            <ul>
+                                <li class="three-grid">
+                                    <a href="javascript:void(0)">
+                                        <img src="{{ url_for('static', filename='general_assets/svg/grid-3.svg') }}" class="blur-up lazyload" alt="">
+                                    </a>
+                                </li>
+                                <li class="grid-btn d-xxl-inline-block d-none active">
+                                    <a href="javascript:void(0)">
+                                        <img src="{{ url_for('static', filename='general_assets/svg/grid-4.svg') }}"
+                                             class="blur-up lazyload d-lg-inline-block d-none" alt="">
+                                        <img src="{{ url_for('static', filename='general_assets/svg/grid.svg') }}"
+                                             class="blur-up lazyload img-fluid d-lg-none d-inline-block" alt="">
+                                    </a>
+                                </li>
+                                <li class="list-btn">
+                                    <a href="javascript:void(0)">
+                                        <img src="{{ url_for('static', filename='general_assets/svg/list.svg') }}" class="blur-up lazyload" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-sm-4 g-3 row-cols-xxl-4 row-cols-xl-3 row-cols-lg-2 row-cols-md-3 row-cols-2 product-list-section">
+
+                    {% for prod in range(cat_prods[0]|length) %}
+                    <div>
+                        <div class="product-box-3 h-100 wow fadeInUp">
+                            <div class="product-header">
+                                <div class="product-image">
+                                    <a href="/products/{{cat_prods[0][loop.index0|string]['id']}}">
+                                        <img src="{{ cat_prods[0][loop.index0|string]['image_url'] }}"
+                                             class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="product-option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                               data-bs-target="#cat_view{{cat_prods[0][loop.index0|string]['id']}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
+                                            <a href="compare.html">
+                                                <i data-feather="refresh-cw"></i>
+                                            </a>
+                                        </li>
+
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a href="wishlist.html" class="notifi-wishlist">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-detail">
+                                    <span class="span-name">{{ categories[cat_prods[0][loop.index0|string]['sector_id']|string].name }}</span>
+                                    <a href="product-left-thumbnail.html">
+                                        <h5 class="name">{{ cat_prods[0][loop.index0|string]['name'] }}</h5>
+                                    </a>
+                                    <p class="text-content mt-1 mb-2 product-content">
+                                        {{ cat_prods[0][loop.index0|string]['description'] }}
+                                    </p>
+                                    <div class="product-rating mt-2">
+                                        <ul class="rating">
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star"></i>
+                                            </li>
+                                        </ul>
+                                        <span>(4.0)</span>
+                                    </div>
+                                    <h6 class="unit">1 ct</h6>
+                                    <h5 class="price">
+                                        <span class="theme-color">${{ cat_prods[0][loop.index0|string]['price'] }}</span> <del>${{ "%.0f"| format(1.08*(cat_prods[0][loop.index0|string]['price'])) }}</del>
+                                    </h5>
+                                    <div class="add-to-cart-box bg-white">
+                                        <button class="btn btn-add-cart addcart-button">
+                                            Add
+                                            <span class="add-icon bg-light-gray">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </span>
+                                        </button>
+                                        <div class="cart_qty qty-box">
+                                            <div class="input-group bg-white">
+                                                <button type="button" class="qty-left-minus bg-gray"
+                                                        data-type="minus" data-field="">
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                </button>
+                                                <input class="form-control input-number qty-input" type="text"
+                                                       name="quantity" value="0">
+                                                <button type="button" class="qty-right-plus bg-gray"
+                                                        data-type="plus" data-field="">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    {% for prod in products %}
+                    <div>
+                        <div class="product-box-3 h-100 wow fadeInUp">
+                            <div class="product-header">
+                                <div class="product-image">
+                                    <a href="/products/{{prod.id}}">
+                                        <img src="{{ prod.image_url }}"
+                                             class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <ul class="product-option">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                            <a href="javascript:void(0)" data-bs-toggle="modal"
+                                               data-bs-target="#cat_view{{prod.id}}">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
+                                            <a href="compare.html">
+                                                <i data-feather="refresh-cw"></i>
+                                            </a>
+                                        </li>
+
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                            <a href="wishlist.html" class="notifi-wishlist">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-footer">
+                                <div class="product-detail">
+                                    <span class="span-name">{{ categories[prod.sector_id-1].name }}</span>
+                                    <a href="/products/{{prod.id}}">
+                                        <h5 class="name">{{ prod.name }}</h5>
+                                    </a>
+                                    <p class="text-content mt-1 mb-2 product-content">
+                                        {{ prod.description }}
+                                    </p>
+                                    <div class="product-rating mt-2">
+                                        <ul class="rating">
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star" class="fill"></i>
+                                            </li>
+                                            <li>
+                                                <i data-feather="star"></i>
+                                            </li>
+                                        </ul>
+                                        <span>(4.0)</span>
+                                    </div>
+                                    <h6 class="unit">1 ct</h6>
+                                    <h5 class="price">
+                                        <span class="theme-color">${{ prod.price }}</span> <del>${{ "%.0f"| format(1.08*(prod.price)) }}</del>
+                                    </h5>
+                                    <div class="add-to-cart-box bg-white">
+                                        <button class="btn btn-add-cart addcart-button">
+                                            Add
+                                            <span class="add-icon bg-light-gray">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </span>
+                                        </button>
+                                        <div class="cart_qty qty-box">
+                                            <div class="input-group bg-white">
+                                                <button type="button" class="qty-left-minus bg-gray"
+                                                        data-type="minus" data-field="">
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                </button>
+                                                <input class="form-control input-number qty-input" type="text"
+                                                       name="quantity" value="0">
+                                                <button type="button" class="qty-right-plus bg-gray"
+                                                        data-type="plus" data-field="">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                <nav class="custome-pagination">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-disabled="true">
+                                <i class="fa-solid fa-angles-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="javascript:void(0)">1</a>
+                        </li>
+                        <li class="page-item" aria-current="page">
+                            <a class="page-link" href="javascript:void(0)">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="javascript:void(0)">
+                                <i class="fa-solid fa-angles-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop Section End -->
+{% endblock %}
+
+{% block remove_stickycart %}
+
+{% endblock %}
+{% block add_modal %}
+    {% for prod in range(cat_prods[0]|length) %}
+<!-- Quick View Modal Box Start -->
+<div class="modal fade theme-modal view-modal" id="cat_view{{cat_prods[0][loop.index0|string]['id']}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header p-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-sm-4 g-2">
+                    <div class="col-lg-6">
+                        <div class="slider-image">
+                            <img src={{ cat_prods[0][loop.index0|string]['image_url'] }} class="img-fluid blur-up lazyload"
+                                 alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="right-sidebar-modal">
+                            <h4 class="title-name">{{cat_prods[0][loop.index0|string]['name']}}</h4>
+                            <h4 class="price">${{cat_prods[0][loop.index0|string]['price']}}</h4>
+                            <div class="product-rating">
+                                <ul class="rating">
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star"></i>
+                                    </li>
+                                </ul>
+                                <span class="ms-2">8 Reviews</span>
+                                <span class="ms-2 text-danger">6 sold in last 16 hours</span>
+                            </div>
+
+                            <div class="product-detail">
+                                <h4>Product Details :</h4>
+                                <p>
+                                    Candy canes sugar plum tart cotton candy chupa chups sugar plum chocolate I love.
+                                    Caramels marshmallow icing dessert candy canes I love soufflé I love toffee.
+                                    Marshmallow pie sweet sweet roll sesame snaps tiramisu jelly bear claw. Bonbon
+                                    muffin I love carrot cake sugar plum dessert bonbon.
+                                </p>
+                            </div>
+
+                            <ul class="brand-list">
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>Brand Name:</h5>
+                                        <h6>Black Forest</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>Product Code:</h5>
+                                        <h6>W0690034</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>Product Type:</h5>
+                                        <h6>{{categories[cat_prods[0][loop.index0|string]['sector_id']|string].name}}</h6>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="select-size">
+                                <h4>Quantity :</h4>
+                                <select class="form-select select-form-size">
+                                    <option selected>Select Size</option>
+                                    <option value="1.2">1/2 KG</option>
+                                    <option value="0">1 KG</option>
+                                    <option value="1.5">1/5 KG</option>
+                                    <option value="red">Red Roses</option>
+                                    <option value="pink">With Pink Roses</option>
+                                </select>
+                            </div>
+
+                            <div class="modal-button">
+                                <button onclick="location.href = 'cart.html';"
+                                        class="btn btn-md add-cart-button icon">
+                                    Add
+                                    To Cart
+                                </button>
+                                <button onclick="location.href = '/products/{{prod.id}}';"
+                                        class="btn theme-bg-color view-button icon text-white fw-bold btn-md">
+                                    View More Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Quick View Modal Box End -->
+    {% endfor %}
+
+    {% for prod in products %}
+<!-- Quick View Modal Box Start -->
+<div class="modal fade theme-modal view-modal" id="cat_view{{prod.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header p-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-sm-4 g-2">
+                    <div class="col-lg-6">
+                        <div class="slider-image">
+                            <img src={{ prod.image_url }} class="img-fluid blur-up lazyload"
+                                 alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="right-sidebar-modal">
+                            <h4 class="title-name">{{prod.name}}</h4>
+                            <h4 class="price">${{prod.price}}</h4>
+                            <div class="product-rating">
+                                <ul class="rating">
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star"></i>
+                                    </li>
+                                </ul>
+                                <span class="ms-2">8 Reviews</span>
+                                <span class="ms-2 text-danger">6 sold in last 16 hours</span>
+                            </div>
+
+                            <div class="product-detail">
+                                <h4>Product Details :</h4>
+                                <p>
+                                    Candy canes sugar plum tart cotton candy chupa chups sugar plum chocolate I love.
+                                    Caramels marshmallow icing dessert candy canes I love soufflé I love toffee.
+                                    Marshmallow pie sweet sweet roll sesame snaps tiramisu jelly bear claw. Bonbon
+                                    muffin I love carrot cake sugar plum dessert bonbon.
+                                </p>
+                            </div>
+
+                            <ul class="brand-list">
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>Brand Name:</h5>
+                                        <h6>Black Forest</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>Product Code:</h5>
+                                        <h6>W0690034</h6>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="brand-box">
+                                        <h5>Product Type:</h5>
+                                        <h6>{{categories[prod.category_id-1].name}}</h6>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="select-size">
+                                <h4>Quantity :</h4>
+                                <select class="form-select select-form-size">
+                                    <option selected>Select Size</option>
+                                    <option value="1.2">1/2 KG</option>
+                                    <option value="0">1 KG</option>
+                                    <option value="1.5">1/5 KG</option>
+                                    <option value="red">Red Roses</option>
+                                    <option value="pink">With Pink Roses</option>
+                                </select>
+                            </div>
+
+                            <div class="modal-button">
+                                <button onclick="location.href = 'cart.html';"
+                                        class="btn btn-md add-cart-button icon">
+                                    Add
+                                    To Cart
+                                </button>
+                                <button onclick="location.href = '/products/{{prod.id}}';"
+                                        class="btn theme-bg-color view-button icon text-white fw-bold btn-md">
+                                    View More Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Quick View Modal Box End -->
+    {% endfor %}
+{% endblock %}
+
+
+
+{% block scripts %}
+<!-- Bg overlay Start -->
+<div class="bg-overlay"></div>
+<!-- Bg overlay End -->
+<!-- latest jquery-->
+
+<script src="{{ url_for('static', filename='general_assets/js/jquery-3.6.0.min.js') }}"></script>
+
+<!-- jquery ui-->
+
+<script src="{{ url_for('static', filename='general_assets/js/jquery-ui.min.js') }}"></script>
+
+<!-- Bootstrap js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/bootstrap-notify.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/bootstrap/popper.min.js') }}"></script>
+
+<!-- feather icon js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/feather/feather.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/feather/feather-icon.js') }}"></script>
+
+<!-- Lazyload Js -->
+
+<script src="{{ url_for('static', filename='general_assets/js/lazysizes.min.js') }}"></script>
+
+<!-- Slick js-->
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/slick.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/slick-animation.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/custom-slick-animated.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/slick/custom_slick.js') }}"></script>
+
+<!-- Price Range Js -->
+
+<script src="{{ url_for('static', filename='general_assets/js/ion.rangeSlider.min.js') }}"></script>
+
+<!-- sidebar open js -->
+
+<script src="{{ url_for('static', filename='general_assets/js/filter-sidebar.js') }}"></script>
+
+<!-- Quantity js -->
+
+<script src="{{ url_for('static', filename='general_assets/js/quantity-2.js') }}"></script>
+
+<!-- WOW js -->
+
+<script src="{{ url_for('static', filename='general_assets/js/wow.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='general_assets/js/custom-wow.js') }}"></script>
+
+<!-- script js -->
+
+<script src="{{ url_for('static', filename='general_assets/js/script.js') }}"></script>
+{% endblock %}
+
+

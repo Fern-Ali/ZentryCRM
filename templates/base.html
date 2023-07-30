@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Budly Dashboard</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/quill/quill.snow.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/simple-datatables/style.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='be_assets/css/datatables.css') }}" rel="stylesheet">
+    <script src="https://unpkg.com/jquery"></script>
+  {% block metadata %}{% endblock %}
+
+  <!-- Main CSS File -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+
+<body class={% block bodyclass%}"bg"{% endblock %} style="background-color: oldlace">
+    {% block hidenav %}
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center" style="background-color: rgba(100, 121, 234, 0.49); position: fixed">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="/" class="logo d-flex align-items-center">
+                <!--<img src="{{ url_for('static', filename='img/logo.png') }}" class="bg-primary-light" alt="">-->
+                <img src="{{ url_for('static', filename='images/readme/zentry-logo.png') }}" class="img-fluid blur-up lazyload" alt="" style="width: 90%; max-height: 51px">
+                <div class="icon ">
+
+
+
+                </div>
+
+                <!--<span class="d-none d-lg-block"> Budly<i class="bx bxs-bot" style="color: mediumpurple; position:relative; top: 5px;"></i> </span>-->
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+
+        <div class="search-bar">
+            <form class="search-form d-flex align-items-center" method="POST" action="/search">
+                {{ search_form.hidden_tag() }}
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword" style="background-color: white">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+        </div><!-- End Search Bar -->
+
+        <nav class="header-nav ms-auto">
+            {% block image_remove %}
+            <ul class="d-flex align-items-center">
+
+                <li class="nav-item d-block d-lg-none">
+                    <a class="nav-link nav-icon search-bar-toggle" {% block fixnavicon1 %}{% endblock %} href="#">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li><!-- End Search Icon-->
+                <li>
+
+                </li>
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" style="padding: 0;" {% block fixnavicon2 %}{% endblock %} href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-bell"></i>
+                        <span class="badge bg-primary badge-number">4</span>
+                    </a><!-- End Notification Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                        <li class="dropdown-header">
+                            You have 4 new notifications
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-exclamation-circle text-warning"></i>
+                            <div>
+                                <h4>Order Pending</h4>
+                                <p>(3) Zkittlez Vaporizer </p>
+                                <p>30 min. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-x-circle text-danger"></i>
+                            <div>
+                                <h4>Order Cancelled</h4>
+                                <p>(1) Jungle Cake Donuts </p>
+                                <p>1 hr. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-check-circle text-success"></i>
+                            <div>
+                                <h4>Order Placed</h4>
+                                <p>(4) Guava Kush Cookies</p>
+                                <p>2 hrs. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <i class="bi bi-info-circle text-primary"></i>
+                            <div>
+                                <h4>Union Dues - Qtr 3</h4>
+                                <p>Union contributions due this qtr, within 7 days</p>
+                                <p>4 hrs. ago</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="dropdown-footer">
+                            <a href="#">Show all notifications</a>
+                        </li>
+
+                    </ul><!-- End Notification Dropdown Items -->
+
+                </li><!-- End Notification Nav -->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" {% block fixnavicon3 %}{% endblock %} href="#" data-bs-toggle="dropdown">
+                        <i class="bi bi-chat-left-text"></i>
+                        <span class="badge bg-success badge-number">{{ g.user_dms|length }} </span>
+                    </a><!-- End Messages Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                        <li class="dropdown-header">
+                            You have {{ g.user_dms|length }} new messages
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        {% for msg in g.user_dms %}
+                        <li class="message-item">
+                            <a href="#">
+                                <img src="{{ g.received_msgs_info[loop.index0][1] }}" alt="" class="rounded-circle">
+                                <div>
+                                    <h4> {{ g.received_msgs_info[loop.index0][0] }} </h4>
+                                    <p>{{ msg.text }}</p>
+                                    <p>{{ msg.timestamp }}</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        {% endfor %}
+
+                        <li class="dropdown-footer">
+                            <a href="#">Show all messages</a>
+                        </li>
+
+                    </ul><!-- End Messages Dropdown Items -->
+
+                </li><!-- End Messages Nav -->
+
+                <li class="nav-item dropdown pe-3">
+
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <!--{% if session['username'] %}
+                <img src= alt="Profile" class="rounded-circle">
+                {% endif %}-->
+                        <img src={{ g.user.image_url }} alt="Profile" class="rounded-circle">
+
+                        <span class="d-none d-md-block dropdown-toggle ps-2">{{ g.user.username }}</span>
+                    </a><!-- End Profile Iamge Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        <li class="dropdown-header">
+                            <h6>{{ g.user.username }}</h6>
+                            <span>Budly Administrator</span>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="/users-profile">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="/users-profile">
+                                <i class="bi bi-gear"></i>
+                                <span>Account Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="/pages-faq">
+                                <i class="bi bi-question-circle"></i>
+                                <span>Need Help?</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <form method="POST" action="/logout">
+                                <p class="dropdown-item d-flex align-items-center">
+                                    <i class="bi bi-box-arrow-right"></i>
+
+                                    <button class="btn btn-info text-light" type="submit">Sign Out</button>
+                                </p>
+                            </form>
+
+
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+            {% endblock %}
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+    {% block removesidebar %}
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar " style="background-color: lavender;">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link " href="/">
+                    <i class="bi bi-grid"></i>
+                    <span style="">
+                        Dashboard
+
+                        <i id="loader" class=" bx bxs-bot p-1" style="position: relative; left: 60px; width: auto; height: auto; vertical-align: auto; border: none; color: mediumpurple; background-color: rgba(100, 121, 234, 0.29); border-radius: 10px; ">
+                            <div id="loader" class="  bg-primary spinner-grow spinner-grow-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </i>
+                        <span class="visually-hidden ">Loading...</span>
+
+                    </span>
+
+                </a>
+
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#accounting-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Finance</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="accounting-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <!--<li>
+        <a href="/orders">
+            <i class="bi bi-circle"></i><span>Sales</span>
+        </a>
+    </li>-->
+                    <li>
+                        <a href="/finance">
+                            <i class="bi bi-circle"></i><span>Demo</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/financial_reporting">
+                            <i class="bi bi-circle"></i><span>Reports</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/orders">
+                            <i class="bi bi-circle"></i><span>Customers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/orders">
+                            <i class="bi bi-circle"></i><span>Vendors</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/orders">
+                            <i class="bi bi-circle"></i><span>Revenue</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/order-detail/1">
+                            <i class="bi bi-circle"></i><span>Expenses</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li><!-- End Components Nav -->
+
+
+            
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Records</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="forms-elements.html">
+                            <i class="bi bi-circle"></i><span>Sales</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/forms-layouts">
+                            <i class="bi bi-circle"></i><span>Form Layouts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/invoice">
+                            <i class="bi bi-circle"></i><span>Invoices</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="forms-validation.html">
+                            <i class="bi bi-circle"></i><span>Order Details</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Forms Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-layout-text-window-reverse"></i><span>Database</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="tables-general">
+                            <i class="bi bi-circle"></i><span>Product Catalogue</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tables-general">
+                            <i class="bi bi-circle"></i><span>Inventory</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/tables-users">
+                            <i class="bi bi-circle"></i><span>Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/orders">
+                            <i class="bi bi-circle"></i><span>Generator</span>
+                        </a>
+                    </li>
+                    <!--<li>
+                        <a href="/orders">
+                            <i class="bi bi-circle"></i><span>Sales by Product</span>
+                        </a>
+                    </li>-->
+                </ul>
+            </li><!-- End Tables Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-bar-chart"></i><span>Metrics</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="charts-chartjs.html">
+                            <i class="bi bi-circle"></i><span>by Product</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="charts-apexcharts.html">
+                            <i class="bi bi-circle"></i><span>by Customer</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="charts-echarts.html">
+                            <i class="bi bi-circle"></i><span>by Sector</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Charts Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-gem"></i><span>Developer</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="icons-bootstrap.html">
+                            <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="icons-remix.html">
+                            <i class="bi bi-circle"></i><span>Remix Icons</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="icons-boxicons.html">
+                            <i class="bi bi-circle"></i><span>Boxicons</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Icons Nav -->
+
+            <li class="nav-heading">Pages</li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/users-profile">
+                    <i class="bi bi-person"></i>
+                    <span>Profile</span>
+                </a>
+            </li><!-- End Profile Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/pages-faq">
+                    <i class="bi bi-question-circle"></i>
+                    <span>F.A.Q</span>
+                </a>
+            </li><!-- End F.A.Q Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/pages-contact">
+                    <i class="bi bi-envelope"></i>
+                    <span>Contact</span>
+                </a>
+            </li><!-- End Contact Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/pages-register">
+                    <i class="bi bi-card-list"></i>
+                    <span>Register</span>
+                </a>
+            </li><!-- End Register Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/pages-login">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    <span>Login</span>
+                </a>
+            </li><!-- End Login Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/pages-error-404">
+                    <i class="bi bi-dash-circle"></i>
+                    <span>Error 404</span>
+                </a>
+            </li><!-- End Error 404 Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/pages-blank">
+                    <i class="bi bi-file-earmark"></i>
+                    <span>Blank</span>
+                </a>
+            </li><!-- End Blank Page Nav -->
+            <li>
+
+            </li>
+        </ul>
+
+    </aside><!-- End Sidebar-->
+    {% endblock %}
+    {% endblock %}
+    {% block content %}
+    <main id="main" class="main">
+
+        <!--<div class="pagetitle">
+            <h1 class="mb-2"style="background-color: lavender; max-width: fit-content; padding: 0.75rem 1rem; border-radius:5px ">Budly Operations Center</h1>
+            <nav>
+                <ol class="breadcrumb" style="background-color: lavender; max-width: fit-content; padding: 0.75rem 1rem; border-radius: 5px;">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item">Dashboard</li>
+                    
+                </ol>
+            </nav>
+        </div>--><!-- End Page Title -->
+        <div class="row">
+            <div class="col-6">
+
+
+            </div>
+            <div class="">
+                <div id="flash_messages" class="" role="alert">
+
+                    <section class="messages">
+                        {% for category,msg in get_flashed_messages(with_categories=true)%}
+                        <p class="{{category}} display " id="flash_msg">{{msg}} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> </p>
+                        {% endfor %}
+                    </section>
+
+                </div>
+            </div>
+        </div>
+
+        <section class="section dashboard">
+            <div class="row">
+
+                <!-- Left side columns -->
+                <div class="col-lg-8">
+                    <div class="row">
+
+                        <!-- Sales Card -->
+                        <div class="col-xxl-4 col-md-6">
+                            <div class="card info-card sales-card">
+
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
+
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Sales <span>| This Month</span></h5>
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-cart"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>88</h6>
+                                            <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!-- End Sales Card -->
+                        <!-- Revenue Card -->
+                        <div class="col-xxl-4 col-md-6">
+                            <div class="card info-card revenue-card">
+
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
+
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Revenue <span>| This Month</span></h5>
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-currency-dollar"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>{{ "${:,}".format(real_revenue[0][0][0]) }}</h6>
+                                            <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!-- End Revenue Card -->
+                        <!-- Customers Card -->
+                        <div class="col-xxl-4 col-xl-12">
+
+                            <div class="card info-card customers-card">
+
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
+
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Expenses <span>| This Month</span></h5>
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <div class="ps-3">
+
+                                            <h6>{{ "${:,}".format(expenses[0]) }}</h6>
+                                            {% if expenses[0] != 0%}
+                                            <span class="text-danger small pt-1 fw-bold">{{ "%.2f"|format(((expenses[0]-expenses[1])/expenses[0])*100) }}%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                                            {% else %}
+                                            <span class="text-danger small pt-1 fw-bold"> 0% </span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div><!-- End Customers Card -->
+                        <!-- Reports -->
+                        <div class="col-12">
+                            <div class="card">
+
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
+
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Revenue vs Expenses  <span>/ past 3 months</span></h5>
+
+                                    <!-- Line Chart -->
+                                    <div id="reportsChart"></div>
+
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", () => {
+                                            new ApexCharts(document.querySelector("#reportsChart"), {
+                                                series: [{
+                                                    name: 'Projection' ,
+                                                    data: [{{ "%.0f"| format(projection[0]) }}, {{ "%.0f"| format(200000*0.78) }}, {{ "%.0f"| format(projection[1]) }}, {{ "%.0f"| format(200000*0.89) }}, {{ "%.0f"| format(projection[2]) }}, {{ "%.0f"| format(200000*0.95) }}]
+                                                }, {
+                                                    name: 'Revenue',
+                                                data: [{{ real_revenue[0][0][0] }}, 200000, {{ real_revenue[1][0][0] }}, 200000, {{ real_revenue[2][0][0] }}, 200000]
+                                                }, {
+                                                name: 'Expenses',
+                                                data: [{{ expenses[0] }}, {{ expenses[1] }}, {{ expenses[2] }}, {{ expenses[3] }}, {{ expenses[4] }}, {{ expenses[5] }} ]
+                                                }],
+                                                chart: {
+                                                    height: 350,
+                                                    type: 'area',
+                                                    toolbar: {
+                                                        show: true
+                                                    },
+                                                },
+                                                markers: {
+                                                    size: 4
+                                                },
+                                                colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                                                fill: {
+                                                    type: "gradient",
+                                                    gradient: {
+                                                        shadeIntensity: 1,
+                                                        opacityFrom: 0.3,
+                                                        opacityTo: 0.4,
+                                                        stops: [0, 90, 100]
+                                                    }
+                                                },
+                                                dataLabels: {
+                                                    enabled: true,
+                                                    offsetY: -05,
+                                                    offsetX: -05
+                                                },
+                                                stroke: {
+                                                    curve: 'smooth',
+                                                    width: 2
+                                                },
+                                                xaxis: {
+                                                    type: 'datetime',
+                                                    categories: ["{{ x_axis[0] }}", "{{ x_axis[1]}}", "{{ x_axis[2]}}", "{{ x_axis[3]}}", "{{ x_axis[4]}}", "{{ x_axis[5]}}", ]
+                                                },
+                                                tooltip: {
+                                                    x: {
+                                                        format: 'yyyy/MM/dd'
+                                                    },
+                                                }
+                                            }).render();
+                                        });
+                                    </script>
+                                    <!-- End Line Chart -->
+
+                                </div>
+
+                            </div>
+                        </div><!-- End Reports -->
+                        <!-- Recent Sales -->
+                        <div class="col-12">
+                            <div class="card recent-sales overflow-auto">
+
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
+
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Recent Sales <span>| past 3 days</span></h5>
+
+                                    <table class="datatable table table-borderless ">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Customer</th>
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for sale in recent_sales %}
+                                            {% for product in sale.products %}
+                                            <tr>
+                                                <th scope="row"><a href="/invoice/{{ sale.id }}">#{{sale.id}}</a></th>
+                                                <td>{{customers[sale.customer_id].first_name}} {{customers[sale.customer_id].last_name}}</td>
+                                                <td><a href="#" class="text-primary">{{product.name}}</a></td>
+                                                <td>${{product.price}}</td>
+                                                <td>{{ sale.submitted_at.strftime('%B %d, %Y') }}</td>
+                                                <td><span class="badge bg-success">Approved</span></td>
+                                            </tr>
+                                            {% endfor %}
+                                            {% endfor %}
+                                            <tr>
+                                                <th scope="row"><a href="#">#2147</a></th>
+                                                <td>Bridie Kessler</td>
+                                                <td><a href="#" class="text-primary">Test transaction</a></td>
+                                                <td>$47</td>
+                                                <td>None</td>
+                                                <td><span class="badge bg-warning">Pending</span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <th scope="row"><a href="#">#2644</a></th>
+                                                <td>Angus Grady</td>
+                                                <td><a href="#" class="text-primar">Test transaction</a></td>
+                                                <td>$67</td>
+                                                <td>None</td>
+                                                <td><span class="badge bg-danger">Rejected</span></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End Recent Sales -->
+                        <!-- Recent Sales -->
+                        <div class="col-12">
+                            <div class="card recent-sales overflow-auto">
+
+                                <div class="filter">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                        <li class="dropdown-header text-start">
+                                            <h6>Filter</h6>
+                                        </li>
+
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Recent Sales <span>| past 3 days</span></h5>
+
+                                    <table class="datatable table table-borderless ">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Customer</th>
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for sale in recent_sales %}
+                                            {% for product in sale.products %}
+                                            <tr>
+                                                <th scope="row"><a href="/invoice/{{ sale.id }}">#{{sale.id}}</a></th>
+                                                <td>{{customers[sale.customer_id].first_name}} {{customers[sale.customer_id].last_name}}</td>
+                                                <td><a href="#" class="text-primary">{{product.name}}</a></td>
+                                                <td>${{product.price}}</td>
+                                                <td>{{ sale.submitted_at.strftime('%B %d, %Y') }}</td>
+                                                <td><span class="badge bg-success">Approved</span></td>
+                                            </tr>
+                                            {% endfor %}
+                                            {% endfor %}
+                                            <tr>
+                                                <th scope="row"><a href="#">#2147</a></th>
+                                                <td>Bridie Kessler</td>
+                                                <td><a href="#" class="text-primary">Test transaction</a></td>
+                                                <td>$47</td>
+                                                <td>None</td>
+                                                <td><span class="badge bg-warning">Pending</span></td>
+                                            </tr>
+
+                                            <tr>
+                                                <th scope="row"><a href="#">#2644</a></th>
+                                                <td>Angus Grady</td>
+                                                <td><a href="#" class="text-primar">Test transaction</a></td>
+                                                <td>$67</td>
+                                                <td>None</td>
+                                                <td><span class="badge bg-danger">Rejected</span></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div><!-- End Recent Sales -->
+                        <!-- Top Selling -->
+                        <!--<div class="col-12">
+        <div class="card top-selling overflow-auto">
+
+            <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                        <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                </ul>
+            </div>
+
+            <div class="card-body pb-0">
+                <h5 class="card-title">Top Selling <span>| All-Time</span></h5>
+
+                <table class="table table-borderless datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Preview</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Units</th>
+                            <th scope="col">Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prod in popular_products %}
+                        <tr>
+                            <th scope="row"><a href="/products/{{prod.id}}"><img src={{prod.image_url}} alt=""></a></th>
+                            <td><a href="/products/{{prod.id}}" class="text-primary fw-bold">{{prod.name}} {{ loop.index }}</a></td>
+                            <td>${{prod.price}}</td>
+                            <td class="fw-bold">{{prod.baskets|length}}</td>
+                            <td>{{"${:,}".format(prod.price * prod.baskets|length)}}</td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>-->
+                        <!-- End Top Selling -->
+
+                    </div>
+                </div><!-- End Left side columns -->
+                <!-- Right side columns -->
+                <div class="col-lg-4">
+
+                    <!-- News & Updates Traffic -->
+                    <div class="card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                </li>
+
+                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="card-body pb-0">
+                            <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
+
+                            <div class="news">
+                                {% for article in news['articles'] %}
+                                <div class="post-item clearfix">
+                                    {% if article.urlToImage == none %}
+                                    <img src='https://images.unsplash.com/photo-1495020689067-958852a7765e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80' alt="">
+                                    {% endif %}
+                                    <img src={{article.urlToImage}} alt="">
+                                    <h4><a href={{article.url}}>{{article.title}}</a></h4>
+                                    {% if article.description == none %}
+                                    <p>Follow the link to learn more!</p>
+                                    {% else %}
+                                    <p>{{article.description}}</p>
+                                    {% endif %}
+
+                                </div>
+                                {% endfor %}
+
+
+                            </div><!-- End sidebar recent posts-->
+
+                        </div>
+                    </div><!-- End News & Updates -->
+                    <!-- Recent Activity -->
+                    <div class="card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                </li>
+
+                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+
+                            <div class="activity">
+
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">32 min</div>
+                                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                                    <div class="activity-content">
+                                        Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                                    </div>
+                                </div><!-- End activity item-->
+
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">56 min</div>
+                                    <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+                                    <div class="activity-content">
+                                        Voluptatem blanditiis blanditiis eveniet
+                                    </div>
+                                </div><!-- End activity item-->
+
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">2 hrs</div>
+                                    <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
+                                    <div class="activity-content">
+                                        Voluptates corrupti molestias voluptatem
+                                    </div>
+                                </div><!-- End activity item-->
+
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">1 day</div>
+                                    <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
+                                    <div class="activity-content">
+                                        Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
+                                    </div>
+                                </div><!-- End activity item-->
+
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">2 days</div>
+                                    <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+                                    <div class="activity-content">
+                                        Est sit eum reiciendis exercitationem
+                                    </div>
+                                </div><!-- End activity item-->
+
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">4 weeks</div>
+                                    <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
+                                    <div class="activity-content">
+                                        Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
+                                    </div>
+                                </div><!-- End activity item-->
+
+                            </div>
+
+                        </div>
+                    </div><!-- End Recent Activity -->
+                    <!-- Budget Report -->
+                    <div class="card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                </li>
+
+                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="card-body pb-0">
+                            <h5 class="card-title">Budget Report <span>| This Month</span></h5>
+
+                            <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
+
+                            <script>
+                                document.addEventListener("DOMContentLoaded", () => {
+                                    var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
+                                        legend: {
+                                            data: ['Allocated Budget', 'Actual Spending']
+                                        },
+                                        radar: {
+                                            // shape: 'circle',
+                                            indicator: [{
+                                                name: 'Sales',
+                                                max: 6500
+                                            },
+                                            {
+                                                name: 'Administration',
+                                                max: 16000
+                                            },
+                                            {
+                                                name: 'Information Technology',
+                                                max: 30000
+                                            },
+                                            {
+                                                name: 'Customer Support',
+                                                max: 38000
+                                            },
+                                            {
+                                                name: 'Development',
+                                                max: 52000
+                                            },
+                                            {
+                                                name: 'Marketing',
+                                                max: 25000
+                                            }
+                                            ]
+                                        },
+                                        series: [{
+                                            name: 'Budget vs spending',
+                                            type: 'radar',
+                                            data: [{
+                                                value: [4200, 3000, 20000, 35000, 50000, 18000],
+                                                name: 'Allocated Budget'
+                                            },
+                                            {
+                                                value: [5000, 14000, 28000, 26000, 42000, 21000],
+                                                name: 'Actual Spending'
+                                            }
+                                            ]
+                                        }]
+                                    });
+                                });
+                            </script>
+
+                        </div>
+                    </div><!-- End Budget Report -->
+                    <!-- Website Traffic -->
+                    <div class="card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                </li>
+
+                                <li><a class="dropdown-item" href="#">Today</a></li>
+                                <li><a class="dropdown-item" href="#">This Month</a></li>
+                                <li><a class="dropdown-item" href="#">This Year</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="card-body pb-0">
+                            <h5 class="card-title">Website Traffic <span>| Today</span></h5>
+
+                            <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
+
+                            <script>
+                                document.addEventListener("DOMContentLoaded", () => {
+                                    echarts.init(document.querySelector("#trafficChart")).setOption({
+                                        tooltip: {
+                                            trigger: 'item'
+                                        },
+                                        legend: {
+                                            top: '5%',
+                                            left: 'center'
+                                        },
+                                        series: [{
+                                            name: 'Access From',
+                                            type: 'pie',
+                                            radius: ['40%', '70%'],
+                                            avoidLabelOverlap: false,
+                                            label: {
+                                                show: false,
+                                                position: 'center'
+                                            },
+                                            emphasis: {
+                                                label: {
+                                                    show: true,
+                                                    fontSize: '18',
+                                                    fontWeight: 'bold'
+                                                }
+                                            },
+                                            labelLine: {
+                                                show: false
+                                            },
+                                            data: [{
+                                                value: 1048,
+                                                name: 'Search Engine'
+                                            },
+                                            {
+                                                value: 735,
+                                                name: 'Direct'
+                                            },
+                                            {
+                                                value: 580,
+                                                name: 'Email'
+                                            },
+                                            {
+                                                value: 484,
+                                                name: 'Union Ads'
+                                            },
+                                            {
+                                                value: 300,
+                                                name: 'Video Ads'
+                                            }
+                                            ]
+                                        }]
+                                    });
+                                });
+                            </script>
+
+                        </div>
+                    </div><!-- End Website Traffic -->
+
+
+                </div><!-- End Right side columns -->
+
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+    {% endblock  %}
+    <!-- ======= Footer ======= -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <footer id="footer" class="footer sticky-bottom" style="background-color: transparent">
+
+        <!--<menu class="menu">
+
+            <button class="menu__item active" style="--bgColorItem: mediumpurple;">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M3.8,6.6h16.4" />
+                    <path d="M20.2,12.1H3.8" />
+                    <path d="M3.8,17.5h16.4" />
+                </svg>
+            </button>
+
+            <button class="menu__item" style="--bgColorItem: #f54888;">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M6.7,4.8h10.7c0.3,0,0.6,0.2,0.7,0.5l2.8,7.3c0,0.1,0,0.2,0,0.3v5.6c0,0.4-0.4,0.8-0.8,0.8H3.8
+        C3.4,19.3,3,19,3,18.5v-5.6c0-0.1,0-0.2,0.1-0.3L6,5.3C6.1,5,6.4,4.8,6.7,4.8z" />
+                    <path d="M3.4,12.9H8l1.6,2.8h4.9l1.5-2.8h4.6" />
+                </svg>
+            </button>
+
+            <button class="menu__item" style="--bgColorItem: #4343f5;">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M3.4,11.9l8.8,4.4l8.4-4.4" />
+                    <path d="M3.4,16.2l8.8,4.5l8.4-4.5" />
+                    <path d="M3.7,7.8l8.6-4.5l8,4.5l-8,4.3L3.7,7.8z" />
+            </button>
+
+            <button class="menu__item" style="--bgColorItem: #e0b115;">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M5.1,3.9h13.9c0.6,0,1.2,0.5,1.2,1.2v13.9c0,0.6-0.5,1.2-1.2,1.2H5.1c-0.6,0-1.2-0.5-1.2-1.2V5.1
+          C3.9,4.4,4.4,3.9,5.1,3.9z" />
+                    <path d="M4.2,9.3h15.6" />
+                    <path d="M9.1,9.5v10.3" />
+            </button>
+
+            <button class="menu__item" style="--bgColorItem:#65ddb7;">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M5.1,3.9h13.9c0.6,0,1.2,0.5,1.2,1.2v13.9c0,0.6-0.5,1.2-1.2,1.2H5.1c-0.6,0-1.2-0.5-1.2-1.2V5.1
+          C3.9,4.4,4.4,3.9,5.1,3.9z" />
+                    <path d="M5.5,20l9.9-9.9l4.7,4.7" />
+                    <path d="M10.4,8.8c0,0.9-0.7,1.6-1.6,1.6c-0.9,0-1.6-0.7-1.6-1.6C7.3,8,8,7.3,8.9,7.3C9.7,7.3,10.4,8,10.4,8.8z" />
+                </svg>
+            </button>
+
+            <div class="menu__border transparent" style={% block menustyle%}{% endblock %}></div>
+
+        </menu>
+
+        <div class="svg-container">
+            <svg viewBox="0 0 202.9 45.5">
+                <clipPath id="menu" clipPathUnits="objectBoundingBox" transform="scale(0.0049285362247413 0.021978021978022)">
+                    <path d="M6.7,45.5c5.7,0.1,14.1-0.4,23.3-4c5.7-2.3,9.9-5,18.1-10.5c10.7-7.1,11.8-9.2,20.6-14.3c5-2.9,9.2-5.2,15.2-7
+          c7.1-2.1,13.3-2.3,17.6-2.1c4.2-0.2,10.5,0.1,17.6,2.1c6.1,1.8,10.2,4.1,15.2,7c8.8,5,9.9,7.1,20.6,14.3c8.3,5.5,12.4,8.2,18.1,10.5
+          c9.2,3.6,17.6,4.2,23.3,4H6.7z" />
+                </clipPath>
+            </svg>
+        </div>-->
+
+    </footer><!-- End Footer -->
+
+
+    <script src="https://unpkg.com/jquery"></script>
+    <!-- Vendor JS Files -->
+    <script src="{{ url_for('static', filename='vendor/apexcharts/apexcharts.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/chart.js/chart.umd.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/echarts/echarts.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/quill/quill.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/simple-datatables/simple-datatables.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/php-email-form/validate.js') }}"></script>
+    {% block scripts %}{% endblock %}
+
+    <!-- Main JS File -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
+</body>
+
+</html>

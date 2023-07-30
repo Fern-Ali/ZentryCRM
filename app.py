@@ -1143,7 +1143,7 @@ def base():
                    'general_assets/images/svg/tag.svg'
                    
                    ]
-    #similar_products = random_products(12)
+    similar_products = random_products(12)
     
     deal_prods = []
     
@@ -1162,9 +1162,8 @@ def base():
     session['total'] = total
  
 
-    #sectors = get_sectors()
-    sectors = []
-    similar_products = []
+    sectors = get_sectors()
+    
     
     
 

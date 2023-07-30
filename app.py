@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, render_template, redirect, flash, session, jsonify, json, g
 from sqlalchemy import func, select, column, text
 import requests

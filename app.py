@@ -26,7 +26,7 @@ from pydantic import BaseModel
 from faker import Faker
 from keys import DATABASEURI_ZENTRY, SECRET_KEY_ZENTRY, DATABASEURI_LOCAL, BASE_URL 
 from api_views import api
-
+from constants import randprods12, categories, subtypes
 import random
 bcrypt = Bcrypt()
 fake = Faker()
@@ -907,7 +907,8 @@ def show_product_detail(id):
     #    user=User.query.filter_by(id=review.user_id)
     #    users.append(user[0])
     
-    
+    #import pdb
+    #pdb.set_trace()
     strains = get_APIdata_all('strains')
     
     facilities = get_APIdata_all('facilities')
@@ -917,8 +918,7 @@ def show_product_detail(id):
     print(product)
     
     
-    #import pdb
-    #pdb.set_trace()
+    
     #for x in range(50, 104):
     #    follow = Follows(user_being_followed_id=x, user_following_id=311)
     #    db.session.add(follow)
@@ -1143,7 +1143,7 @@ def base():
                    'general_assets/images/svg/tag.svg'
                    
                    ]
-    similar_products = random_products(12)
+    #similar_products = random_products(12)
     
     deal_prods = []
     
@@ -1162,12 +1162,14 @@ def base():
     session['total'] = total
  
 
-    sectors = get_sectors()
-    
+    #sectors = get_sectors()
+    sectors=categories
+    types=subtypes
+    similar_products=randprods12
     
     
 
-    return dict(category_svgs=category_svgs, search_form=search_form, now=now, quote=quote, cart=carty, total=total, quantity=quantity, categories=sectors, similar_products=similar_products, deal_prods=deal_prods)
+    return dict(category_svgs=category_svgs, subtypes=subtypes, search_form=search_form, now=now, quote=quote, cart=carty, total=total, quantity=quantity, categories=sectors, similar_products=similar_products, deal_prods=deal_prods)
 
 
 

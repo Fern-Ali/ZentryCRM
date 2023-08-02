@@ -1145,10 +1145,15 @@ def base():
                    ]
     #similar_products = random_products(12)
     
-    deal_prods = []
     
-    #for i in range(4):
-        #deal_prods.append(similar_products[str(i)])
+    sectors=categories
+    types=subtypes
+    similar_products=randprods12
+    deal_prods = []
+    base = 50
+    for i in range(4):
+        base = base+10
+        deal_prods.append(get_APIdata(base, 'products'))
     cart = session["cart"]
     carty = []    
     total=0
@@ -1163,9 +1168,7 @@ def base():
  
 
     #sectors = get_sectors()
-    sectors=categories
-    types=subtypes
-    similar_products=randprods12
+    
     
     
 

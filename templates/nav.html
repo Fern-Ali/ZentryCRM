@@ -1393,13 +1393,13 @@
                             {% endif %}
                                 <div class="deal-offer-contain">
                                     <a href="shop-left-sidebar.html" class="deal-image">
-                                        <img src="{{deal_prods[loop.index0]['image_url']}}" class="blur-up lazyload"
+                                        <img src="{{deal_prods[loop.index0][0]['image_url']}}" class="blur-up lazyload"
                                              alt="">
                                     </a>
 
-                                    <a href="/products/{{deal_prods[loop.index0]['id']}}" class="deal-contain">
-                                        <h5>{{deal_prods[loop.index0]['name']}} Buy 1 Get 1 Free</h5>
-                                        <h6>${{deal_prods[loop.index0]['price']}} <del>{{ "%.0f"| format(1.08*(deal_prods[loop.index0]['price'])) }}</del> <span>{{categories[deal_prods[loop.index0]['sector_id']|string]['name']}}</span></h6>
+                                    <a href="/products/{{deal_prods[loop.index0][0]['id']}}" class="deal-contain">
+                                        <h5>{{deal_prods[loop.index0][0]['name']}} Buy 1 Get 1 Free</h5>
+                                        <h6>${{deal_prods[loop.index0][0]['price']}} <del>{{ "%.0f"| format(1.08*(deal_prods[loop.index0][0]['price'])) }}</del> <span>{{categories[deal_prods[loop.index0][0]['sector_id']|string]['name']}}</span></h6>
                                     </a>
                                 </div>
                             </li>

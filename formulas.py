@@ -18,6 +18,26 @@ fake = Faker()
 ########################
 
 def random_products(num_products):
+    '''choose amount of random products to be added to a list'''
+
+    products = Product.query.all()
+    rand_prods = []
+    res = []
+    for x in range(num_products):
+        prod = choice(products)
+        rand_prods.append(prod)
+    rand_prods = list(set(rand_prods))
+    while len(rand_prods) < num_products:
+        prod2=choice(products)
+        rand_prods.append(prod2)
+        rand_prods = list(set(rand_prods))
+    
+        
+            
+    return rand_prods
+
+
+def random_productsAPI(num_products):
     '''ZentryAPI request to /api/products/random/<int:num_products>, provide num_products to specify number of results'''
     products = []
     try:
@@ -306,6 +326,39 @@ def get_past_datetime(num_days):
 ##  Sales Helpers ORGANIZE ME ##
 ################################
 
+
+def make_shop():
+    '''generate featured product data on /shop homepage'''
+    trending_products = random_products(7)
+    #similar_products = random_products(12)
+    
+    virtual_assistant_prods = random_products(18)
+    va_prods = []
+    va_prods.append((virtual_assistant_prods[0],virtual_assistant_prods[1]))
+    va_prods.append((virtual_assistant_prods[2],virtual_assistant_prods[3]))
+    va_prods.append((virtual_assistant_prods[4],virtual_assistant_prods[5]))
+    va_prods.append((virtual_assistant_prods[6],virtual_assistant_prods[7]))
+    va_prods.append((virtual_assistant_prods[8],virtual_assistant_prods[9]))
+    va_prods.append((virtual_assistant_prods[10],virtual_assistant_prods[11]))
+    va_prods.append((virtual_assistant_prods[12],virtual_assistant_prods[13]))
+    va_prods.append((virtual_assistant_prods[14],virtual_assistant_prods[15]))
+    va_prods.append((virtual_assistant_prods[16],virtual_assistant_prods[17]))
+
+
+    sales_products = random_products(14)
+    sales_prods = []
+    sales_prods.append((sales_products[0],sales_products[1]))
+    sales_prods.append((sales_products[2],sales_products[3]))
+    sales_prods.append((sales_products[4],sales_products[5]))
+    sales_prods.append((sales_products[6],sales_products[7]))
+    sales_prods.append((sales_products[8],sales_products[9]))
+    sales_prods.append((sales_products[10],sales_products[11]))
+    sales_prods.append((sales_products[12],sales_products[13]))
+    res=[]
+    res.append(trending_products)
+    res.append(va_prods)
+    res.append(sales_prods)
+    return res
 
 def random_generator(num_units, model):
     '''choose amount of random units to be added to a list'''

@@ -7,7 +7,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Message, Follows, Likes, Favorites, Effect_Tag, ProductTag, Product, Category, Plant_facility, Strain, Seedling, User, Sector, Account, Customer, Invoice, Bill, Vendor, Sale, Basket, Double_Entry, Journal_Entry, TransactionCR, TransactionDB, Direct_Message, ProductRating
 from forms import ProductForm, CategoryForm, RegisterForm, LoginForm, SearchForm
 import main
-from formulas import get_APIdata_all, get_APIdata, get_sectors, generate_reviews, generate_likes, random_generator, delete_favorites, generate_favorites, balance_sheet_data_placeholder, get_sales_by_sector, get_currUser_orders, generate_daily_bill_metrics, generate_daily_sale_metrics, generate_daily_metrics, get_random_date, get_random_datetime, get_past_datetime, get_quote, set_date, parse_date, limit_month_revenue, parse_sales_numbers, parse_date_bills, get_product_sale_data, get_timedelta, get_news, get_past_date, random_products
+from formulas import make_shop, get_APIdata_all, get_APIdata, get_sectors, generate_reviews, generate_likes, random_generator, delete_favorites, generate_favorites, balance_sheet_data_placeholder, get_sales_by_sector, get_currUser_orders, generate_daily_bill_metrics, generate_daily_sale_metrics, generate_daily_metrics, get_random_date, get_random_datetime, get_past_datetime, get_quote, set_date, parse_date, limit_month_revenue, parse_sales_numbers, parse_date_bills, get_product_sale_data, get_timedelta, get_news, get_past_date, random_products
 from main import generate_index_html, APPLICATION_ID, LOCATION_ID, ACCESS_TOKEN, client, location, ACCOUNT_CURRENCY, ACCOUNT_COUNTRY, CONFIG_TYPE, PAYMENT_FORM_URL, Payment
 from flask_wtf import FlaskForm
 from wtforms import StringField, FloatField, validators, ValidationError, SelectField 
@@ -58,30 +58,7 @@ PAYMENT_FORM_URL = (
 def add_user_to_g():
     """If we're logged in, add current user to Flask global."""
     
-    if "username" in session:
-        #Here we address an edge case where if the User has been deleted, but the User data persists in the session, user will not be able to access the site and no pages will load.
-        if User.query.filter(User.id==session['user_id']).all() == []:
-            session.pop("username")
-            session.pop("user_id")
-            return redirect('/shop')
-        #Here we return to our auth process
-        id = session["user_id"]
-        g.user = User.query.get(id)
-        #if g.user.dms_received:
-        #    g.user_dms = g.user.dms_received
-        #    g.received_msgs_info = []
-        #    for msg in g.user_dms:
-        #        sender = User.query.get(msg.sender_id)
-        #        g.received_msgs_info.append((sender.username, sender.image_url))
 
-
-    else:
-        g.user = None
-        
-    if "cart" in session:
-        session["cart"] = session["cart"]
-    else:
-        session["cart"] = []
 
 #backend routes zentry
 
@@ -909,9 +886,9 @@ def show_product_detail(id):
     
     #import pdb
     #pdb.set_trace()
-    strains = get_APIdata_all('strains')
+    strains = Strain.query.all()
     
-    facilities = get_APIdata_all('facilities')
+    facilities = Plant_facility.query.all()
     
     trending_products = random_products(7)
     similar_products = random_products(12)
@@ -920,7 +897,7 @@ def show_product_detail(id):
     
     
     #for x in range(50, 104):
-    #    follow = Follows(user_being_followed_id=x, user_following_id=311)
+    #    follow = Follows(user_being_followed_id=x, user_following_id=304)
     #    db.session.add(follow)
     #    db.session.commit()
     return render_template('/front-end/product.html', 
@@ -968,63 +945,17 @@ def show_category_detail(id):
 @app.route('/shop', methods=["GET", "POST"])
 def show_main_shop_page():
     '''Here we render each product in RESTFUL fashion. Photo, description, pricing, product origin details'''
-    
-    if "username" in session:
-        user_id = session["user_id"]
-        currUser = User.query.filter_by(id=user_id)
-    else:
-        currUser = []
-    
-   
+
     strains = Strain.query.all()
     facilities = Plant_facility.query.all()
-    
-    trending_products = random_products(7)
-    similar_products = random_products(12)
-    
-    virtual_assistant_prods = random_products(18)
-    va_prods = []
-    va_prods.append((virtual_assistant_prods[0],virtual_assistant_prods[1]))
-    va_prods.append((virtual_assistant_prods[2],virtual_assistant_prods[3]))
-    va_prods.append((virtual_assistant_prods[4],virtual_assistant_prods[5]))
-    va_prods.append((virtual_assistant_prods[6],virtual_assistant_prods[7]))
-    va_prods.append((virtual_assistant_prods[8],virtual_assistant_prods[9]))
-    va_prods.append((virtual_assistant_prods[10],virtual_assistant_prods[11]))
-    va_prods.append((virtual_assistant_prods[12],virtual_assistant_prods[13]))
-    va_prods.append((virtual_assistant_prods[14],virtual_assistant_prods[15]))
-    va_prods.append((virtual_assistant_prods[16],virtual_assistant_prods[17]))
+    shop=make_shop()
 
-
-    sales_products = random_products(14)
-    sales_prods = []
-    sales_prods.append((sales_products[0],sales_products[1]))
-    sales_prods.append((sales_products[2],sales_products[3]))
-    sales_prods.append((sales_products[4],sales_products[5]))
-    sales_prods.append((sales_products[6],sales_products[7]))
-    sales_prods.append((sales_products[8],sales_products[9]))
-    sales_prods.append((sales_products[10],sales_products[11]))
-    sales_prods.append((sales_products[12],sales_products[13]))
-    
-    
-    
-    
-    #import pdb
-    #pdb.set_trace()
-    #for x in range(50, 104):
-    #    follow = Follows(user_being_followed_id=x, user_following_id=311)
-    #    db.session.add(follow)
-    #    db.session.commit()
     return render_template('/front-end/shop_real.html', 
-                            
-                           currUser=currUser, 
-                           
                            strains=strains,
-                           
-                           trending_products=trending_products,
-                           similar_products=similar_products,
+                           trending_products=shop[0],
                            facilities=facilities,
-                           sales_prods = sales_prods,
-                           va_prods=va_prods)
+                           sales_prods = shop[2],
+                           va_prods=shop[1])
 
 
 @app.route('/social/home')
@@ -1076,24 +1007,24 @@ def homepage():
 
 @app.route('/social/dashboard')
 def show_chatter_feed():
+    '''user dashboard home - show general feed and account data'''
     #import pdb
     #pdb.set_trace()
-
-    similar_products = random_products(12)
-    wishlist = g.user.favorites
-    sectors = Sector.query.all()
-    
-    
-
     if "username" in session:
         id = session["user_id"]
-        currUser = User.query.filter_by(id=id)
+        currUser = User.query.get(id)
+        g.user = currUser
 
     else:
         currUser = None
-    if currUser:
-        user = currUser[0]
-        followed_users = user.following
+    
+    if g.user:
+        similar_products = random_products(12)
+        wishlist = g.user.favorites
+
+    
+        
+        followed_users = g.user.following
         followed_users_id = []
         for user in followed_users:
             followed_users_id.append(user.id)
@@ -1111,25 +1042,49 @@ def show_chatter_feed():
                         .all())
         #raise
         product = random_products(1)
-    orders = get_currUser_orders(currUser[0].id)
+    orders = get_currUser_orders(g.user.id)
     if not orders:
         
         orders = get_currUser_orders(23)
     #generate_daily_metrics(100)
     #generate_daily_bill_metrics(2)
     #generate_daily_sale_metrics(3)
-    #import pdb
-    #pdb.set_trace()
+    
 
     
 
-    return render_template('/front-end/my_dashboard.html', wishlist=wishlist, orders=orders, categories = sectors, similar_products=similar_products, product=product, messages=messages, recent_messages=recent_messages, user=user)
+    return render_template('/front-end/my_dashboard.html', wishlist=wishlist, orders=orders, similar_products=similar_products, product=product, messages=messages, recent_messages=recent_messages, user=user)
 
 
 
 #pass stuff to navbar search
 @app.context_processor
 def base():
+    """If we're logged in, add current user to Flask global."""
+    if "username" in session:
+        #Here we address an edge case where if the User has been deleted, but the User data persists in the session, user will not be able to access the site and no pages will load.
+        if User.query.filter(User.id==session['user_id']).all() == []:
+            session.pop("username")
+            session.pop("user_id")
+            return redirect('/shop')
+        #Here we return to our auth process
+        id = session["user_id"]
+        g.user = User.query.get(id)
+        #if g.user.dms_received:
+        #    g.user_dms = g.user.dms_received
+        #    g.received_msgs_info = []
+        #    for msg in g.user_dms:
+        #        sender = User.query.get(msg.sender_id)
+        #        g.received_msgs_info.append((sender.username, sender.image_url))
+
+
+    else:
+        g.user = None
+        
+    if "cart" in session:
+        session["cart"] = session["cart"]
+    else:
+        session["cart"] = []
     search_form = SearchForm()
     now = datetime.date.today()
     quote = get_quote()
@@ -1143,17 +1098,23 @@ def base():
                    'general_assets/images/svg/tag.svg'
                    
                    ]
-    #similar_products = random_products(12)
+    similar_products = random_products(12)
     
     
-    sectors=categories
-    types=subtypes
-    similar_products=randprods12
+    #sectors=categories
+    sectors=Sector.query.all()
+    subtypes=Category.query.all()
+    #similar_products=randprods12
+    similar_products=Product.query.filter(Product.id<13).all()
+
     deal_prods = []
-    base = 50
     for i in range(4):
-        base = base+10
-        deal_prods.append(get_APIdata(base, 'products'))
+        deal_prods.append(similar_products[i])
+    base = 50
+    #cant query in the context processor to api. cmon. you knew that.........
+    #for i in range(4):
+    #    base = base+10
+    #    deal_prods.append(get_APIdata(base, 'products'))
     cart = session["cart"]
     carty = []    
     total=0

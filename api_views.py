@@ -76,6 +76,11 @@ def get_schema_image():
     return render_template('schema.html')
 
 
+@api.route('/api/docs')
+def get_zentry_docs():
+    '''render zentry docs page - dev'''
+    return render_template('zentry-docs.html')
+
 
 
 

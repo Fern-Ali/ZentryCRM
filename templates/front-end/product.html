@@ -1,7 +1,7 @@
 {% extends 'nav.html' %}
 {% block related_products %}{% endblock %}
 
-{% block html_title %} {{ product[0]['name'] }} | Budly {% endblock %}
+{% block html_title %} {{ product[0].name }} | Budly {% endblock %}
 
 {% block content %}
 <!-- Breadcrumb Section Start -->
@@ -11,7 +11,7 @@
 
             <div class="col-12">
                 <div class="breadscrumb-contain">
-                    <h2 class="bg p-2" style="border-radius: 5px; color: #0da487a6; background-color: lavenderblush"> {% block html_breadcrumb %}{{product[0]['name']}} {% endblock %} </h2>
+                    <h2 class="bg p-2" style="border-radius: 5px; color: #0da487a6; background-color: lavenderblush"> {% block html_breadcrumb %}{{product[0].name}} {% endblock %} </h2>
                     <nav>
                         <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item">
@@ -20,7 +20,7 @@
                                 </a>
                             </li>
 
-                            <li class="breadcrumb-item active">{% block html_breadcrumb_mini %} {{product[0]['name']}} {% endblock %}</li>
+                            <li class="breadcrumb-item active">{% block html_breadcrumb_mini %} {{product[0].name}} {% endblock %}</li>
                         </ol>
                     </nav>
                 </div>
@@ -38,12 +38,12 @@
                     <div class="col-xl-6">
                         <div class="product-left-box">
                             <div class="row g-sm-4 g-2">
-                                
+
 
                                 <div class="col-12 wow fadeInUp">
                                     <div class="slider-image">
-                                        <img src={{ product[0]['image_url']}} style="border-radius: 10px;" id="img-2"
-                                             data-zoom-image="{{ product[0]['image_url'] }}" class="
+                                        <img src={{ product[0].image_url }} style="border-radius: 10px;" id="img-2"
+                                             data-zoom-image="{{ product[0].image_url }}" class="
                                                     img-fluid image_zoom_cls-1 blur-up lazyload" alt="">
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                                 <div class="col-12 wow fadeInUp">
                                     <div class="slider-image">
                                         <img src='https://images.unsplash.com/photo-1618967635414-2a6d59ecab0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80' id="img-3"
-                                             data-zoom-image={{ product[0]['image_url'] }} style="border-radius: 10px;" class="
+                                             data-zoom-image={{ product[0].image_url }} style="border-radius: 10px;" class="
                                                     img-fluid image_zoom_cls-2 blur-up lazyload" alt="">
                                     </div>
                                 </div>
@@ -74,8 +74,8 @@
 
                                 <div class="col-12 wow fadeInUp">
                                     <div class="slider-image">
-                                        <img src={{ product[0]['image_url'] }} id="img-6"
-                                             data-zoom-image="{{ product[0]['image_url'] }}" class="
+                                        <img src={{ product[0].image_url }} id="img-6"
+                                             data-zoom-image="{{ product[0].image_url }}" class="
                                                     img-fluid image_zoom_cls-5 blur-up lazyload" style="border-radius: 10px;" alt="">
                                     </div>
                                 </div>
@@ -86,11 +86,11 @@
                     <div class="col-xl-6 wow fadeInUp">
                         <div class="right-box-contain p-sticky">
                             <h6 class="offer-top">8% Off</h6>
-                            <h2 class="name">{{ product[0]['name'] }}</h2>
+                            <h2 class="name">{{ product[0].name }}</h2>
 
                             <div class="price-rating">
                                 <h3 class="theme-color price">
-                                    ${{ product[0]['price'] }} <del class="text-content">${{ "%.0f"| format(1.08*(product[0]['price'])) }}</del> <span class="offer theme-color">(8% off)</span>
+                                    ${{ product[0].price }} <del class="text-content">${{ "%.0f"| format(1.08*(product[0].price)) }}</del> <span class="offer theme-color">(8% off)</span>
                                 </h3>
                                 <div class="product-rating custom-rate">
                                     <ul class="rating">
@@ -116,7 +116,7 @@
 
                             <div class="procuct-contain">
                                 <p>
-                                    {{ product[0]['description'] }}
+                                    {{ product[0].description }}
                                 </p>
                             </div>
 
@@ -188,7 +188,7 @@
 
                             <div class="note-box product-packege">
 
-                                <form method="POST" action="/add_to_cart/{{product[0]['id']}}" id="messages-form">
+                                <form method="POST" action="/add_to_cart/{{product[0].id}}" id="messages-form">
                                     <div class="row cart_qty qty-box product-qty">
                                         <div class="col-9">
                                             <div class="input-group bg-white">
@@ -241,9 +241,9 @@
 
                                 <div class="product-info">
                                     <ul class="product-info-list product-info-list-2">
-                                        <li>Strain : <a href="javascript:void(0)">{{strains[0][product[0]['strain_id']|string]['name']}}</a></li>
-                                        <li>CAT : <a href="javascript:void(0)">{{categories[product[0]['sector_id']|string]['name']}}</a></li>
-                                        <li>MFG : <a href="javascript:void(0)">{{product[0]['updated_at']}}</a></li>
+                                        <li>Type : <a href="javascript:void(0)">{{categories[product[0].sector_id-1].name}}</a></li>
+                                        <li>CAT : <a href="javascript:void(0)">{{subtypes[product[0].category_id-1].name}}</a></li>
+                                        <li>MFG : <a href="javascript:void(0)">{{product[0].updated_at}}</a></li>
                                         <li>Stock : <a href="javascript:void(0)">Available</a></li>
                                         <li>
                                             Effects : <a href="javascript:void(0)">| Therapeutic | Relaxing | Uplifting |</a>
@@ -412,11 +412,11 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Specialty</td>
-                                                    <td>{{strains[0][product[0]['strain_id']|string]['name']}}</td>
+                                                    <td>{{strains[product[0].category_id-1].name}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Type</td>
-                                                    <td>{{subtypes[product[0]['category_id']|string]['name']}}</td>
+                                                    <td>{{categories[product[0].category_id-1].name}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Brand</td>
@@ -432,7 +432,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Greenhouse</td>
-                                                    <td>{{facilities[0][product[0]['plant_facility_id']|string]['name']}}</td>
+                                                    <td>{{facilities[product[0].plant_facility_id-1].name}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Seedling Batch</td>
@@ -440,7 +440,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Cultivation Locality</td>
-                                                    <td>{{facilities[0][product[0]['plant_facility_id']|string]['location']}}</td>
+                                                    <td>{{facilities[product[0].plant_facility_id-1].location}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -886,21 +886,21 @@
                             <h3>Trending Products</h3>
 
                             <ul class="product-list product-right-sidebar border-0 p-0">
-                                {% for prod in range(trending_products|length) %}
+                                {% for prod in trending_products %}
                                 <li>
                                     <div class="offer-product">
-                                        <a href="/products/{{ trending_products[loop.index0|string]['id'] }}" class="offer-image">
-                                            <img src={{ trending_products[loop.index0|string]['image_url'] }}
+                                        <a href="/products/{{prod.id}}" class="offer-image">
+                                            <img src={{prod.image_url}}
                                                  class="img-fluid blur-up lazyload" alt="">
                                         </a>
 
                                         <div class="offer-detail">
                                             <div>
-                                                <a href="/products/{{ trending_products[loop.index0|string]['id'] }}">
-                                                    <h6 class="name">{{ trending_products[loop.index0|string]['name'] }}</h6>
+                                                <a href="/products/{{prod.id}}">
+                                                    <h6 class="name">{{prod.name}}</h6>
                                                 </a>
                                                 <span>New Arrival!</span>
-                                                <h6 class="price theme-color">$ {{ trending_products[loop.index0|string]['price'] }}</h6>
+                                                <h6 class="price theme-color">$ {{prod.price}}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -952,20 +952,20 @@
         <div class="row">
             <div class="col-12">
                 <div class="slider-6_1 product-wrapper">
-                    {% for prod in range(similar_products|length) %}
+                    {% for prod in similar_products %}
                     <div>
                         <div class="product-box-3 wow fadeInUp">
                             <div class="product-header">
                                 <div class="product-image">
                                     <a href="product-left.htm">
-                                        <img src={{similar_products[loop.index0|string]['image_url']}}
+                                        <img src={{prod.image_url}}
                                              class="img-fluid blur-up rounded lazyload" alt="">
                                     </a>
 
                                     <ul class="product-option">
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
                                             <a href="javascript:void(0)" data-bs-toggle="modal"
-                                               data-bs-target="#view{{similar_products[loop.index0|string]['id']}}">
+                                               data-bs-target="#view{{prod.id}}">
                                                 <i data-feather="eye"></i>
                                             </a>
                                         </li>
@@ -989,9 +989,9 @@
 
                             <div class="product-footer">
                                 <div class="product-detail">
-                                    <span class="span-name">{{categories[similar_products[loop.index0|string]['sector_id']|string]['name']}}</span>
-                                    <a href="/products/{{similar_products[loop.index0|string]['id']}}">
-                                        <h5 class="name">{{similar_products[loop.index0|string]['name']}}</h5>
+                                    <span class="span-name">{{categories[prod.sector_id-1].name}}</span>
+                                    <a href="product-left-thumbnail.html">
+                                        <h5 class="name">{{prod.name}}</h5>
                                     </a>
                                     <div class="product-rating mt-2">
                                         <ul class="rating">
@@ -1018,7 +1018,7 @@
                                     <h6 class="unit"> Therapeutic </h6>
 
                                     <h5 class="price">
-                                        <span class="theme-color">${{similar_products[loop.index0|string]['price']}}</span> <del>${{"%.0f"| format(similar_products[loop.index0|string]['price']*1.2)}}</del>
+                                        <span class="theme-color">${{prod.price}}</span> <del>${{"%.0f"| format(prod.price*1.2)}}</del>
                                     </h5>
                                     <div class="add-to-cart-box bg-white">
                                         <button class="btn btn-add-cart addcart-button">
@@ -1057,8 +1057,3 @@
 </section>
 <!-- Releted Product Section End -->
 {% endblock %}
-
-
-
-
-

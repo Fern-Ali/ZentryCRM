@@ -232,7 +232,7 @@
                 {% block search_results %}
                 <div class="comment-box overflow-hidden" style="background-color: rgba(0,0,0,.1); ">
                     <div class="leave-title">
-                        <!--<h3>{{currUser[0].username}}'s Chatter Feed</h3>-->
+                        
                     </div>
 
                     <div class="user-comment-box" style="overflow: scroll !important; height: 100vh">
@@ -584,3 +584,5 @@
 <!-- script js -->
 <script src="{{ url_for('static', filename='general_assets/js/script.js') }}"></script>
 {% endblock %}
+{%block remove_stickycart%}
+{%endblock%}

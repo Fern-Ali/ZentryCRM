@@ -876,7 +876,8 @@ def show_products():
 def show_product_detail(id):
     '''Here we render each product in RESTFUL fashion. Photo, description, pricing, product origin details'''
 
-    product = get_APIdata(id=id, model='products')
+    #product = get_APIdata(id=id, model='products')
+    product = Product.query.filter(Product.id==id).all()
     reviews = []
     #reviews = product[0].messages
     users = []
@@ -884,22 +885,16 @@ def show_product_detail(id):
     #    user=User.query.filter_by(id=review.user_id)
     #    users.append(user[0])
     
-    #import pdb
-    #pdb.set_trace()
-    strains = Strain.query.all()
-    
-    facilities = Plant_facility.query.all()
-    
+
+    strains = Strain.query.all()    
+    facilities = Plant_facility.query.all()    
     trending_products = random_products(7)
     similar_products = random_products(12)
     print(product)
     
     
     
-    #for x in range(50, 104):
-    #    follow = Follows(user_being_followed_id=x, user_following_id=304)
-    #    db.session.add(follow)
-    #    db.session.commit()
+
     return render_template('/front-end/product.html', 
                            product=product, 
                            reviews=reviews,
@@ -920,7 +915,8 @@ def show_category_detail(id):
     else:
         currUser = []
     category = Sector.query.get_or_404(id)
-    cat_prods = get_APIdata_all(f'products/sectors/{id}')
+    #cat_prods = get_APIdata_all(f'products/sectors/{id}')
+    cat_prods = Product.query.filter(Product.sector_id==id).all()
     
     strains = Strain.query.all()
     facilities = Plant_facility.query.all()
@@ -996,12 +992,22 @@ def homepage():
                         .limit(3)
                         .all())
         #raise
-        product = random_products(1)
         
-        return render_template('/front-end/blog-detail.html', messages=messages, recent_messages=recent_messages, product=product, currUser=currUser, now=now, quote=quote, trending_products=trending_products)
+        
+        return render_template('/front-end/blog-detail.html', messages=messages, recent_messages=recent_messages, currUser=currUser, now=now, quote=quote, trending_products=trending_products)
 
     else:
-        return render_template('home-anon.html')
+        recent_messages = (Message
+                .query
+                .order_by(Message.timestamp.desc())
+                .limit(3)
+                .all())
+        messages = (Message
+                .query
+                .order_by(Message.timestamp.desc())
+                .limit(100)
+                .all())
+        return render_template('/front-end/blog-detail.html', messages=messages, recent_messages=recent_messages, currUser=currUser, now=now, quote=quote, trending_products=trending_products)
 
 
 
@@ -1017,6 +1023,8 @@ def show_chatter_feed():
 
     else:
         currUser = None
+        flash(f"Log in to view your dashboard!", "alert alert-success alert-dismissible border border-success fade show col-3 mb-3 mt-3 text-center")
+        return redirect('/social/home')
     
     if g.user:
         similar_products = random_products(12)
@@ -1040,8 +1048,7 @@ def show_chatter_feed():
                         .order_by(Message.timestamp.desc())
                         .limit(3)
                         .all())
-        #raise
-        product = random_products(1)
+        
     orders = get_currUser_orders(g.user.id)
     if not orders:
         
@@ -1053,7 +1060,7 @@ def show_chatter_feed():
 
     
 
-    return render_template('/front-end/my_dashboard.html', wishlist=wishlist, orders=orders, similar_products=similar_products, product=product, messages=messages, recent_messages=recent_messages, user=user)
+    return render_template('/front-end/my_dashboard.html', wishlist=wishlist, orders=orders, similar_products=similar_products, messages=messages, recent_messages=recent_messages, user=user)
 
 
 
@@ -1914,41 +1921,3 @@ def front_end_register_user():
         return render_template("/front-end/register.html", form=form)
 
 
-#############################
-#old title page##############
-#############################
-#@app.route('/title', methods=["GET", "POST"])
-#def ses():
-    
-#    products = Product.query.all()
-#    categories = Category.query.all()
-#    seedlings = Seedling.query.all()
-#    strains = Strain.query.all()
-#    plant_facilities = Plant_facility.query.all()
-#    form = LoginForm()
-#    products = Product.query.all()
-#    name_check = request.form.get('name')
-    
-    
-        
-    
-#    if "username" in session:
-#        return redirect(f"/users/{session['username']}")
-
-#    if form.validate_on_submit():
-#        username = form.username.data
-#        pwd = form.password.data
-        
-#        user = User.authenticate(username, pwd)
-#        if user:
-#            session["user_id"] = user.id
-#            id = user.id
-#            session["username"] = user.username
-#            userdata = User.query.filter_by(id=id).all()
-#            username = userdata[0].username
-#            flash(f"You have successfully logged in, {username}!", "success col-3 alert alert-dismissible fade show")   
-#            return redirect(f"/")
-#        else:
-#            flash(f"Invalid credentials!", "error")
-#            return redirect("/pages-login")
-#    return render_template('title_index.html',  products=products, name_check=name_check, form=form)

@@ -647,7 +647,7 @@ $(".deleteCartItem").click(async function () {
         "msg": `delete`
     })
         .then(function (response) {
-            console.log(response.data[0]);
+            console.log(response.data);
             $("h2").text(response.data[0])
         })
         .catch(function (error) {

@@ -57,7 +57,10 @@ PAYMENT_FORM_URL = (
 @app.before_request
 def add_user_to_g():
     """If we're logged in, add current user to Flask global."""
-    
+    if "cart" in session:
+        session["cart"] = session["cart"]
+    else:
+        session["cart"] = []
 
 
 #backend routes zentry
@@ -89,27 +92,38 @@ def redirect_list_users():
         return redirect('/login')
         flash(f"Welcome back, {currUser}!", "alert alert-success alert-dismissible border border-success fade show col-3")
 
-    now = datetime.datetime.now()
+    #now = datetime.datetime.now()
 
     #data generation for revenue/projection/expenses line graph1
 
     #TransactionCR.query.filter(TransactionCR.account_number==300, TransactionCR.date <= '3-3-2023').all()
+    today = datetime.datetime(2023, 4, 30, 18, 00).strftime('%m-%d-%y')
+    this_month = datetime.datetime(2023, 3, 31, 18, 00).strftime('%m-%d-%y')
+    last_month=datetime.datetime(2023, 2, 28, 18, 00).strftime('%m-%d-%y')
+    two_months_ago=datetime.datetime(2023, 1, 30, 18, 00).strftime('%m-%d-%y')
+    three_months_ago=datetime.datetime(2022, 12, 31, 18, 00).strftime('%m-%d-%y')
+    four_months_ago=datetime.datetime(2022, 11, 30, 18, 00).strftime('%m-%d-%y')
+    five_months_ago=datetime.datetime(2022, 10, 31, 18, 00).strftime('%m-%d-%y')
 
-    this_month=get_past_date(60).strftime('%m-%d-%y')
-    last_month=get_past_date(90).strftime('%m-%d-%y')
-    two_months_ago=get_past_date(120).strftime('%m-%d-%y')
-    three_months_ago=get_past_date(150).strftime('%m-%d-%y')
-
-    query = text("SELECT SUM(ALL amount) FROM transactions_cr WHERE (account_number=300) AND (date <= :this_month) AND (date > :last_month)")
-    res1 = db.session.execute(query, {"this_month": this_month, "last_month": last_month}).fetchall()
-    query1 = text("SELECT SUM(ALL amount) FROM transactions_cr WHERE (account_number=300) AND (date <= :last_month) AND (date > :two_months_ago)")
-    res2 = db.session.execute(query1, {"two_months_ago": two_months_ago, "last_month": last_month}).fetchall()
-    query2 = text("SELECT SUM(ALL amount) FROM transactions_cr WHERE (account_number=300)  AND (date <= :two_months_ago) AND (date > :three_months_ago)")
-    res3 = db.session.execute(query2, {"two_months_ago": two_months_ago, "three_months_ago": three_months_ago}).fetchall()
+    query = text("SELECT SUM(ALL amount) FROM transactions_cr WHERE (account_number=300) AND (date <= :today) AND (date > :this_month)")
+    res1 = db.session.execute(query, {"this_month": this_month, "today": today}).fetchall()
+    query1 = text("SELECT SUM(ALL amount) FROM transactions_cr WHERE (account_number=300) AND (date <= :this_month) AND (date > :last_month)")
+    res2 = db.session.execute(query1, {"this_month": this_month, "last_month": last_month}).fetchall()
+    query2 = text("SELECT SUM(ALL amount) FROM transactions_cr WHERE (account_number=300)  AND (date <= :last_month) AND (date > :two_months_ago)")
+    res3 = db.session.execute(query2, {"last_month": last_month, "two_months_ago": two_months_ago }).fetchall()
+    query3 = text("SELECT SUM(ALL amount) FROM transactions_cr WHERE (account_number=300)  AND (date <= :two_months_ago) AND (date > :three_months_ago)")
+    res4 = db.session.execute(query3, {"two_months_ago": two_months_ago, "three_months_ago": three_months_ago}).fetchall()
+    query4 = text("SELECT SUM(ALL amount) FROM transactions_cr WHERE (account_number=300)  AND (date <= :three_months_ago) AND (date > :four_months_ago)")
+    res5 = db.session.execute(query4, {"three_months_ago": three_months_ago, "four_months_ago": four_months_ago}).fetchall()
+    query5 = text("SELECT SUM(ALL amount) FROM transactions_cr WHERE (account_number=300)  AND (date <= :four_months_ago) AND (date > :five_months_ago)")
+    res6 = db.session.execute(query5, {"four_months_ago": four_months_ago, "five_months_ago": five_months_ago}).fetchall()
     real_revenue=[]
     real_revenue.append(res1)
     real_revenue.append(res2)
     real_revenue.append(res3)
+    real_revenue.append(res4)
+    real_revenue.append(res5)
+    real_revenue.append(res6)
 
 
     #revenue_data = set_date(datetime.datetime.now())
@@ -117,42 +131,38 @@ def redirect_list_users():
     #sales_numbers = parse_sales_numbers(revenue_data)
     #revenue = limit_month_revenue(parsed_dates)
     #expenses = parse_date_bills(revenue_data)
-    expenses = [252004,296385,369255,302559,245077, 376888, 364744]
+    expenses = [52004,96385,69255,72559,45077, 76888, 64744]
     projection = []
     projection_calculator = [.88, .90, .72, .69, .84, .92, .82]
-    for i in range(3):
+    for i in range(len(real_revenue)):
         projection.append(real_revenue[i][0][0]*projection_calculator[i])
 
 
     #data generation for sales by product graph
 
-    #popular_products = get_product_sale_data()
-    popular_products = []
+    popular_products = get_product_sale_data()
+    
         
     #data generation for recent sales - enter number of days in the past you want data to be generated for.
-
-    recent_sales = get_timedelta(100)
-
+    ourDelta = datetime.datetime(2023, 5, 8, 18, 00) - datetime.datetime.now()
+    recent_sales = get_timedelta(ourDelta.days*-1)
+    
 
     #get trending news from newsapi
 
     news = get_news()
 
     x_axis = []
-    #x_axis.append(get_past_date(30))
-    #x_axis.append(get_past_date(60))
-    #x_axis.append(get_past_date(90))
-    #x_axis.append(get_past_date(120))
-    #x_axis.append(get_past_date(150))
-    #x_axis.append(get_past_date(180))
-    #x_axis.append(get_past_date(210))
+
+    x_axis.append(today)
     x_axis.append(this_month)
-    x_axis.append(get_past_date(75).strftime('%m-%d-%y'))
+    
     x_axis.append(last_month)
-    x_axis.append(get_past_date(105).strftime('%m-%d-%y'))
+    
     x_axis.append(two_months_ago)
-    x_axis.append(get_past_date(135).strftime('%m-%d-%y'))
+    
     x_axis.append(three_months_ago)
+    x_axis.append(four_months_ago)
 
     
 
@@ -172,8 +182,7 @@ def redirect_list_users():
                            popular_products=popular_products,
                            recent_sales=recent_sales,
                            customers=customers,
-                           news=news,
-                           now=now)
+                           news=news)
 
 
 
@@ -551,7 +560,7 @@ def remove_item_from_cart(id):
         if item[0] == id:
             idx = session["cart"].index(item)
             session["cart"].pop(idx)
-
+            
     return jsonify((session["cart"]), 202)
 
 
@@ -653,8 +662,10 @@ def registerme():
         #first_name = form.first_name.data
         #last_name = form.last_name.data
         email = form.email.data
-        image_url = form.image_url.data
-        user = User.signup(username, email, pwd, image_url)
+        if form.image_url.data:
+            image_url = form.image_url.data
+            user = User.signup(username, email, pwd, image_url)
+        user = User.signup(username, email, pwd, image_url="/static/images/default-pic.png")
         db.session.add(user)
         db.session.commit()
         
@@ -663,9 +674,9 @@ def registerme():
 
         #generate welcome message for new user inbox
 
-        welcome_msg = Direct_Message(text=f"Welcome to Zentry, {username}! With our streamlined customer relationship manager, getting business done has never been simpler. Visit zentry.onrender.com/shop to see your ecommerce page!", sender_id=1, recipient_id=user.id)
-        db.session.add(welcome_msg)
-        db.session.commit()
+        #welcome_msg = Direct_Message(text=f"Welcome to Zentry, {username}! With our streamlined customer relationship manager, getting business done has never been simpler. Visit zentry.onrender.com/shop to see your ecommerce page!", sender_id=1, recipient_id=session["user_id"])
+        #db.session.add(welcome_msg)
+        #db.session.commit()
 
 
         #on successful login, redirect to auth user pages
@@ -1029,7 +1040,7 @@ def show_chatter_feed():
     if g.user:
         similar_products = random_products(12)
         wishlist = g.user.favorites
-
+        liked_messages = g.user.likes
     
         
         followed_users = g.user.following
@@ -1060,7 +1071,7 @@ def show_chatter_feed():
 
     
 
-    return render_template('/front-end/my_dashboard.html', wishlist=wishlist, orders=orders, similar_products=similar_products, messages=messages, recent_messages=recent_messages, user=user)
+    return render_template('/front-end/my_dashboard.html', wishlist=wishlist, orders=orders, similar_products=similar_products, messages=messages, recent_messages=recent_messages, user=user, liked_messages=liked_messages)
 
 
 
@@ -1088,10 +1099,7 @@ def base():
     else:
         g.user = None
         
-    if "cart" in session:
-        session["cart"] = session["cart"]
-    else:
-        session["cart"] = []
+
     search_form = SearchForm()
     now = datetime.date.today()
     quote = get_quote()
@@ -1198,6 +1206,10 @@ def showNav():
 @app.route('/finance', methods=['GET'])
 def showFinancialData():
     return render_template("finance.html")
+
+@app.route('/financelight', methods=['GET'])
+def showLightFinancialData():
+    return render_template("lightdemo.html")
 
 @app.route('/accounting', methods=['GET'])
 def showCharts():

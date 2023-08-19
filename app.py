@@ -56,27 +56,7 @@ PAYMENT_FORM_URL = (
 
 @app.before_request
 def add_user_to_g():
-    """If we're logged in, add current user to Flask global."""
-   
-    if "username" in session:
-        #Here we address an edge case where if the User has been deleted, but the User data persists in the session, user will not be able to access the site and no pages will load.
-        if User.query.filter(User.id==session['user_id']).all() == []:
-            session.pop("username")
-            session.pop("user_id")
-            return redirect('/shop')
-        #Here we return to our auth process
-        id = session["user_id"]
-        g.user = User.query.get(id)
-        #if g.user.dms_received:
-        #    g.user_dms = g.user.dms_received
-        #    g.received_msgs_info = []
-        #    for msg in g.user_dms:
-        #        sender = User.query.get(msg.sender_id)
-        #        g.received_msgs_info.append((sender.username, sender.image_url))
 
-
-    else:
-        g.user = None
     if "cart" in session:
         session["cart"] = session["cart"]
     else:
@@ -302,10 +282,11 @@ def dsdds():
 #    idempotencyKey: str
 
 @app.route('/process-payment', methods=["GET", "POST"])
-def sffdfdf():
+def process_payment():
     logging.info("Creating payment")
     # Charge the customer's card
-    currUser = g.user
+    id = session["user_id"]
+    currUser = User.query.get(id)
     result = client.payments.create_payment(
     body = {
     "source_id": "cnon:card-nonce-ok",
@@ -1099,7 +1080,27 @@ def show_chatter_feed():
 @app.context_processor
 def base():
 
-        
+    """If we're logged in, add current user to Flask global."""
+   
+    if "username" in session:
+        #Here we address an edge case where if the User has been deleted, but the User data persists in the session, user will not be able to access the site and no pages will load.
+        if User.query.filter(User.id==session['user_id']).all() == []:
+            session.pop("username")
+            session.pop("user_id")
+            return redirect('/shop')
+        #Here we return to our auth process
+        id = session["user_id"]
+        g.user = User.query.get(id)
+        #if g.user.dms_received:
+        #    g.user_dms = g.user.dms_received
+        #    g.received_msgs_info = []
+        #    for msg in g.user_dms:
+        #        sender = User.query.get(msg.sender_id)
+        #        g.received_msgs_info.append((sender.username, sender.image_url))
+
+
+    else:
+        g.user = None    
 
     search_form = SearchForm()
     now = datetime.date.today()
@@ -1681,7 +1682,7 @@ def users_show(user_id):
 def show_following(user_id):
     """Show list of people this user is following."""
 
-    if not g.user:
+    if not session["user_id"]:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
@@ -1694,7 +1695,7 @@ def show_following(user_id):
 def users_followers(user_id):
     """Show list of followers of this user."""
 
-    if not g.user:
+    if not session["user_id"]:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
@@ -1706,7 +1707,7 @@ def users_followers(user_id):
 def add_follow(follow_id):
     """Add a follow for the currently-logged-in user."""
 
-    if not g.user:
+    if not session["user_id"]:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
@@ -1721,7 +1722,7 @@ def add_follow(follow_id):
 def stop_following(follow_id):
     """Have currently-logged-in-user stop following this user."""
 
-    if not g.user:
+    if not session["user_id"]:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
@@ -1736,7 +1737,7 @@ def stop_following(follow_id):
 def profile():
     """Update profile for current user."""
     
-    if not g.user:
+    if not session["user_id"]:
         flash("Access unauthorized.", "danger")
         return redirect("/")
     
@@ -1779,7 +1780,7 @@ def profile():
 def delete_user():
     """Delete user."""
 
-    if not g.user:
+    if not session["user_id"]:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
@@ -1793,12 +1794,14 @@ def delete_user():
 @app.route('/users/add_like/<int:id>', methods=["POST"])
 def add_like(id):
     """add like"""
-    if not g.user:
+    if not session["user_id"]:
         flash("Log in to like a message!.", "danger")
         return redirect("/")
+    id = session["user_id"]
+    currUser = User.query.get(id)
     msg = Message.query.filter_by(id=id)
     if request.method == 'POST':
-        user_id=g.user.id
+        user_id=currUser.id
         message_id=msg[0].id
         new_like = Likes(user_id=user_id, message_id=message_id)
         db.session.add(new_like)
@@ -1811,7 +1814,7 @@ def add_like(id):
 @app.route('/users/<int:id>/liked')
 def show_likes(id):
     """add like"""
-    if not g.user:
+    if not session["user_id"]:
         flash("Log in to liked messages!.", "danger")
         return redirect("/sfef")
     user = User.query.filter_by(id=id)
@@ -1828,7 +1831,7 @@ def messages_add():
     Show form if GET. If valid, update message and redirect to user page.
     """
 
-    if not g.user:
+    if not session["user_id"]:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 
@@ -1856,7 +1859,7 @@ def messages_show(message_id):
 def messages_destroy(message_id):
     """Delete a message."""
 
-    if not g.user:
+    if not session["user_id"]:
         flash("Access unauthorized.", "danger")
         return redirect("/")
 

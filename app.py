@@ -33,7 +33,7 @@ fake = Faker()
 app = Flask(__name__)
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASEURI_ZENTRY
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASEURI_LOCAL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = SECRET_KEY_ZENTRY
@@ -57,6 +57,26 @@ PAYMENT_FORM_URL = (
 @app.before_request
 def add_user_to_g():
     """If we're logged in, add current user to Flask global."""
+   
+    if "username" in session:
+        #Here we address an edge case where if the User has been deleted, but the User data persists in the session, user will not be able to access the site and no pages will load.
+        if User.query.filter(User.id==session['user_id']).all() == []:
+            session.pop("username")
+            session.pop("user_id")
+            return redirect('/shop')
+        #Here we return to our auth process
+        id = session["user_id"]
+        g.user = User.query.get(id)
+        #if g.user.dms_received:
+        #    g.user_dms = g.user.dms_received
+        #    g.received_msgs_info = []
+        #    for msg in g.user_dms:
+        #        sender = User.query.get(msg.sender_id)
+        #        g.received_msgs_info.append((sender.username, sender.image_url))
+
+
+    else:
+        g.user = None
     if "cart" in session:
         session["cart"] = session["cart"]
     else:
@@ -1078,26 +1098,7 @@ def show_chatter_feed():
 #pass stuff to navbar search
 @app.context_processor
 def base():
-    """If we're logged in, add current user to Flask global."""
-    if "username" in session:
-        #Here we address an edge case where if the User has been deleted, but the User data persists in the session, user will not be able to access the site and no pages will load.
-        if User.query.filter(User.id==session['user_id']).all() == []:
-            session.pop("username")
-            session.pop("user_id")
-            return redirect('/shop')
-        #Here we return to our auth process
-        id = session["user_id"]
-        g.user = User.query.get(id)
-        #if g.user.dms_received:
-        #    g.user_dms = g.user.dms_received
-        #    g.received_msgs_info = []
-        #    for msg in g.user_dms:
-        #        sender = User.query.get(msg.sender_id)
-        #        g.received_msgs_info.append((sender.username, sender.image_url))
 
-
-    else:
-        g.user = None
         
 
     search_form = SearchForm()
@@ -1663,6 +1664,7 @@ def users_show(user_id):
 
     user = User.query.get_or_404(user_id)
     num_of_likes = len(user.likes)
+    wishlist = user.favorites
     # snagging messages in order from the database;
     # user.messages won't be in order by default
     messages = (Message
@@ -1672,7 +1674,7 @@ def users_show(user_id):
                 .limit(100)
                 .all())
     
-    return render_template('users/show.html', user=user, messages=messages, num_of_likes=num_of_likes)
+    return render_template('front-end/user_info.html', user=user, messages=messages, num_of_likes=num_of_likes, wishlist=wishlist)
 
 
 @app.route('/users/<int:user_id>/following')
@@ -1801,9 +1803,9 @@ def add_like(id):
         new_like = Likes(user_id=user_id, message_id=message_id)
         db.session.add(new_like)
         db.session.commit()
-        flash("Added to liked messages!", "success")
+        flash("Added to liked messages!", "alert alert-success alert-dismissible border border-success fade show col-3")
         
-        return redirect("/")
+        return redirect(f"/users/{user_id}")
 
 
 @app.route('/users/<int:id>/liked')

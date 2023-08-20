@@ -33,7 +33,7 @@ fake = Faker()
 app = Flask(__name__)
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASEURI_ZENTRY
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASEURI_LOCAL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = SECRET_KEY_ZENTRY
@@ -1687,8 +1687,9 @@ def show_following(user_id):
         return redirect("/")
 
     user = User.query.get_or_404(user_id)
+    following = user.following
     
-    return render_template('users/following.html', user=user)
+    return render_template('front-end/user_following.html', user=user, following=following)
 
 
 @app.route('/users/<int:user_id>/followers')
@@ -1700,7 +1701,8 @@ def users_followers(user_id):
         return redirect("/")
 
     user = User.query.get_or_404(user_id)
-    return render_template('users/followers.html', user=user)
+    followers = user.followers
+    return render_template('front-end/user_followers.html', user=user, followers=followers)
 
 
 @app.route('/users/follow/<int:follow_id>', methods=['POST'])
@@ -1712,10 +1714,11 @@ def add_follow(follow_id):
         return redirect("/")
 
     followed_user = User.query.get_or_404(follow_id)
-    g.user.following.append(followed_user)
+    user = User.query.get_or_404(session["user_id"])
+    user.following.append(followed_user)
     db.session.commit()
 
-    return redirect(f"/users/{g.user.id}/following")
+    return redirect(f"/users/{user.id}/following")
 
 
 @app.route('/users/stop-following/<int:follow_id>', methods=['POST'])
@@ -1727,10 +1730,11 @@ def stop_following(follow_id):
         return redirect("/")
 
     followed_user = User.query.get(follow_id)
-    g.user.following.remove(followed_user)
+    user = User.query.get_or_404(session["user_id"])
+    user.following.remove(followed_user)
     db.session.commit()
 
-    return redirect(f"/users/{g.user.id}/following")
+    return redirect(f"/users/{user.id}/following")
 
 
 @app.route('/users/profile', methods=["GET", "POST"])
@@ -1797,10 +1801,17 @@ def add_like(id):
     if not session["user_id"]:
         flash("Log in to like a message!.", "danger")
         return redirect("/")
-    id = session["user_id"]
-    currUser = User.query.get(id)
+    
+    currUser = User.query.get_or_404(session["user_id"])
     msg = Message.query.filter_by(id=id)
     if request.method == 'POST':
+        if Likes.query.filter_by(user_id=currUser.id, message_id=msg[0].id).first():
+            unlike = Likes.query.filter_by(user_id=currUser.id, message_id=msg[0].id)
+            db.session.delete(unlike[0])
+            db.session.commit()
+            flash("Removed from liked!", "alert alert-success alert-dismissible border border-success fade show col-3")
+            return redirect(f"/users/{currUser.id}/liked")
+
         user_id=currUser.id
         message_id=msg[0].id
         new_like = Likes(user_id=user_id, message_id=message_id)
@@ -1808,7 +1819,7 @@ def add_like(id):
         db.session.commit()
         flash("Added to liked messages!", "alert alert-success alert-dismissible border border-success fade show col-3")
         
-        return redirect(f"/users/{user_id}")
+        return redirect(f"/users/{user_id}/liked")
 
 
 @app.route('/users/<int:id>/liked')
@@ -1817,10 +1828,10 @@ def show_likes(id):
     if not session["user_id"]:
         flash("Log in to liked messages!.", "danger")
         return redirect("/sfef")
-    user = User.query.filter_by(id=id)
-    liked_messages = user[0].likes
-        
-    return render_template("messages/show_liked.html", user=user, liked_messages=liked_messages)
+    user = User.query.get_or_404(id)
+    liked_messages = user.likes
+
+    return render_template("front-end/user_likes.html", user=user, liked_messages=liked_messages)
 ##############################################################################
 # Messages routes:
 

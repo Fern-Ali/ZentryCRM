@@ -211,7 +211,7 @@
                                                         <i class="fa-solid fa-reply"></i>
                                                         <span class="theme-color">Reply</span>
                                                     </div>-->
-                                                    <div class="user-iamge col-11 col-sm-10 justify-content-center ">
+                                                    <div class="user-iamge col-12 col-sm-10 justify-content-center ">
                                                         <!--style="border-radius: 50px; border-left: 2px solid rgba(13, 164, 135, .20); border-right: 2px solid rgba(13, 164, 135, .20); "-->
 
 
@@ -254,7 +254,7 @@
                                                                                     </a>
 
                                                                                 </div>
-                                                                                <div class="col-9">
+                                                                                <div class="col-12 col-md-9">
                                                                                     <h5 class="text-content text-left" style="display: inline" overflow: hidden;"><a href="/users/{{ msg.id }}"> {{ msg.username }}</a></h5>
                                                                                     <span class="text-info"><i class="fa-solid fa-angles-right text-warning"></i> @{{ msg.username }}</span>
                                                                                     <span class="text-secondary"><i class="fa-solid fa-angles-right text-warning"></i> {{ now.strftime('%d %B %Y') }} </span>
@@ -270,13 +270,7 @@
 
 
 
-                                                                            <div class="row justify-content-center" style="margin-left: 35px;">
-
-                                                                                <!--<div class="col-12">
-                <img class="" src="{{msg.header_image_url}}" style="border-radius: 40px; max-height: 500px; max-width: -webkit-fill-available; " />
-            </div>-->
-
-                                                                            </div>
+                                                                            
 
 
 
@@ -287,7 +281,7 @@
                                                                             <div class="col-2">
 
                                                                             </div>
-                                                                            <div class="col-10">
+                                                                            <div class="col-12 col-md-10">
                                                                                 <div class="row justify-content-center">
                                                                                     <div class="col-3 col-sm-3">
                                                                                         <form method="GET" action="/users/{{ msg.id }}" id="messages-form">
@@ -353,7 +347,7 @@
                                                         <i class="fa-solid fa-reply"></i>
                                                         <span class="theme-color">Reply</span>
                                                     </div>-->
-                                                    <div class="user-iamge col-11 col-sm-10 justify-content-center ">
+                                                    <div class="user-iamge col-12 col-sm-10 justify-content-center ">
                                                         <!--style="border-radius: 50px; border-left: 2px solid rgba(13, 164, 135, .20); border-right: 2px solid rgba(13, 164, 135, .20); "-->
 
 
@@ -393,7 +387,7 @@
 
 
                                                                                 </div>
-                                                                                <div class="col-9">
+                                                                                <div class="col-12 col-md-9">
                                                                                     <h5 class="text-content text-left" style="display: inline" overflow: hidden;"><a href="/users/{{ user.id }}"> {{ user.username }}</a></h5>
                                                                                     <span class="text-info"><i class="fa-solid fa-angles-right text-warning"></i> @{{ user.username }}</span>
                                                                                     <span class="text-secondary"><i class="fa-solid fa-angles-right text-warning"></i> {{ now.strftime('%d %B %Y') }} </span>
@@ -408,8 +402,18 @@
 
 
 
+                                                                            <style scoped>
+                                                                                .mobile-pic {
+                                                                                    margin-left: 35px;
+                                                                                }
 
-                                                                            <div class="row justify-content-center" style="margin-left: 35px;">
+                                                                                @media (max-width: 760px) {
+                                                                                    .mobile-pic {
+                                                                                        margin-left: 0px;
+                                                                                    }
+                                                                                }
+                                                                            </style>
+                                                                            <div class="row justify-content-center mobile-pic" style="">
 
                                                                                 <div class="col-12">
 

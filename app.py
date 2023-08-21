@@ -1710,8 +1710,8 @@ def add_follow(follow_id):
     """Add a follow for the currently-logged-in user."""
 
     if not session.get('user_id'):
-        flash("Access unauthorized.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
-        return redirect(f"/users/{user_id}")
+        flash("Log in to follow users!", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
+        return redirect(f"/users/{follow_id}")
 
     followed_user = User.query.get_or_404(follow_id)
     user = User.query.get_or_404(session["user_id"])
@@ -1826,8 +1826,8 @@ def add_like(id):
 def show_likes(id):
     """add like"""
     if not session.get('user_id'):
-        flash("Log in to see liked messages!.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
-        return redirect(f"/users/{user_id}")
+        flash("Log in to see liked messages!", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
+        return redirect(f"/users/{id}")
     user = User.query.get_or_404(id)
     liked_messages = user.likes
 

@@ -33,7 +33,7 @@ fake = Faker()
 app = Flask(__name__)
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASEURI_LOCAL
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASEURI_ZENTRY
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = SECRET_KEY_ZENTRY

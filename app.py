@@ -1682,9 +1682,9 @@ def users_show(user_id):
 def show_following(user_id):
     """Show list of people this user is following."""
 
-    if not session["user_id"]:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
+    if not session.get('user_id'):
+        flash("Access unauthorized.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
+        return redirect(f"/users/{user_id}")
 
     user = User.query.get_or_404(user_id)
     following = user.following
@@ -1696,9 +1696,9 @@ def show_following(user_id):
 def users_followers(user_id):
     """Show list of followers of this user."""
 
-    if not session["user_id"]:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
+    if not session.get('user_id'):
+        flash("Access unauthorized.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
+        return redirect(f"/users/{user_id}")
 
     user = User.query.get_or_404(user_id)
     followers = user.followers
@@ -1709,9 +1709,9 @@ def users_followers(user_id):
 def add_follow(follow_id):
     """Add a follow for the currently-logged-in user."""
 
-    if not session["user_id"]:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
+    if not session.get('user_id'):
+        flash("Access unauthorized.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
+        return redirect(f"/users/{user_id}")
 
     followed_user = User.query.get_or_404(follow_id)
     user = User.query.get_or_404(session["user_id"])
@@ -1725,9 +1725,9 @@ def add_follow(follow_id):
 def stop_following(follow_id):
     """Have currently-logged-in-user stop following this user."""
 
-    if not session["user_id"]:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
+    if not session.get('user_id'):
+        flash("Access unauthorized.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
+        return redirect("/shop")
 
     followed_user = User.query.get(follow_id)
     user = User.query.get_or_404(session["user_id"])
@@ -1741,9 +1741,9 @@ def stop_following(follow_id):
 def profile():
     """Update profile for current user."""
     
-    if not session["user_id"]:
-        flash("Access unauthorized.", "danger")
-        return redirect("/")
+    if not session.get('user_id'):
+        flash("Access unauthorized.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
+        return redirect("/shop")
     
         
     user=g.user
@@ -1771,10 +1771,10 @@ def profile():
 
             db.session.add(user)
             db.session.commit()
-            flash("Updated profile successfully", 'success')
+            flash("Updated profile successfully", 'alert alert-success alert-dismissible border border-success mb-4 fade show col-3')
             return redirect(f'/users/{id}')
 
-        flash("Invalid credentials.", 'danger')
+        flash("Invalid credentials.", 'alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3')
 
         
     # IMPLEMENT THIS
@@ -1784,8 +1784,8 @@ def profile():
 def delete_user():
     """Delete user."""
 
-    if not session["user_id"]:
-        flash("Access unauthorized.", "danger")
+    if not session.get('user_id'):
+        flash("Access unauthorized.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
         return redirect("/")
 
     do_logout()
@@ -1798,9 +1798,9 @@ def delete_user():
 @app.route('/users/add_like/<int:id>', methods=["POST"])
 def add_like(id):
     """add like"""
-    if not session["user_id"]:
-        flash("Log in to like a message!.", "danger")
-        return redirect("/")
+    if not session.get('user_id'):
+        flash("Log in to like a message!.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
+        return redirect("/shop")
     
     currUser = User.query.get_or_404(session["user_id"])
     msg = Message.query.filter_by(id=id)
@@ -1809,7 +1809,7 @@ def add_like(id):
             unlike = Likes.query.filter_by(user_id=currUser.id, message_id=msg[0].id)
             db.session.delete(unlike[0])
             db.session.commit()
-            flash("Removed from liked!", "alert alert-success alert-dismissible border border-success fade show col-3")
+            flash("Removed from liked!", "alert alert-success alert-dismissible border border-success mb-4 fade show col-3")
             return redirect(f"/users/{currUser.id}/liked")
 
         user_id=currUser.id
@@ -1817,7 +1817,7 @@ def add_like(id):
         new_like = Likes(user_id=user_id, message_id=message_id)
         db.session.add(new_like)
         db.session.commit()
-        flash("Added to liked messages!", "alert alert-success alert-dismissible border border-success fade show col-3")
+        flash("Added to liked messages!", "alert alert-success alert-dismissible border border-success mb-4 fade show col-3")
         
         return redirect(f"/users/{user_id}/liked")
 
@@ -1825,9 +1825,9 @@ def add_like(id):
 @app.route('/users/<int:id>/liked')
 def show_likes(id):
     """add like"""
-    if not session["user_id"]:
-        flash("Log in to liked messages!.", "danger")
-        return redirect("/sfef")
+    if not session.get('user_id'):
+        flash("Log in to see liked messages!.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
+        return redirect(f"/users/{user_id}")
     user = User.query.get_or_404(id)
     liked_messages = user.likes
 
@@ -1842,8 +1842,8 @@ def messages_add():
     Show form if GET. If valid, update message and redirect to user page.
     """
 
-    if not session["user_id"]:
-        flash("Access unauthorized.", "danger")
+    if not session.get('user_id'):
+        flash("Access unauthorized.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
         return redirect("/")
 
     form = MessageForm()
@@ -1870,8 +1870,8 @@ def messages_show(message_id):
 def messages_destroy(message_id):
     """Delete a message."""
 
-    if not session["user_id"]:
-        flash("Access unauthorized.", "danger")
+    if not session.get('user_id'):
+        flash("Access unauthorized.", "alert alert-danger alert-dismissible border border-danger mb-4 fade show col-3")
         return redirect("/")
 
     msg = Message.query.get(message_id)

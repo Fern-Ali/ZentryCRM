@@ -42,7 +42,20 @@
 
                             <div class="profile-name">
                                 <h3>{{ user.username}}</h3>
-                                <h6 class="text-content">{{ user.email}}</h6>
+                                <h6 class="text-content"><i class="fa-solid fa-location-dot"></i> {{ user.location}}</h6>
+                                <div class="row justify-content-center">
+                                    <div class="col-4"></div>
+                                    <div class="col-4">
+                                        <form class="col-12" method="POST" {% if user in g.user.following %} action="/users/stop-following/{{user.id}}" {% else %} action="/users/follow/{{user.id}}" {% endif %} id="messages-form">
+                                            <button title="{{'Unfollow' if user in g.user.following else 'Follow'}}" class=" btn left-dashboard-show btn-animation btn-md fw-bold d-block mb-4 mt-2 ">
+                                                {{'Unfollow' if user in g.user.following else 'Follow'}}
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                    <div class="col-4"></div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -285,28 +298,28 @@
                                                                                 <div class="row justify-content-center">
                                                                                     <div class="col-3 col-sm-3">
                                                                                         <form method="GET" action="/users/{{ msg.id }}" id="messages-form">
-                                                                                            <button title="View profile" class="mt-3 sm-mt-3 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487; ">
+                                                                                            <button title="View profile" class="mt-3 sm-mt-3 btn btn-sm btn-secondary {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487; ">
                                                                                                 <i class="fa-beat fa fa-address-card"></i>
                                                                                             </button>
                                                                                         </form>
                                                                                     </div>
                                                                                     <div class="col-3 col-sm-3">
                                                                                         <form method="GET" action="/users/{{ msg.id }}/liked" id="messages-form">
-                                                                                            <button title="{{msg.username}}'s likes" class="mt-3 sm-mt-3 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487; ">
+                                                                                            <button title="{{msg.username}}'s likes" class="mt-3 sm-mt-3 btn btn-sm btn-secondary {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487; ">
                                                                                                 <i class="fa fa-heart"></i>
                                                                                             </button>
                                                                                         </form>
                                                                                     </div>
                                                                                     <div class="col-3 col-sm-3">
                                                                                         <form method="POST" {% if msg in g.user.following %} action="/users/stop-following/{{msg.id}}" {% else %} action="/users/follow/{{msg.id}}" {% endif %} id="messages-form">
-                                                                                            <button title="{{'Unfollow' if msg in g.user.following else 'Follow'}}" class="mt-3 sm-mt-2 btn btn-sm {{'text-warning' if msg in g.user.following else 'theme-color'}}" >
+                                                                                            <button title="{{'Unfollow' if msg in g.user.following else 'Follow'}}" class="mt-3 sm-mt-2 btn btn-sm btn-secondary {{'text-warning' if msg in g.user.following else 'theme-color'}}" >
                                                                                                 <i class="fa fa-bell"></i>
                                                                                             </button>
                                                                                         </form>
                                                                                     </div>
                                                                                     <div class="col-3 col-sm-3">
                                                                                         <form method="GET" action="/users/{{ msg.id }}" id="messages-form">
-                                                                                            <button title="{{msg.username}}'s wishlist" class="mt-3 sm-mt-2 btn btn-sm {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487;  ">
+                                                                                            <button title="{{msg.username}}'s wishlist" class="mt-3 sm-mt-2 btn btn-sm btn-secondary {{'btn-primary' if msg.id in likes else 'btn-secondary'}}" style="color: #0da487;  ">
                                                                                                 <i class="fa fa-bong"></i>
                                                                                             </button>
                                                                                         </form>
